@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import ZigZagTwo from "../assets/zigzag_two.png";
 
 const Footer = () => {
@@ -114,9 +114,9 @@ const Footer = () => {
           <div className="text-sm text-gray-600">
             <p>© {currentYear} All Rights Reserved.</p>
             <div className="flex flex-wrap gap-4 mt-4">
-              <Link to="/terms" className="text-gray-700 hover:text-yellow-600">Terms of Use</Link>
+              <Link href="/terms" className="text-gray-700 hover:text-yellow-600">Terms of Use</Link>
               <span className="text-gray-400">|</span>
-              <Link to="/privacy" className="text-gray-700 hover:text-yellow-600">Privacy Policy</Link>
+              <Link href="/privacy" className="text-gray-700 hover:text-yellow-600">Privacy Policy</Link>
               <span className="text-gray-400">|</span>
               <a href="#" className="text-gray-700 hover:text-yellow-600">Security</a>
               <span className="text-gray-400">|</span>

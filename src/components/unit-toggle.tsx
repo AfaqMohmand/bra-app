@@ -1,5 +1,14 @@
 "use client";
-export default function UnitToggle({ chartUnit, setChartUnit }) {
+
+interface UnitToggleProps {
+  chartUnit: string;
+  setChartUnit: (unit: string) => void;
+}
+
+export default function UnitToggle({
+  chartUnit,
+  setChartUnit,
+}: UnitToggleProps) {
   return (
     <>
       <div className="bg-yellow-100 rounded-full p-1 inline-flex shadow-md">

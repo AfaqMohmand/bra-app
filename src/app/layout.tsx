@@ -4,7 +4,7 @@ import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import bgZigzag from "@/assets/bg-zigzag.svg";
+import bgZigzagUrl from "@/assets/bg_zigzag.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +36,7 @@ export default function RootLayout({
           className="min-h-screen flex flex-col"
           style={{
             backgroundColor: "var(--color-white)",
-            backgroundImage: `url(${bgZigzag})`,
+            backgroundImage: `url(${bgZigzagUrl.src})`,
             backgroundRepeat: "repeat",
             backgroundSize: "106px",
           }}

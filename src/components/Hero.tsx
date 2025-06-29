@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import heroImage from "../assets/heroImage.png";
 import ZigZagTwo from "../assets/zigzag_two.png";
 
@@ -87,10 +88,12 @@ const Hero = () => {
           {/* Right side - Image with decorative elements */}
           <div className="w-full md:w-1/2 relative mt-8 md:mt-0">
             <div className="relative z-10 rounded-lg overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl mx-auto max-w-md sm:max-w-lg md:max-w-full transform hover:scale-105 transition-transform duration-500">
-              <img
+              <Image
                 src={heroImage}
                 alt="Hero Image"
                 className="w-full h-auto object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
 
               {/* Decorative elements - responsive sizes */}

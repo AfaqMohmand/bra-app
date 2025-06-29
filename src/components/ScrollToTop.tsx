@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 
 // This component will automatically scroll to top when route changes

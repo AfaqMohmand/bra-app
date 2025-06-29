@@ -1,867 +1,938 @@
-import React, { useState, useEffect, useCallback } from "react";
+"use client";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import zigzagTwo from "../assets/zigzag_two.png";
 import bgZigzag from "../assets/bg_zigzag.png";
 import underbustSvg from "../assets/underbust-cup.svg";
 import overbustSvg from "../assets/overbust-cup.svg";
 import UnitToggle from "./unit-toggle";
+import { Dropdown } from "./Dropdown";
+import Image from "next/image";
+// Ensure UnitToggle component is defined and used correctly
+
+// Define types for chart data
+type ChartRow = {
+  band: string;
+  underbust: string;
+  cupA: string;
+  cupB: string;
+  cupC: string;
+  cupD: string;
+  cupE: string;
+  cupF: string;
+};
+
+type RegionChartData = {
+  headers: string[];
+  rows: ChartRow[];
+};
+
+type BraSizeChartData = {
+  [region: string]: RegionChartData;
+};
+
+type CupMapping = {
+  [key: string]: string;
+};
+
+type RegionConversion = {
+  bandAdjustment: number;
+  cupMapping: CupMapping;
+};
+
+type RegionConversions = {
+  [region: string]: RegionConversion;
+};
+
+type BandSizes = {
+  [unit: string]: {
+    [size: number]: { cm: string };
+  };
+};
+
+type CupSizes = {
+  [unit: string]: {
+    [difference: number]: string;
+  };
+};
+
+type BraSizeData = {
+  bandSizes: BandSizes;
+  cupSizes: CupSizes;
+  regionConversions: RegionConversions;
+};
+
+type RecommendedSize = {
+  bandSize: number;
+  cupSize: string;
+} | null;
 
 const BraSizeCalculator = () => {
   const [unit, setUnit] = useState("inches");
   const [bandMeasurement, setBandMeasurement] = useState("");
   const [bustMeasurement, setBustMeasurement] = useState("");
-  const [recommendedSize, setRecommendedSize] = useState(null);
-  const [activeRegion, setActiveRegion] = useState("US");
+  const [recommendedSize, setRecommendedSize] = useState<{
+    bandSize: number;
+    cupSize: string;
+  } | null>(null);
+  const [activeRegion, setActiveRegion] =
+    useState<keyof typeof braSizeData.regionConversions>("US");
   const [chartUnit, setChartUnit] = useState("in");
   const [chartRegion, setChartRegion] = useState("US");
   const [showBandTooltip, setShowBandTooltip] = useState(false);
   const [showBustTooltip, setShowBustTooltip] = useState(false);
 
   // Bra size chart data for the dynamic table
-  const braSizeChartData = {
-    // Data for the size chart table
-    "Pak/Ind": {
-      headers: [
-        "BAND SIZE",
-        "UNDERBUST (cm/in)",
-        "CUP A",
-        "CUP B",
-        "CUP C",
-        "CUP D",
-        "CUP E",
-        "CUP F",
-      ],
-      rows: [
-        {
-          band: "28",
-          underbust: "58.5-63.5",
-          cupA: "71-73.5",
-          cupB: "73.5-76",
-          cupC: "76-78.5",
-          cupD: "78.5-81",
-          cupE: "",
-          cupF: "",
-        },
-        {
-          band: "30",
-          underbust: "63.5-68.5",
-          cupA: "76-78.5",
-          cupB: "78.5-81",
-          cupC: "81-83.5",
-          cupD: "83.5-86",
-          cupE: "",
-          cupF: "",
-        },
-        {
-          band: "32",
-          underbust: "68.5-73.5",
-          cupA: "81-83.5",
-          cupB: "83.5-86",
-          cupC: "86-89",
-          cupD: "89-91.5",
-          cupE: "91.5-94",
-          cupF: "94-96.5",
-        },
-        {
-          band: "34",
-          underbust: "73.5-78.5",
-          cupA: "86-89",
-          cupB: "89-91.5",
-          cupC: "91.5-94",
-          cupD: "94-96.5",
-          cupE: "96.5-99",
-          cupF: "99-1.01m",
-        },
-        {
-          band: "36",
-          underbust: "78.5-84",
-          cupA: "91.5-94",
-          cupB: "94-96.5",
-          cupC: "96.5-99",
-          cupD: "99cm-1.01m",
-          cupE: "1.01-1.04m",
-          cupF: "1.04-1.06m",
-        },
-        {
-          band: "38",
-          underbust: "84-89",
-          cupA: "96.5-99",
-          cupB: "99-1.01m",
-          cupC: "1.01-1.04m",
-          cupD: "1.04-1.06m",
-          cupE: "1.06-1.09",
-          cupF: "1.09-1.11m",
-        },
-        {
-          band: "40",
-          underbust: "89-94",
-          cupA: "1.01-1.04m",
-          cupB: "1.04-1.06m",
-          cupC: "1.06-1.09m",
-          cupD: "1.09-1.11m",
-          cupE: "1.11-1.14m",
-          cupF: "1.14-1.16m",
-        },
-        {
-          band: "42",
-          underbust: "94-99",
-          cupA: "1.06-1.09m",
-          cupB: "1.09-1.11m",
-          cupC: "1.11-1.14m",
-          cupD: "1.14-1.16m",
-          cupE: "1.16-1.19m",
-          cupF: "1.19-1.22m",
-        },
-        {
-          band: "44",
-          underbust: "99-104",
-          cupA: "1.11-1.14m",
-          cupB: "1.14-1.16m",
-          cupC: "1.16-1.19m",
-          cupD: "1.19-1.22m",
-          cupE: "1.22-1.24m",
-          cupF: "1.24-1.27m",
-        },
-      ],
-    },
-    US: {
-      headers: [
-        "BAND SIZE",
-        "UNDERBUST (cm/in)",
-        "CUP A",
-        "CUP B",
-        "CUP C",
-        "CUP D",
-        "CUP E",
-        "CUP F",
-      ],
-      rows: [
-        {
-          band: "28",
-          underbust: "58.5-63.5",
-          cupA: "71-73.5",
-          cupB: "73.5-76",
-          cupC: "76-78.5",
-          cupD: "78.5-81",
-          cupE: "83.5-86",
-          cupF: "91.5-94",
-        },
-        {
-          band: "30",
-          underbust: "63.5-68.5",
-          cupA: "76-78.5",
-          cupB: "78.5-81",
-          cupC: "81-83.5",
-          cupD: "83.5-86",
-          cupE: "86-89",
-          cupF: "94-96.5",
-        },
-        {
-          band: "32",
-          underbust: "68.5-73.5",
-          cupA: "81-83.5",
-          cupB: "83.5-86",
-          cupC: "86-89",
-          cupD: "89-91.5",
-          cupE: "91.5-94",
-          cupF: "96.5-99",
-        },
-        {
-          band: "34",
-          underbust: "73.5-78.5",
-          cupA: "86-89",
-          cupB: "89-91.5",
-          cupC: "91.5-94",
-          cupD: "94-96.5",
-          cupE: "96.5-99",
-          cupF: "99-101.5",
-        },
-        {
-          band: "36",
-          underbust: "78.5-84",
-          cupA: "91.5-94",
-          cupB: "94-96.5",
-          cupC: "96.5-99",
-          cupD: "99-101.5",
-          cupE: "101.5-104",
-          cupF: "104-106.5",
-        },
-        {
-          band: "38",
-          underbust: "84-89",
-          cupA: "96.5-99",
-          cupB: "99-101.5",
-          cupC: "101.5-104",
-          cupD: "104-106.5",
-          cupE: "106.5-109",
-          cupF: "109-111.5",
-        },
-        {
-          band: "40",
-          underbust: "89-94",
-          cupA: "101.5-104",
-          cupB: "104-106.5",
-          cupC: "106.5-109",
-          cupD: "109-111.5",
-          cupE: "111.5-114",
-          cupF: "114-116.5",
-        },
-        {
-          band: "42",
-          underbust: "94-99",
-          cupA: "106.5-109",
-          cupB: "109-111.5",
-          cupC: "111.5-114",
-          cupD: "114-116.5",
-          cupE: "116.5-119",
-          cupF: "119-121.5",
-        },
-        {
-          band: "44",
-          underbust: "99-104",
-          cupA: "111.5-114",
-          cupB: "114-116.5",
-          cupC: "116.5-119",
-          cupD: "119-121.5",
-          cupE: "121.5-124",
-          cupF: "124-127",
-        },
-      ],
-    },
-    UK: {
-      headers: [
-        "BAND SIZE",
-        "UNDERBUST (cm/in)",
-        "CUP A",
-        "CUP B",
-        "CUP C",
-        "CUP D",
-        "CUP E",
-        "CUP F",
-      ],
-      rows: [
-        {
-          band: "28",
-          underbust: "58.5-63.5",
-          cupA: "71-73.5",
-          cupB: "73.5-76",
-          cupC: "76-78.5",
-          cupD: "78.5-81",
-          cupE: "83.5-86",
-          cupF: "91.5-94",
-        },
-        {
-          band: "30",
-          underbust: "63.5-68.5",
-          cupA: "76-78.5",
-          cupB: "78.5-81",
-          cupC: "81-83.5",
-          cupD: "83.5-86",
-          cupE: "86-89",
-          cupF: "94-96.5",
-        },
-        {
-          band: "32",
-          underbust: "68.5-73.5",
-          cupA: "81-83.5",
-          cupB: "83.5-86",
-          cupC: "86-89",
-          cupD: "89-91.5",
-          cupE: "91.5-94",
-          cupF: "96.5-99",
-        },
-        {
-          band: "34",
-          underbust: "73.5-78.5",
-          cupA: "86-89",
-          cupB: "89-91.5",
-          cupC: "91.5-94",
-          cupD: "94-96.5",
-          cupE: "96.5-99",
-          cupF: "99-101.5",
-        },
-        {
-          band: "36",
-          underbust: "78.5-84",
-          cupA: "91.5-94",
-          cupB: "94-96.5",
-          cupC: "96.5-99",
-          cupD: "99-101.5",
-          cupE: "101.5-104",
-          cupF: "104-106.5",
-        },
-        {
-          band: "38",
-          underbust: "84-89",
-          cupA: "96.5-99",
-          cupB: "99-101.5",
-          cupC: "101.5-104",
-          cupD: "104-106.5",
-          cupE: "106.5-109",
-          cupF: "109-111.5",
-        },
-        {
-          band: "40",
-          underbust: "89-94",
-          cupA: "101.5-104",
-          cupB: "104-106.5",
-          cupC: "106.5-109",
-          cupD: "109-111.5",
-          cupE: "111.5-114",
-          cupF: "114-116.5",
-        },
-        {
-          band: "42",
-          underbust: "94-99",
-          cupA: "106.5-109",
-          cupB: "109-111.5",
-          cupC: "111.5-114",
-          cupD: "114-116.5",
-          cupE: "116.5-119",
-          cupF: "119-121.5",
-        },
-        {
-          band: "44",
-          underbust: "99-104",
-          cupA: "111.5-114",
-          cupB: "114-116.5",
-          cupC: "116.5-119",
-          cupD: "119-121.5",
-          cupE: "121.5-124",
-          cupF: "124-127",
-        },
-      ],
-    },
-    EU: {
-      headers: [
-        "BAND SIZE",
-        "UNDERBUST (cm/in)",
-        "CUP A",
-        "CUP B",
-        "CUP C",
-        "CUP D",
-        "CUP E",
-        "CUP F",
-      ],
-      rows: [
-        {
-          band: "60",
-          underbust: "58.5-63.5",
-          cupA: "71-73.5",
-          cupB: "73.5-76",
-          cupC: "76-78.5",
-          cupD: "78.5-81",
-          cupE: "83.5-86",
-          cupF: "91.5-94",
-        },
-        {
-          band: "65",
-          underbust: "63.5-68.5",
-          cupA: "76-78.5",
-          cupB: "78.5-81",
-          cupC: "81-83.5",
-          cupD: "83.5-86",
-          cupE: "86-89",
-          cupF: "94-96.5",
-        },
-        {
-          band: "70",
-          underbust: "68.5-73.5",
-          cupA: "81-83.5",
-          cupB: "83.5-86",
-          cupC: "86-89",
-          cupD: "89-91.5",
-          cupE: "91.5-94",
-          cupF: "96.5-99",
-        },
-        {
-          band: "75",
-          underbust: "73.5-78.5",
-          cupA: "86-89",
-          cupB: "89-91.5",
-          cupC: "91.5-94",
-          cupD: "94-96.5",
-          cupE: "96.5-99",
-          cupF: "99-101.5",
-        },
-        {
-          band: "80",
-          underbust: "78.5-84",
-          cupA: "91.5-94",
-          cupB: "94-96.5",
-          cupC: "96.5-99",
-          cupD: "99-101.5",
-          cupE: "101.5-104",
-          cupF: "104-106.5",
-        },
-        {
-          band: "85",
-          underbust: "84-89",
-          cupA: "96.5-99",
-          cupB: "99-101.5",
-          cupC: "101.5-104",
-          cupD: "104-106.5",
-          cupE: "106.5-109",
-          cupF: "109-111.5",
-        },
-        {
-          band: "90",
-          underbust: "89-94",
-          cupA: "101.5-104",
-          cupB: "104-106.5",
-          cupC: "106.5-109",
-          cupD: "109-111.5",
-          cupE: "111.5-114",
-          cupF: "114-116.5",
-        },
-        {
-          band: "95",
-          underbust: "94-99",
-          cupA: "106.5-109",
-          cupB: "109-111.5",
-          cupC: "111.5-114",
-          cupD: "114-116.5",
-          cupE: "116.5-119",
-          cupF: "119-121.5",
-        },
-        {
-          band: "100",
-          underbust: "99-104",
-          cupA: "111.5-114",
-          cupB: "114-116.5",
-          cupC: "116.5-119",
-          cupD: "119-121.5",
-          cupE: "121.5-124",
-          cupF: "124-127",
-        },
-      ],
-    },
-    FR: {
-      headers: [
-        "BAND SIZE",
-        "UNDERBUST (cm/in)",
-        "CUP A",
-        "CUP B",
-        "CUP C",
-        "CUP D",
-        "CUP E",
-        "CUP F",
-      ],
-      rows: [
-        {
-          band: "75",
-          underbust: "58.5-63.5",
-          cupA: "71-73.5",
-          cupB: "73.5-76",
-          cupC: "76-78.5",
-          cupD: "78.5-81",
-          cupE: "83.5-86",
-          cupF: "91.5-94",
-        },
-        {
-          band: "80",
-          underbust: "63.5-68.5",
-          cupA: "76-78.5",
-          cupB: "78.5-81",
-          cupC: "81-83.5",
-          cupD: "83.5-86",
-          cupE: "86-89",
-          cupF: "94-96.5",
-        },
-        {
-          band: "85",
-          underbust: "68.5-73.5",
-          cupA: "81-83.5",
-          cupB: "83.5-86",
-          cupC: "86-89",
-          cupD: "89-91.5",
-          cupE: "91.5-94",
-          cupF: "96.5-99",
-        },
-        {
-          band: "90",
-          underbust: "73.5-78.5",
-          cupA: "86-89",
-          cupB: "89-91.5",
-          cupC: "91.5-94",
-          cupD: "94-96.5",
-          cupE: "96.5-99",
-          cupF: "99-101.5",
-        },
-        {
-          band: "95",
-          underbust: "78.5-84",
-          cupA: "91.5-94",
-          cupB: "94-96.5",
-          cupC: "96.5-99",
-          cupD: "99-101.5",
-          cupE: "101.5-104",
-          cupF: "104-106.5",
-        },
-        {
-          band: "100",
-          underbust: "84-89",
-          cupA: "96.5-99",
-          cupB: "99-101.5",
-          cupC: "101.5-104",
-          cupD: "104-106.5",
-          cupE: "106.5-109",
-          cupF: "109-111.5",
-        },
-        {
-          band: "105",
-          underbust: "89-94",
-          cupA: "101.5-104",
-          cupB: "104-106.5",
-          cupC: "106.5-109",
-          cupD: "109-111.5",
-          cupE: "111.5-114",
-          cupF: "114-116.5",
-        },
-        {
-          band: "110",
-          underbust: "94-99",
-          cupA: "106.5-109",
-          cupB: "109-111.5",
-          cupC: "111.5-114",
-          cupD: "114-116.5",
-          cupE: "116.5-119",
-          cupF: "119-121.5",
-        },
-        {
-          band: "115",
-          underbust: "99-104",
-          cupA: "111.5-114",
-          cupB: "114-116.5",
-          cupC: "116.5-119",
-          cupD: "119-121.5",
-          cupE: "121.5-124",
-          cupF: "124-127",
-        },
-      ],
-    },
-    JP: {
-      headers: [
-        "BAND SIZE",
-        "UNDERBUST (cm/in)",
-        "CUP A",
-        "CUP B",
-        "CUP C",
-        "CUP D",
-        "CUP E",
-        "CUP F",
-      ],
-      rows: [
-        {
-          band: "65",
-          underbust: "58.5-63.5",
-          cupA: "71-73.5",
-          cupB: "73.5-76",
-          cupC: "76-78.5",
-          cupD: "78.5-81",
-          cupE: "83.5-86",
-          cupF: "91.5-94",
-        },
-        {
-          band: "70",
-          underbust: "63.5-68.5",
-          cupA: "76-78.5",
-          cupB: "78.5-81",
-          cupC: "81-83.5",
-          cupD: "83.5-86",
-          cupE: "86-89",
-          cupF: "94-96.5",
-        },
-        {
-          band: "75",
-          underbust: "68.5-73.5",
-          cupA: "81-83.5",
-          cupB: "83.5-86",
-          cupC: "86-89",
-          cupD: "89-91.5",
-          cupE: "91.5-94",
-          cupF: "96.5-99",
-        },
-        {
-          band: "80",
-          underbust: "73.5-78.5",
-          cupA: "86-89",
-          cupB: "89-91.5",
-          cupC: "91.5-94",
-          cupD: "94-96.5",
-          cupE: "96.5-99",
-          cupF: "99-101.5",
-        },
-        {
-          band: "85",
-          underbust: "78.5-84",
-          cupA: "91.5-94",
-          cupB: "94-96.5",
-          cupC: "96.5-99",
-          cupD: "99-101.5",
-          cupE: "101.5-104",
-          cupF: "104-106.5",
-        },
-        {
-          band: "90",
-          underbust: "84-89",
-          cupA: "96.5-99",
-          cupB: "99-101.5",
-          cupC: "101.5-104",
-          cupD: "104-106.5",
-          cupE: "106.5-109",
-          cupF: "109-111.5",
-        },
-        {
-          band: "95",
-          underbust: "89-94",
-          cupA: "101.5-104",
-          cupB: "104-106.5",
-          cupC: "106.5-109",
-          cupD: "109-111.5",
-          cupE: "111.5-114",
-          cupF: "114-116.5",
-        },
-        {
-          band: "100",
-          underbust: "94-99",
-          cupA: "106.5-109",
-          cupB: "109-111.5",
-          cupC: "111.5-114",
-          cupD: "114-116.5",
-          cupE: "116.5-119",
-          cupF: "119-121.5",
-        },
-        {
-          band: "105",
-          underbust: "99-104",
-          cupA: "111.5-114",
-          cupB: "114-116.5",
-          cupC: "116.5-119",
-          cupD: "119-121.5",
-          cupE: "121.5-124",
-          cupF: "124-127",
-        },
-      ],
-    },
-  };
-
-  // Bra size conversion data
-  const braSizeData = {
-    // Band size ranges in inches
-    bandSizes: {
-      inches: {
-        26: { cm: "65-66" },
-        28: { cm: "67-71" },
-        30: { cm: "72-76" },
-        32: { cm: "77-81" },
-        34: { cm: "82-86" },
-        36: { cm: "87-91" },
-        38: { cm: "92-96" },
-        40: { cm: "97-101" },
-        42: { cm: "102-106" },
-        44: { cm: "107-111" },
-        46: { cm: "112-116" },
-        48: { cm: "117-121" },
-      },
-    },
-
-    // Cup size differences (bust - band) in inches
-    cupSizes: {
-      inches: {
-        0: "AA",
-        1: "A",
-        2: "B",
-        3: "C",
-        4: "D",
-        5: "DD/E",
-        6: "DDD/F",
-        7: "G",
-        8: "H",
-        9: "I",
-        10: "J",
-        11: "K",
-        12: "L",
-        13: "M",
-        14: "N",
-        15: "O",
-      },
-    },
-
-    // Regional size conversions
-    regionConversions: {
+  const braSizeChartData: BraSizeChartData = useMemo(
+    () => ({
+      // Data for the size chart table
       "Pak/Ind": {
-        bandAdjustment: 0,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "DD/E",
-          "DDD/F": "DDD/F",
-          G: "G",
-          H: "H",
-          I: "I",
-          J: "J",
-          K: "K",
-          L: "L",
-          M: "M",
-          N: "N",
-          O: "O",
-        },
+        headers: [
+          "BAND SIZE",
+          "UNDERBUST (cm/in)",
+          "CUP A",
+          "CUP B",
+          "CUP C",
+          "CUP D",
+          "CUP E",
+          "CUP F",
+        ],
+        rows: [
+          {
+            band: "28",
+            underbust: "58.5-63.5",
+            cupA: "71-73.5",
+            cupB: "73.5-76",
+            cupC: "76-78.5",
+            cupD: "78.5-81",
+            cupE: "",
+            cupF: "",
+          },
+          {
+            band: "30",
+            underbust: "63.5-68.5",
+            cupA: "76-78.5",
+            cupB: "78.5-81",
+            cupC: "81-83.5",
+            cupD: "83.5-86",
+            cupE: "",
+            cupF: "",
+          },
+          {
+            band: "32",
+            underbust: "68.5-73.5",
+            cupA: "81-83.5",
+            cupB: "83.5-86",
+            cupC: "86-89",
+            cupD: "89-91.5",
+            cupE: "91.5-94",
+            cupF: "94-96.5",
+          },
+          {
+            band: "34",
+            underbust: "73.5-78.5",
+            cupA: "86-89",
+            cupB: "89-91.5",
+            cupC: "91.5-94",
+            cupD: "94-96.5",
+            cupE: "96.5-99",
+            cupF: "99-1.01m",
+          },
+          {
+            band: "36",
+            underbust: "78.5-84",
+            cupA: "91.5-94",
+            cupB: "94-96.5",
+            cupC: "96.5-99",
+            cupD: "99cm-1.01m",
+            cupE: "1.01-1.04m",
+            cupF: "1.04-1.06m",
+          },
+          {
+            band: "38",
+            underbust: "84-89",
+            cupA: "96.5-99",
+            cupB: "99-1.01m",
+            cupC: "1.01-1.04m",
+            cupD: "1.04-1.06m",
+            cupE: "1.06-1.09",
+            cupF: "1.09-1.11m",
+          },
+          {
+            band: "40",
+            underbust: "89-94",
+            cupA: "1.01-1.04m",
+            cupB: "1.04-1.06m",
+            cupC: "1.06-1.09m",
+            cupD: "1.09-1.11m",
+            cupE: "1.11-1.14m",
+            cupF: "1.14-1.16m",
+          },
+          {
+            band: "42",
+            underbust: "94-99",
+            cupA: "1.06-1.09m",
+            cupB: "1.09-1.11m",
+            cupC: "1.11-1.14m",
+            cupD: "1.14-1.16m",
+            cupE: "1.16-1.19m",
+            cupF: "1.19-1.22m",
+          },
+          {
+            band: "44",
+            underbust: "99-104",
+            cupA: "1.11-1.14m",
+            cupB: "1.14-1.16m",
+            cupC: "1.16-1.19m",
+            cupD: "1.19-1.22m",
+            cupE: "1.22-1.24m",
+            cupF: "1.24-1.27m",
+          },
+        ],
       },
       US: {
-        bandAdjustment: 0,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "DD/E",
-          "DDD/F": "DDD/F",
-          G: "G",
-          H: "H",
-          I: "I",
-          J: "J",
-          K: "K",
-          L: "L",
-          M: "M",
-          N: "N",
-          O: "O",
-        },
+        headers: [
+          "BAND SIZE",
+          "UNDERBUST (cm/in)",
+          "CUP A",
+          "CUP B",
+          "CUP C",
+          "CUP D",
+          "CUP E",
+          "CUP F",
+        ],
+        rows: [
+          {
+            band: "28",
+            underbust: "58.5-63.5",
+            cupA: "71-73.5",
+            cupB: "73.5-76",
+            cupC: "76-78.5",
+            cupD: "78.5-81",
+            cupE: "83.5-86",
+            cupF: "91.5-94",
+          },
+          {
+            band: "30",
+            underbust: "63.5-68.5",
+            cupA: "76-78.5",
+            cupB: "78.5-81",
+            cupC: "81-83.5",
+            cupD: "83.5-86",
+            cupE: "86-89",
+            cupF: "94-96.5",
+          },
+          {
+            band: "32",
+            underbust: "68.5-73.5",
+            cupA: "81-83.5",
+            cupB: "83.5-86",
+            cupC: "86-89",
+            cupD: "89-91.5",
+            cupE: "91.5-94",
+            cupF: "96.5-99",
+          },
+          {
+            band: "34",
+            underbust: "73.5-78.5",
+            cupA: "86-89",
+            cupB: "89-91.5",
+            cupC: "91.5-94",
+            cupD: "94-96.5",
+            cupE: "96.5-99",
+            cupF: "99-101.5",
+          },
+          {
+            band: "36",
+            underbust: "78.5-84",
+            cupA: "91.5-94",
+            cupB: "94-96.5",
+            cupC: "96.5-99",
+            cupD: "99-101.5",
+            cupE: "101.5-104",
+            cupF: "104-106.5",
+          },
+          {
+            band: "38",
+            underbust: "84-89",
+            cupA: "96.5-99",
+            cupB: "99-101.5",
+            cupC: "101.5-104",
+            cupD: "104-106.5",
+            cupE: "106.5-109",
+            cupF: "109-111.5",
+          },
+          {
+            band: "40",
+            underbust: "89-94",
+            cupA: "101.5-104",
+            cupB: "104-106.5",
+            cupC: "106.5-109",
+            cupD: "109-111.5",
+            cupE: "111.5-114",
+            cupF: "114-116.5",
+          },
+          {
+            band: "42",
+            underbust: "94-99",
+            cupA: "106.5-109",
+            cupB: "109-111.5",
+            cupC: "111.5-114",
+            cupD: "114-116.5",
+            cupE: "116.5-119",
+            cupF: "119-121.5",
+          },
+          {
+            band: "44",
+            underbust: "99-104",
+            cupA: "111.5-114",
+            cupB: "114-116.5",
+            cupC: "116.5-119",
+            cupD: "119-121.5",
+            cupE: "121.5-124",
+            cupF: "124-127",
+          },
+        ],
       },
       UK: {
-        bandAdjustment: 0,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "DD/E",
-          "DDD/F": "F",
-          G: "FF",
-          H: "G",
-          I: "GG",
-          J: "H",
-          K: "HH",
-          L: "J",
-          M: "JJ",
-          N: "K",
-          O: "KK",
-        },
+        headers: [
+          "BAND SIZE",
+          "UNDERBUST (cm/in)",
+          "CUP A",
+          "CUP B",
+          "CUP C",
+          "CUP D",
+          "CUP E",
+          "CUP F",
+        ],
+        rows: [
+          {
+            band: "28",
+            underbust: "58.5-63.5",
+            cupA: "71-73.5",
+            cupB: "73.5-76",
+            cupC: "76-78.5",
+            cupD: "78.5-81",
+            cupE: "83.5-86",
+            cupF: "91.5-94",
+          },
+          {
+            band: "30",
+            underbust: "63.5-68.5",
+            cupA: "76-78.5",
+            cupB: "78.5-81",
+            cupC: "81-83.5",
+            cupD: "83.5-86",
+            cupE: "86-89",
+            cupF: "94-96.5",
+          },
+          {
+            band: "32",
+            underbust: "68.5-73.5",
+            cupA: "81-83.5",
+            cupB: "83.5-86",
+            cupC: "86-89",
+            cupD: "89-91.5",
+            cupE: "91.5-94",
+            cupF: "96.5-99",
+          },
+          {
+            band: "34",
+            underbust: "73.5-78.5",
+            cupA: "86-89",
+            cupB: "89-91.5",
+            cupC: "91.5-94",
+            cupD: "94-96.5",
+            cupE: "96.5-99",
+            cupF: "99-101.5",
+          },
+          {
+            band: "36",
+            underbust: "78.5-84",
+            cupA: "91.5-94",
+            cupB: "94-96.5",
+            cupC: "96.5-99",
+            cupD: "99-101.5",
+            cupE: "101.5-104",
+            cupF: "104-106.5",
+          },
+          {
+            band: "38",
+            underbust: "84-89",
+            cupA: "96.5-99",
+            cupB: "99-101.5",
+            cupC: "101.5-104",
+            cupD: "104-106.5",
+            cupE: "106.5-109",
+            cupF: "109-111.5",
+          },
+          {
+            band: "40",
+            underbust: "89-94",
+            cupA: "101.5-104",
+            cupB: "104-106.5",
+            cupC: "106.5-109",
+            cupD: "109-111.5",
+            cupE: "111.5-114",
+            cupF: "114-116.5",
+          },
+          {
+            band: "42",
+            underbust: "94-99",
+            cupA: "106.5-109",
+            cupB: "109-111.5",
+            cupC: "111.5-114",
+            cupD: "114-116.5",
+            cupE: "116.5-119",
+            cupF: "119-121.5",
+          },
+          {
+            band: "44",
+            underbust: "99-104",
+            cupA: "111.5-114",
+            cupB: "114-116.5",
+            cupC: "116.5-119",
+            cupD: "119-121.5",
+            cupE: "121.5-124",
+            cupF: "124-127",
+          },
+        ],
       },
       EU: {
-        bandAdjustment: 0,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "E",
-          "DDD/F": "F",
-          G: "G",
-          H: "H",
-          I: "I",
-          J: "J",
-          K: "K",
-          L: "L",
-          M: "M",
-          N: "N",
-          O: "O",
-        },
+        headers: [
+          "BAND SIZE",
+          "UNDERBUST (cm/in)",
+          "CUP A",
+          "CUP B",
+          "CUP C",
+          "CUP D",
+          "CUP E",
+          "CUP F",
+        ],
+        rows: [
+          {
+            band: "60",
+            underbust: "58.5-63.5",
+            cupA: "71-73.5",
+            cupB: "73.5-76",
+            cupC: "76-78.5",
+            cupD: "78.5-81",
+            cupE: "83.5-86",
+            cupF: "91.5-94",
+          },
+          {
+            band: "65",
+            underbust: "63.5-68.5",
+            cupA: "76-78.5",
+            cupB: "78.5-81",
+            cupC: "81-83.5",
+            cupD: "83.5-86",
+            cupE: "86-89",
+            cupF: "94-96.5",
+          },
+          {
+            band: "70",
+            underbust: "68.5-73.5",
+            cupA: "81-83.5",
+            cupB: "83.5-86",
+            cupC: "86-89",
+            cupD: "89-91.5",
+            cupE: "91.5-94",
+            cupF: "96.5-99",
+          },
+          {
+            band: "75",
+            underbust: "73.5-78.5",
+            cupA: "86-89",
+            cupB: "89-91.5",
+            cupC: "91.5-94",
+            cupD: "94-96.5",
+            cupE: "96.5-99",
+            cupF: "99-101.5",
+          },
+          {
+            band: "80",
+            underbust: "78.5-84",
+            cupA: "91.5-94",
+            cupB: "94-96.5",
+            cupC: "96.5-99",
+            cupD: "99-101.5",
+            cupE: "101.5-104",
+            cupF: "104-106.5",
+          },
+          {
+            band: "85",
+            underbust: "84-89",
+            cupA: "96.5-99",
+            cupB: "99-101.5",
+            cupC: "101.5-104",
+            cupD: "104-106.5",
+            cupE: "106.5-109",
+            cupF: "109-111.5",
+          },
+          {
+            band: "90",
+            underbust: "89-94",
+            cupA: "101.5-104",
+            cupB: "104-106.5",
+            cupC: "106.5-109",
+            cupD: "109-111.5",
+            cupE: "111.5-114",
+            cupF: "114-116.5",
+          },
+          {
+            band: "95",
+            underbust: "94-99",
+            cupA: "106.5-109",
+            cupB: "109-111.5",
+            cupC: "111.5-114",
+            cupD: "114-116.5",
+            cupE: "116.5-119",
+            cupF: "119-121.5",
+          },
+          {
+            band: "100",
+            underbust: "99-104",
+            cupA: "111.5-114",
+            cupB: "114-116.5",
+            cupC: "116.5-119",
+            cupD: "119-121.5",
+            cupE: "121.5-124",
+            cupF: "124-127",
+          },
+        ],
       },
       FR: {
-        bandAdjustment: 15,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "E",
-          "DDD/F": "F",
-          G: "G",
-          H: "H",
-          I: "I",
-          J: "J",
-          K: "K",
-          L: "L",
-          M: "M",
-          N: "N",
-          O: "O",
-        },
-      },
-      IT: {
-        bandAdjustment: 15,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "E",
-          "DDD/F": "F",
-          G: "G",
-          H: "H",
-          I: "I",
-          J: "J",
-          K: "K",
-          L: "L",
-          M: "M",
-          N: "N",
-          O: "O",
-        },
-      },
-      AU: {
-        bandAdjustment: 0,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "DD/E",
-          "DDD/F": "F",
-          G: "FF",
-          H: "G",
-          I: "GG",
-          J: "H",
-          K: "HH",
-          L: "J",
-          M: "JJ",
-          N: "K",
-          O: "KK",
-        },
+        headers: [
+          "BAND SIZE",
+          "UNDERBUST (cm/in)",
+          "CUP A",
+          "CUP B",
+          "CUP C",
+          "CUP D",
+          "CUP E",
+          "CUP F",
+        ],
+        rows: [
+          {
+            band: "75",
+            underbust: "58.5-63.5",
+            cupA: "71-73.5",
+            cupB: "73.5-76",
+            cupC: "76-78.5",
+            cupD: "78.5-81",
+            cupE: "83.5-86",
+            cupF: "91.5-94",
+          },
+          {
+            band: "80",
+            underbust: "63.5-68.5",
+            cupA: "76-78.5",
+            cupB: "78.5-81",
+            cupC: "81-83.5",
+            cupD: "83.5-86",
+            cupE: "86-89",
+            cupF: "94-96.5",
+          },
+          {
+            band: "85",
+            underbust: "68.5-73.5",
+            cupA: "81-83.5",
+            cupB: "83.5-86",
+            cupC: "86-89",
+            cupD: "89-91.5",
+            cupE: "91.5-94",
+            cupF: "96.5-99",
+          },
+          {
+            band: "90",
+            underbust: "73.5-78.5",
+            cupA: "86-89",
+            cupB: "89-91.5",
+            cupC: "91.5-94",
+            cupD: "94-96.5",
+            cupE: "96.5-99",
+            cupF: "99-101.5",
+          },
+          {
+            band: "95",
+            underbust: "78.5-84",
+            cupA: "91.5-94",
+            cupB: "94-96.5",
+            cupC: "96.5-99",
+            cupD: "99-101.5",
+            cupE: "101.5-104",
+            cupF: "104-106.5",
+          },
+          {
+            band: "100",
+            underbust: "84-89",
+            cupA: "96.5-99",
+            cupB: "99-101.5",
+            cupC: "101.5-104",
+            cupD: "104-106.5",
+            cupE: "106.5-109",
+            cupF: "109-111.5",
+          },
+          {
+            band: "105",
+            underbust: "89-94",
+            cupA: "101.5-104",
+            cupB: "104-106.5",
+            cupC: "106.5-109",
+            cupD: "109-111.5",
+            cupE: "111.5-114",
+            cupF: "114-116.5",
+          },
+          {
+            band: "110",
+            underbust: "94-99",
+            cupA: "106.5-109",
+            cupB: "109-111.5",
+            cupC: "111.5-114",
+            cupD: "114-116.5",
+            cupE: "116.5-119",
+            cupF: "119-121.5",
+          },
+          {
+            band: "115",
+            underbust: "99-104",
+            cupA: "111.5-114",
+            cupB: "114-116.5",
+            cupC: "116.5-119",
+            cupD: "119-121.5",
+            cupE: "121.5-124",
+            cupF: "124-127",
+          },
+        ],
       },
       JP: {
-        bandAdjustment: 0,
-        cupMapping: {
-          AA: "AA",
-          A: "A",
-          B: "B",
-          C: "C",
-          D: "D",
-          "DD/E": "E",
-          "DDD/F": "F",
-          G: "G",
-          H: "H",
-          I: "I",
-          J: "J",
-          K: "K",
-          L: "L",
-          M: "M",
-          N: "N",
-          O: "O",
+        headers: [
+          "BAND SIZE",
+          "UNDERBUST (cm/in)",
+          "CUP A",
+          "CUP B",
+          "CUP C",
+          "CUP D",
+          "CUP E",
+          "CUP F",
+        ],
+        rows: [
+          {
+            band: "65",
+            underbust: "58.5-63.5",
+            cupA: "71-73.5",
+            cupB: "73.5-76",
+            cupC: "76-78.5",
+            cupD: "78.5-81",
+            cupE: "83.5-86",
+            cupF: "91.5-94",
+          },
+          {
+            band: "70",
+            underbust: "63.5-68.5",
+            cupA: "76-78.5",
+            cupB: "78.5-81",
+            cupC: "81-83.5",
+            cupD: "83.5-86",
+            cupE: "86-89",
+            cupF: "94-96.5",
+          },
+          {
+            band: "75",
+            underbust: "68.5-73.5",
+            cupA: "81-83.5",
+            cupB: "83.5-86",
+            cupC: "86-89",
+            cupD: "89-91.5",
+            cupE: "91.5-94",
+            cupF: "96.5-99",
+          },
+          {
+            band: "80",
+            underbust: "73.5-78.5",
+            cupA: "86-89",
+            cupB: "89-91.5",
+            cupC: "91.5-94",
+            cupD: "94-96.5",
+            cupE: "96.5-99",
+            cupF: "99-101.5",
+          },
+          {
+            band: "85",
+            underbust: "78.5-84",
+            cupA: "91.5-94",
+            cupB: "94-96.5",
+            cupC: "96.5-99",
+            cupD: "99-101.5",
+            cupE: "101.5-104",
+            cupF: "104-106.5",
+          },
+          {
+            band: "90",
+            underbust: "84-89",
+            cupA: "96.5-99",
+            cupB: "99-101.5",
+            cupC: "101.5-104",
+            cupD: "104-106.5",
+            cupE: "106.5-109",
+            cupF: "109-111.5",
+          },
+          {
+            band: "95",
+            underbust: "89-94",
+            cupA: "101.5-104",
+            cupB: "104-106.5",
+            cupC: "106.5-109",
+            cupD: "109-111.5",
+            cupE: "111.5-114",
+            cupF: "114-116.5",
+          },
+          {
+            band: "100",
+            underbust: "94-99",
+            cupA: "106.5-109",
+            cupB: "109-111.5",
+            cupC: "111.5-114",
+            cupD: "114-116.5",
+            cupE: "116.5-119",
+            cupF: "119-121.5",
+          },
+          {
+            band: "105",
+            underbust: "99-104",
+            cupA: "111.5-114",
+            cupB: "114-116.5",
+            cupC: "116.5-119",
+            cupD: "119-121.5",
+            cupE: "121.5-124",
+            cupF: "124-127",
+          },
+        ],
+      },
+    }),
+    []
+  );
+
+  // Bra size conversion data
+  const braSizeData: BraSizeData = useMemo(
+    () => ({
+      // Band size ranges in inches
+      bandSizes: {
+        inches: {
+          26: { cm: "65-66" },
+          28: { cm: "67-71" },
+          30: { cm: "72-76" },
+          32: { cm: "77-81" },
+          34: { cm: "82-86" },
+          36: { cm: "87-91" },
+          38: { cm: "92-96" },
+          40: { cm: "97-101" },
+          42: { cm: "102-106" },
+          44: { cm: "107-111" },
+          46: { cm: "112-116" },
+          48: { cm: "117-121" },
         },
       },
-    },
-  };
+
+      // Cup size differences (bust - band) in inches
+      cupSizes: {
+        inches: {
+          0: "AA",
+          1: "A",
+          2: "B",
+          3: "C",
+          4: "D",
+          5: "DD/E",
+          6: "DDD/F",
+          7: "G",
+          8: "H",
+          9: "I",
+          10: "J",
+          11: "K",
+          12: "L",
+          13: "M",
+          14: "N",
+          15: "O",
+        },
+      },
+
+      // Regional size conversions
+      regionConversions: {
+        "Pak/Ind": {
+          bandAdjustment: 0,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "DD/E",
+            "DDD/F": "DDD/F",
+            G: "G",
+            H: "H",
+            I: "I",
+            J: "J",
+            K: "K",
+            L: "L",
+            M: "M",
+            N: "N",
+            O: "O",
+          },
+        },
+        US: {
+          bandAdjustment: 0,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "DD/E",
+            "DDD/F": "DDD/F",
+            G: "G",
+            H: "H",
+            I: "I",
+            J: "J",
+            K: "K",
+            L: "L",
+            M: "M",
+            N: "N",
+            O: "O",
+          },
+        },
+        UK: {
+          bandAdjustment: 0,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "DD/E",
+            "DDD/F": "F",
+            G: "FF",
+            H: "G",
+            I: "GG",
+            J: "H",
+            K: "HH",
+            L: "J",
+            M: "JJ",
+            N: "K",
+            O: "KK",
+          },
+        },
+        EU: {
+          bandAdjustment: 0,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "E",
+            "DDD/F": "F",
+            G: "G",
+            H: "H",
+            I: "I",
+            J: "J",
+            K: "K",
+            L: "L",
+            M: "M",
+            N: "N",
+            O: "O",
+          },
+        },
+        FR: {
+          bandAdjustment: 15,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "E",
+            "DDD/F": "F",
+            G: "G",
+            H: "H",
+            I: "I",
+            J: "J",
+            K: "K",
+            L: "L",
+            M: "M",
+            N: "N",
+            O: "O",
+          },
+        },
+        IT: {
+          bandAdjustment: 15,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "E",
+            "DDD/F": "F",
+            G: "G",
+            H: "H",
+            I: "I",
+            J: "J",
+            K: "K",
+            L: "L",
+            M: "M",
+            N: "N",
+            O: "O",
+          },
+        },
+        AU: {
+          bandAdjustment: 0,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "DD/E",
+            "DDD/F": "F",
+            G: "FF",
+            H: "G",
+            I: "GG",
+            J: "H",
+            K: "HH",
+            L: "J",
+            M: "JJ",
+            N: "K",
+            O: "KK",
+          },
+        },
+        JP: {
+          bandAdjustment: 0,
+          cupMapping: {
+            AA: "AA",
+            A: "A",
+            B: "B",
+            C: "C",
+            D: "D",
+            "DD/E": "E",
+            "DDD/F": "F",
+            G: "G",
+            H: "H",
+            I: "I",
+            J: "J",
+            K: "K",
+            L: "L",
+            M: "M",
+            N: "N",
+            O: "O",
+          },
+        },
+      },
+    }),
+    []
+  );
 
   // Calculate bra size based on measurements
-  const calculateBraSize = useCallback(() => {
+  const calculateBraSize = useCallback((): RecommendedSize => {
     if (!bandMeasurement || !bustMeasurement) return null;
 
     let band = parseFloat(bandMeasurement);
@@ -882,15 +953,18 @@ const BraSizeCalculator = () => {
 
     // Calculate cup size (difference between bust and band)
     const difference = Math.round(bust - band);
-    const cupSize = braSizeData.cupSizes.inches[difference] || null;
+    const cupSize =
+      braSizeData.cupSizes.inches[
+        difference as keyof typeof braSizeData.cupSizes.inches
+      ] || null;
 
     if (!cupSize) return null;
 
     return { bandSize, cupSize };
-  }, [bandMeasurement, bustMeasurement, unit, braSizeData.cupSizes.inches]);
+  }, [bandMeasurement, bustMeasurement, unit, braSizeData]);
 
   // Convert measurements between units for the chart
-  const convertMeasurement = (value, targetUnit) => {
+  const convertMeasurement = (value: string, targetUnit: string): string => {
     if (!value) return value;
 
     // Check if the value is a range (e.g., "58.5-63.5")
@@ -914,28 +988,38 @@ const BraSizeCalculator = () => {
   };
 
   // Get size for specific region
-  const getSizeForRegion = (region, baseSize) => {
+  const getSizeForRegion = (
+    region: string,
+    baseSize: { bandSize: number; cupSize: string } | null
+  ): string | null => {
     if (!baseSize) return null;
 
     const { bandSize, cupSize } = baseSize;
-    const regionData = braSizeData.regionConversions[region];
+    const regionData =
+      braSizeData.regionConversions[
+        region as keyof typeof braSizeData.regionConversions
+      ];
 
     if (!regionData) return null;
 
     const adjustedBand = bandSize + regionData.bandAdjustment;
-    const adjustedCup = regionData.cupMapping[cupSize] || cupSize;
+    const adjustedCup =
+      regionData.cupMapping[cupSize as keyof typeof regionData.cupMapping] ||
+      cupSize;
 
-    return `${adjustedBand}${adjustedCup}`;
+    return `${String(adjustedBand)}${adjustedCup}`;
   };
 
   // Update recommended size when measurements change
   useEffect(() => {
     const baseSize = calculateBraSize();
-    setRecommendedSize(baseSize);
+    if (baseSize) {
+      setRecommendedSize(baseSize);
+    }
   }, [bandMeasurement, bustMeasurement, unit, calculateBraSize]);
 
   // Handle unit change
-  const handleUnitChange = (newUnit) => {
+  const handleUnitChange = (newUnit: string) => {
     setUnit(newUnit);
     setBandMeasurement("");
     setBustMeasurement("");
@@ -1144,7 +1228,7 @@ const BraSizeCalculator = () => {
                       </div>
                       <div className="flex flex-col md:flex-row items-center">
                         <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                          <img
+                          <Image
                             src={underbustSvg}
                             alt="Band Size Measurement"
                             className="w-full"
@@ -1175,7 +1259,7 @@ const BraSizeCalculator = () => {
                           </ol>
                           <p className="mt-4 text-sm text-gray-600">
                             This measurement is crucial for proper support as
-                            the band provides 80% of a bra's support.
+                            the band provides 80% of a bra&apos;s support.
                           </p>
                         </div>
                       </div>
@@ -1255,7 +1339,7 @@ const BraSizeCalculator = () => {
                       </div>
                       <div className="flex flex-col md:flex-row items-center">
                         <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                          <img
+                          <Image
                             src={overbustSvg}
                             alt="Bust Size Measurement"
                             className="w-full"
@@ -1367,7 +1451,8 @@ const BraSizeCalculator = () => {
                     letterSpacing: "1px",
                   }}
                 >
-                  {getSizeForRegion(activeRegion, recommendedSize)}
+                  {getSizeForRegion(String(activeRegion), recommendedSize) ||
+                    ""}
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
                   {activeRegion} Size
@@ -1403,7 +1488,11 @@ const BraSizeCalculator = () => {
                               ? "bg-yellow-500 text-white shadow-sm font-medium"
                               : "text-gray-600 hover:bg-yellow-100 border border-yellow-200"
                           }`}
-                          onClick={() => setActiveRegion(region)}
+                          onClick={() =>
+                            setActiveRegion(
+                              region as keyof typeof braSizeData.regionConversions
+                            )
+                          }
                         >
                           {region}
                         </button>
@@ -1415,18 +1504,22 @@ const BraSizeCalculator = () => {
                     <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200 shadow-sm">
                       <p className="text-xs text-gray-500 mb-1">Band Size</p>
                       <p className="text-xl font-semibold text-yellow-700">
-                        {recommendedSize.bandSize +
-                          braSizeData.regionConversions[activeRegion]
-                            .bandAdjustment}
+                        {String(
+                          recommendedSize.bandSize +
+                            braSizeData.regionConversions[
+                              activeRegion as keyof typeof braSizeData.regionConversions
+                            ].bandAdjustment
+                        )}
                       </p>
                     </div>
                     <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200 shadow-sm">
                       <p className="text-xs text-gray-500 mb-1">Cup Size</p>
                       <p className="text-xl font-semibold text-yellow-700">
-                        {
-                          braSizeData.regionConversions[activeRegion]
-                            .cupMapping[recommendedSize.cupSize]
-                        }
+                        {braSizeData.regionConversions[
+                          activeRegion as keyof typeof braSizeData.regionConversions
+                        ].cupMapping[
+                          recommendedSize.cupSize as keyof (typeof braSizeData.regionConversions)[typeof activeRegion]["cupMapping"]
+                        ] || recommendedSize.cupSize}
                       </p>
                     </div>
                   </div>
@@ -1494,42 +1587,10 @@ const BraSizeCalculator = () => {
           {/* Region and Unit Controls */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-6">
             {/* Region Selector */}
-            <div className="mb-4 md:mb-0">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Select Region:
-              </label>
-              <div className="relative">
-                <select
-                  value={chartRegion}
-                  onChange={(e) => setChartRegion(e.target.value)}
-                  className="block w-full pl-4 pr-10 py-2.5 text-base border-2 border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm rounded-lg bg-gradient-to-r from-yellow-50 to-white shadow-sm appearance-none transition-all duration-200 hover:border-yellow-400"
-                  style={{ fontWeight: "500" }}
-                >
-                  <option value="Pak/Ind">Pakistan/India (Pak/Ind)</option>
-                  <option value="US">United States (US)</option>
-                  <option value="UK">United Kingdom (UK)</option>
-                  <option value="EU">Europe (EU)</option>
-                  <option value="FR">France (FR)</option>
-                  <option value="JP">Japan (JP)</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                  <div className="h-6 w-6 rounded-full bg-yellow-400 flex items-center justify-center shadow-sm">
-                    <svg
-                      className="h-4 w-4 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Dropdown
+              chartRegion={chartRegion}
+              setChartRegion={setChartRegion}
+            />
 
             {/* Unit Toggle */}
             <UnitToggle chartUnit={chartUnit} setChartUnit={setChartUnit} />
