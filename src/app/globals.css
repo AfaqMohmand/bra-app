@@ -1,26 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap");
 @import "tailwindcss";
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+:root {
+  /* Main color scheme */
+  --color-yellow: #f2c94c; /* Shadow yellow color */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  /* Box shadow */
+  --box-shadow: 0 4px 10px rgba(242, 201, 76, 0.3);
+}
+
+/* Apply Poppins font family to all elements */
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+}
+
+/* Hero section styling */
+.hero-section {
+  min-height: 80vh;
+  position: relative;
+}
+
+/* Zigzag background */
+.zigzag-bg {
+  background-color: var(--color-yellow);
+  background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.3) 25%,
+      transparent 25%
+    ),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%);
+  background-position: 25px 0, 25px 0, 0 0, 0 0;
+  background-size: 50px 50px;
+  background-repeat: repeat;
+  opacity: 0.8;
+}
+
+/* Text styling for hero section */
+.hero-heading {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.hero-heading-accent {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+.hero-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* Text gradient effect */
+.text-gradient {
+  background: linear-gradient(90deg, #000000 0%, #444444 50%, #000000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3s infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* Button hover effects */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow);
 }

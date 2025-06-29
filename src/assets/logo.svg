@@ -1,0 +1,5 @@
+<svg width="150" height="50" viewBox="0 0 150 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="150" height="50" rx="5" fill="white"/>
+  <path d="M30 15H40C42.7614 15 45 17.2386 45 20V30C45 32.7614 42.7614 35 40 35H30C27.2386 35 25 32.7614 25 30V20C25 17.2386 27.2386 15 30 15Z" fill="#f2c94c"/>
+  <text x="55" y="30" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#000000">LOGO</text>
+</svg>
