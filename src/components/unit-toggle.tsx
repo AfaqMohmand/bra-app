@@ -1,5 +1,3 @@
-"use client";
-
 interface UnitToggleProps {
   chartUnit: string;
   setChartUnit: (unit: string) => void;
