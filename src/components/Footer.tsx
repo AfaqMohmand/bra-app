@@ -1,11 +1,28 @@
 import React from "react";
 import Link from "next/link";
+import ZigZagTwo from "../assets/zigzag_two.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden">
+      {/* Beautiful gradient background with texture */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(135deg, rgba(242, 201, 76, 0.15) 0%, rgba(242, 201, 76, 0.25) 100%)`,
+          backgroundImage: `url(${ZigZagTwo.src})`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "200px",
+          backgroundBlendMode: "soft-light",
+          borderTop: "1px solid rgba(242, 201, 76, 0.3)",
+        }}
+      ></div>
+
+      {/* Subtle top edge decoration */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60"></div>
+
       <div className="relative z-10 container mx-auto px-4 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

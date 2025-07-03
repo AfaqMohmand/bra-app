@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import heroImage from "../assets/heroImage.png";
 import ZigZagTwo from "../assets/zigzag_two.png";
+import HeroImage from "../assets/HeroImage.jpg";
 
 const Hero = () => {
   return (
@@ -33,7 +33,7 @@ const Hero = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10">
+      <div className="container mx-auto px-4 py-6 sm:py-8 md:py-10 lg:py-12 relative z-10">
         <div className="flex flex-col md:flex-row items-center md:items-start lg:items-center">
           {/* Left side - Text content */}
           <div className="w-full md:w-1/2 mb-10 md:mb-0 md:pr-4 lg:pr-8">
@@ -86,12 +86,12 @@ const Hero = () => {
           </div>
 
           {/* Right side - Image with decorative elements */}
-          <div className="w-full md:w-1/2 relative mt-8 md:mt-0">
+          <div className="w-full md:w-1/2 relative mt-4 md:mt-0">
             <div className="relative z-10 rounded-lg overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl mx-auto max-w-md sm:max-w-lg md:max-w-full transform hover:scale-105 transition-transform duration-500">
               <Image
-                src={heroImage}
+                src={HeroImage}
                 alt="Hero Image"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover max-h-[700px]"
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />

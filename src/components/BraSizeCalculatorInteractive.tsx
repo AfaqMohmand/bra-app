@@ -74,7 +74,18 @@ const BraSizeCalculatorInteractive: React.FC<
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-lg relative overflow-hidden h-full animate-fadeIn gradient-border">
+    <div className="bg-white p-8 rounded-xl shadow-lg relative overflow-hidden h-full animate-fadeIn">
+      {/* Stylish discontinuous border */}
+      <div className="absolute top-0 left-0 w-[30%] h-[2px] bg-yellow-400"></div>
+      <div className="absolute top-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
+      <div className="absolute bottom-0 left-0 w-[30%] h-[2px] bg-yellow-400"></div>
+      <div className="absolute bottom-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
+      
+      <div className="absolute top-0 left-0 h-[30%] w-[2px] bg-yellow-400"></div>
+      <div className="absolute top-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
+      <div className="absolute bottom-0 left-0 h-[30%] w-[2px] bg-yellow-400"></div>
+      <div className="absolute bottom-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
+      
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-20 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-20 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div>

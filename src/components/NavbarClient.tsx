@@ -39,14 +39,14 @@ const NavbarClient = ({ logoSrc }: NavbarClientProps) => {
 
   return (
     <>
-      <nav className="w-full py-4 px-6 md:px-12 flex justify-between items-center bg-white shadow-md relative z-20">
+      <nav className="w-full py-2 px-6 md:px-12 flex justify-between items-center bg-white shadow-sm relative z-20">
         <div className="flex items-center">
           <Image
             src={logoSrc}
             alt="Logo"
-            width={48}
-            height={48}
-            className="h-10 md:h-12 w-auto"
+            width={40}
+            height={20}
+            className="h-6 md:h-8 w-auto"
           />
         </div>
 
