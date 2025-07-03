@@ -1,22 +1,8 @@
 import React from "react";
-// import ZigZagTwo from "../assets/zigzag_two.png";
 
 const PrivacyPolicy = () => {
   return (
     <div className="relative min-h-screen">
-      {/* Background with texture */}
-      {/* <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${ZigZagTwo})`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "150px",
-          backgroundColor: "#FFDD00",
-          mixBlendMode: "soft-light",
-          opacity: 0.2,
-        }}
-      ></div> */}
-
       <div className="relative z-10 container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
 

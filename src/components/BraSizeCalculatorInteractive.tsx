@@ -47,7 +47,7 @@ const BraSizeCalculatorInteractive: React.FC<
         difference as keyof typeof braSizeData.cupSizes.inches
       ] || null;
 
-    if (!cupSize) return null;
+    if (!cupSize) return { isInvalid: true, bandSize: 0, cupSize: '' };
 
     return { bandSize, cupSize };
   }, [bandMeasurement, bustMeasurement, unit, braSizeData]);

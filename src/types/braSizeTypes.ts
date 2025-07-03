@@ -53,4 +53,5 @@ export type BraSizeData = {
 export type RecommendedSize = {
   bandSize: number;
   cupSize: string;
+  isInvalid?: boolean;
 } | null;

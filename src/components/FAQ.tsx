@@ -34,16 +34,6 @@ const FAQ = () => {
 
   return (
     <section className="faq-section relative overflow-hidden py-16 md:py-24">
-      {/* Background with curved edges and yellow gradient */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,248,225,1) 100%)",
-          opacity: 0.8,
-        }}
-      ></div>
-
       {/* Decorative elements */}
       <div
         className="absolute top-20 left-10 w-32 h-32 rounded-full"

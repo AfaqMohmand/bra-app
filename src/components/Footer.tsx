@@ -1,25 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import ZigZagTwo from "../assets/zigzag_two.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden">
-      {/* Background with texture */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${ZigZagTwo})`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "150px",
-          backgroundColor: "#FFDD00" /* Yellow color to match site theme */,
-          mixBlendMode: "soft-light",
-          opacity: 0.3,
-        }}
-      ></div>
-
       <div className="relative z-10 container mx-auto px-4 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -35,7 +21,7 @@ const Footer = () => {
                   placeholder="Email Address"
                   className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-full"
                 />
-                <button className="bg-black text-white px-4 py-2 font-bold whitespace-nowrap">
+                <button className="bg-black text-white px-8 py-0 font-bold whitespace-nowrap">
                   SIGN UP
                 </button>
               </div>

@@ -74,7 +74,43 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
         {/* Right column - Results */}
         <div className="w-full lg:w-1/2 animate-slideInRight">
-          {recommendedSize ? (
+          {recommendedSize && recommendedSize.isInvalid ? (
+            <div className="bg-white p-6 rounded-xl shadow-lg h-full gradient-border animate-fadeIn">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
+
+              <div className="flex items-center justify-center mb-6 animate-fadeIn animate-delay-100 mt-5">
+                <div className="bg-gradient-to-br from-red-400 to-red-600 rounded-full p-4 shadow-lg animate-pulse">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-7 w-7 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-center mb-3 font-serif animate-fadeIn animate-delay-200">
+                Invalid Size
+              </h3>
+
+              <div className="text-center my-6 animate-fadeIn animate-delay-300">
+                <p className="text-lg text-gray-700 mb-4">
+                  The measurements you entered don&apos;t correspond to a standard bra size.
+                </p>
+                <p className="text-md text-gray-600">
+                  Please double-check your measurements and try again, or consider getting professionally fitted.
+                </p>
+              </div>
+            </div>
+          ) : recommendedSize ? (
             <div className="bg-white p-6 rounded-xl shadow-lg h-full gradient-border animate-fadeIn">
               <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
 

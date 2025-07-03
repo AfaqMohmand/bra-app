@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import ZigZagTwo from "../assets/zigzag_two.png";
 
 const BraStylesSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -113,19 +112,6 @@ const BraStylesSlider = () => {
 
   return (
     <section className="relative py-16 overflow-hidden">
-      {/* Background with texture */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${ZigZagTwo})`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "150px",
-          backgroundColor: "#f5f5f5",
-          mixBlendMode: "soft-light",
-          opacity: 0.2,
-        }}
-      ></div>
-
       <div className="relative z-10 container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
           Select Your Style
