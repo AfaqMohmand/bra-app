@@ -74,14 +74,16 @@ const BraSizeCalculatorInteractive: React.FC<
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-yellow-200 relative overflow-hidden h-full">
-      {/* Decorative corner accent */}
-      <div className="absolute top-0 right-0 w-16 h-16 bg-yellow-300 opacity-30 transform rotate-45 translate-x-8 -translate-y-8"></div>
-      <div className="flex items-center justify-center mb-4">
-        <div className="bg-yellow-500 rounded-full p-3 shadow-lg">
+    <div className="bg-white p-8 rounded-xl shadow-lg relative overflow-hidden h-full animate-fadeIn gradient-border">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-20 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-20 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div>
+
+      <div className="flex items-center justify-center mb-6 animate-fadeIn animate-delay-100 mt-5">
+        <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full p-4 shadow-lg animate-pulse">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-white"
+            className="h-7 w-7 text-white"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -95,31 +97,31 @@ const BraSizeCalculatorInteractive: React.FC<
           </svg>
         </div>
       </div>
-      <h3 className="text-xl font-semibold text-center mb-2">
+      <h3 className="text-2xl font-bold text-center mb-2 animate-fadeIn animate-delay-200 font-serif">
         Enter Your Measurements
       </h3>
-      <p className="text-center text-sm text-gray-500 mb-4">
+      <p className="text-center text-sm text-gray-600 mb-6 animate-fadeIn animate-delay-300">
         Measure around your body for the most accurate results
       </p>
 
       {/* Unit toggle */}
-      <div className="flex justify-center mb-6">
-        <div className="inline-flex rounded-full overflow-hidden">
+      <div className="flex justify-center mb-8 animate-fadeIn animate-delay-400">
+        <div className="inline-flex rounded-full overflow-hidden shadow-md">
           <button
-            className={`px-4 py-2 text-sm font-medium transition-all ${
+            className={`px-6 py-2.5 text-sm font-medium transition-all ${
               unit === "inches"
-                ? "bg-yellow-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
+                : "bg-white text-gray-700 hover:bg-gray-50"
             }`}
             onClick={() => handleUnitChange("inches")}
           >
             Inches
           </button>
           <button
-            className={`px-4 py-2 text-sm font-medium transition-all ${
+            className={`px-6 py-2.5 text-sm font-medium transition-all ${
               unit === "centimeters"
-                ? "bg-yellow-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
+                : "bg-white text-gray-700 hover:bg-gray-50"
             }`}
             onClick={() => handleUnitChange("centimeters")}
           >
@@ -129,8 +131,8 @@ const BraSizeCalculatorInteractive: React.FC<
       </div>
 
       {/* Measurement inputs */}
-      <div className="space-y-6">
-        <div>
+      <div className="space-y-8 animate-fadeIn animate-delay-500">
+        <div className="px-5">
           <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
             Band Measurement
             <div
@@ -154,17 +156,15 @@ const BraSizeCalculatorInteractive: React.FC<
             </div>
           </label>
           <div className="relative">
-            <input
-              type="number"
-              value={bandMeasurement}
-              onChange={(e) => setBandMeasurement(e.target.value)}
-              className="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder={`Enter band size in ${unit}`}
-            />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <span className="text-gray-500">
-                {unit === "inches" ? "in" : "cm"}
-              </span>
+            <div className="flex items-center">
+              <input
+                type="number"
+                value={bandMeasurement}
+                onChange={(e) => setBandMeasurement(e.target.value)}
+                className="block w-full px-6 py-4 text-gray-700 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md"
+                placeholder={`Enter band measurement in ${unit}`}
+              />
+              {/* <span className="ml-3 text-gray-600 font-medium">{unit}</span> */}
             </div>
           </div>
           <p className="mt-1 text-xs text-gray-500">
@@ -241,7 +241,7 @@ const BraSizeCalculatorInteractive: React.FC<
           )}
         </div>
 
-        <div>
+        <div className="px-5">
           <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
             Bust Measurement
             <div
@@ -265,17 +265,15 @@ const BraSizeCalculatorInteractive: React.FC<
             </div>
           </label>
           <div className="relative">
-            <input
-              type="number"
-              value={bustMeasurement}
-              onChange={(e) => setBustMeasurement(e.target.value)}
-              className="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder={`Enter bust size in ${unit}`}
-            />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <span className="text-gray-500">
-                {unit === "inches" ? "in" : "cm"}
-              </span>
+            <div className="flex items-center">
+              <input
+                type="number"
+                value={bustMeasurement}
+                onChange={(e) => setBustMeasurement(e.target.value)}
+                className="block w-full px-6 py-4 text-gray-700 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md"
+                placeholder={`Enter bust measurement in ${unit}`}
+              />
+              {/* <span className="ml-3 text-gray-600 font-medium">{unit}</span> */}
             </div>
           </div>
           <p className="mt-1 text-xs text-gray-500">
@@ -351,22 +349,37 @@ const BraSizeCalculatorInteractive: React.FC<
             </div>
           )}
         </div>
-        
+
         {/* How to Measure Guide */}
-        <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <div className="flex items-center mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h4 className="font-medium text-gray-700">How to Measure</h4>
-          </div>
-          <div className="text-sm text-gray-600">
-            <p className="mb-2">
-              <strong>Band:</strong> Measure snugly around your ribcage, directly under your bust.
-            </p>
-            <p>
-              <strong>Bust:</strong> Measure around the fullest part of your bust while wearing a non-padded bra.
-            </p>
+        <div className="px-5 mb-5">
+          <div className="mt-8 p-4 bg-yellow-50 border border-t-1 border-t-yellow-200 border-b-0 border-r-0 border-l-0 rounded-lg">
+            <div className="flex items-center mb-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-yellow-500 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <h4 className="font-medium text-gray-700">How to Measure</h4>
+            </div>
+            <div className="text-sm text-gray-600">
+              <p className="mb-2">
+                <strong>Band:</strong> Measure snugly around your ribcage,
+                directly under your bust.
+              </p>
+              <p>
+                <strong>Bust:</strong> Measure around the fullest part of your
+                bust while wearing a non-padded bra.
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url(${ZigZagTwo})`,
+          backgroundImage: `url(${ZigZagTwo.src})`,
           backgroundRepeat: "repeat",
           backgroundSize: "200px",
           backgroundColor: "var(--color-yellow)",

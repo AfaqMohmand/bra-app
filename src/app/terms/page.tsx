@@ -1,21 +1,21 @@
 import React from "react";
-import ZigZagTwo from "../assets/zigzag_two.png";
+// import ZigZagTwo from "../assets/zigzag_two.png";
 
 const Terms = () => {
   return (
     <div className="relative min-h-screen">
       {/* Background with texture */}
-      <div
+      {/* <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url(${ZigZagTwo})`,
+          // backgroundImage: `url(${ZigZagTwo})`,
           backgroundRepeat: "repeat",
           backgroundSize: "150px",
           backgroundColor: "#FFDD00",
           mixBlendMode: "soft-light",
           opacity: 0.2,
         }}
-      ></div>
+      ></div> */}
 
       <div className="relative z-10 container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">Terms and Conditions</h1>
