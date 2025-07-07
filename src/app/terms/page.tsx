@@ -11,10 +11,11 @@ const Terms = () => {
           <p className="mb-4">
             These Terms and Conditions constitute a legally binding agreement
             made between you, whether personally or on behalf of an entity
-            ("you") and our company ("we," "us" or "our"), concerning your
-            access to and use of our website as well as any other media form,
-            media channel, mobile website or mobile application related, linked,
-            or otherwise connected thereto (collectively, the "Site").
+            (&quot;you&quot;) and our company (&quot;we,&quot; &quot;us&quot; or
+            &quot;our&quot;), concerning your access to and use of our website
+            as well as any other media form, media channel, mobile website or
+            mobile application related, linked, or otherwise connected thereto
+            (collectively, the &quot;Site&quot;).
           </p>
           <p className="mb-4">
             You agree that by accessing the Site, you have read, understood, and
@@ -31,21 +32,21 @@ const Terms = () => {
             Unless otherwise indicated, the Site is our proprietary property and
             all source code, databases, functionality, software, website
             designs, audio, video, text, photographs, and graphics on the Site
-            (collectively, the "Content") and the trademarks, service marks, and
-            logos contained therein (the "Marks") are owned or controlled by us
-            or licensed to us, and are protected by copyright and trademark laws
-            and various other intellectual property rights and unfair
-            competition laws of the United States, international copyright laws,
-            and international conventions.
+            (collectively, the &quot;Content&quot;) and the trademarks, service
+            marks, and logos contained therein (the &quot;Marks&quot;) are owned
+            or controlled by us or licensed to us, and are protected by
+            copyright and trademark laws and various other intellectual property
+            rights and unfair competition laws of the United States,
+            international copyright laws, and international conventions.
           </p>
           <p className="mb-4">
-            The Content and the Marks are provided on the Site "AS IS" for your
-            information and personal use only. Except as expressly provided in
-            these Terms and Conditions, no part of the Site and no Content or
-            Marks may be copied, reproduced, aggregated, republished, uploaded,
-            posted, publicly displayed, encoded, translated, transmitted,
-            distributed, sold, licensed, or otherwise exploited for any
-            commercial purpose whatsoever, without our express prior written
+            The Content and the Marks are provided on the Site &quot;AS IS&quot;
+            for your information and personal use only. Except as expressly
+            provided in these Terms and Conditions, no part of the Site and no
+            Content or Marks may be copied, reproduced, aggregated, republished,
+            uploaded, posted, publicly displayed, encoded, translated,
+            transmitted, distributed, sold, licensed, or otherwise exploited for
+            any commercial purpose whatsoever, without our express prior written
             permission.
           </p>
 

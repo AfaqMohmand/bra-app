@@ -8,6 +8,9 @@ import {
 } from "../types/braSizeTypes";
 import BraSizeCalculatorInteractive from "./BraSizeCalculatorInteractive";
 import BraSizeChartInteractive from "./BraSizeChartInteractive";
+import Heading from "./heading";
+import NoMeasurementData from "./layout/noMeasrumentData";
+import DetailBraSizeChart from "./braSizeChart";
 
 interface BraSizeCalculatorWrapperProps {
   braSizeData: BraSizeData;
@@ -52,16 +55,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
   return (
     <div>
-      <div className="text-center mb-10 animate-fadeIn">
-        <h2 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 font-serif">
-          PROFESSIONAL BRA SIZE CALCULATOR
-        </h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto mb-4 rounded-full"></div>
-        <p className="text-gray-600 max-w-2xl mx-auto animate-fadeIn animate-delay-200">
-          Get your perfect fit with our accurate bra size calculator. Used by
-          thousands of women worldwide for precise measurements.
-        </p>
-      </div>
+      <Heading />
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left column - Calculator input */}
@@ -103,10 +97,12 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
               <div className="text-center my-6 animate-fadeIn animate-delay-300">
                 <p className="text-lg text-gray-700 mb-4">
-                  The measurements you entered don&apos;t correspond to a standard bra size.
+                  The measurements you entered don&apos;t correspond to a
+                  standard bra size.
                 </p>
                 <p className="text-md text-gray-600">
-                  Please double-check your measurements and try again, or consider getting professionally fitted.
+                  Please double-check your measurements and try again, or
+                  consider getting professionally fitted.
                 </p>
               </div>
             </div>
@@ -259,42 +255,14 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               </div>
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-xl shadow-lg h-full flex items-center justify-center gradient-border animate-fadeIn">
-              <div className="text-center text-gray-500 animate-pulse">
-                <div className="relative">
-                  <div className="absolute -inset-4 rounded-full bg-yellow-100 opacity-50 blur-lg"></div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-16 w-16 mx-auto mb-6 text-yellow-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <p className="text-xl font-medium mb-2">
-                  Enter your measurements
-                </p>
-                <p className="text-sm text-gray-400">
-                  Your recommended size will appear here
-                </p>
-              </div>
-            </div>
+            <NoMeasurementData />
           )}
         </div>
       </div>
 
       {/* Size chart section */}
       <div className="mt-16">
-        <h2 className="text-4xl font-bold text-center mb-3 bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 font-serif">
-          DETAILED BRA SIZE CHART
-        </h2>
+        <DetailBraSizeChart />
         <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto mb-8 rounded-full"></div>
         <BraSizeChartInteractive braSizeChartData={braSizeChartData} />
       </div>

@@ -5,6 +5,7 @@ import { BraSizeData, RecommendedSize } from "../types/braSizeTypes";
 import Image from "next/image";
 import underbustSvg from "../assets/underbust-cup.svg";
 import overbustSvg from "../assets/overbust-cup.svg";
+import HowToMeasure from "./howToMeasrure";
 
 interface BraSizeCalculatorInteractiveProps {
   braSizeData: BraSizeData;
@@ -47,7 +48,7 @@ const BraSizeCalculatorInteractive: React.FC<
         difference as keyof typeof braSizeData.cupSizes.inches
       ] || null;
 
-    if (!cupSize) return { isInvalid: true, bandSize: 0, cupSize: '' };
+    if (!cupSize) return { isInvalid: true, bandSize: 0, cupSize: "" };
 
     return { bandSize, cupSize };
   }, [bandMeasurement, bustMeasurement, unit, braSizeData]);
@@ -80,12 +81,12 @@ const BraSizeCalculatorInteractive: React.FC<
       <div className="absolute top-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
       <div className="absolute bottom-0 left-0 w-[30%] h-[2px] bg-yellow-400"></div>
       <div className="absolute bottom-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
-      
+
       <div className="absolute top-0 left-0 h-[30%] w-[2px] bg-yellow-400"></div>
       <div className="absolute top-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
       <div className="absolute bottom-0 left-0 h-[30%] w-[2px] bg-yellow-400"></div>
       <div className="absolute bottom-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
-      
+
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-20 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-20 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div>
@@ -109,7 +110,7 @@ const BraSizeCalculatorInteractive: React.FC<
         </div>
       </div>
       <h3 className="text-2xl font-bold text-center mb-2 animate-fadeIn animate-delay-200 font-serif">
-        Enter Your Measurements
+        Enter Your Measurementsoo
       </h3>
       <p className="text-center text-sm text-gray-600 mb-6 animate-fadeIn animate-delay-300">
         Measure around your body for the most accurate results
@@ -362,37 +363,7 @@ const BraSizeCalculatorInteractive: React.FC<
         </div>
 
         {/* How to Measure Guide */}
-        <div className="px-5 mb-5">
-          <div className="mt-8 p-4 bg-yellow-50 border border-t-1 border-t-yellow-200 border-b-0 border-r-0 border-l-0 rounded-lg">
-            <div className="flex items-center mb-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-yellow-500 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <h4 className="font-medium text-gray-700">How to Measure</h4>
-            </div>
-            <div className="text-sm text-gray-600">
-              <p className="mb-2">
-                <strong>Band:</strong> Measure snugly around your ribcage,
-                directly under your bust.
-              </p>
-              <p>
-                <strong>Bust:</strong> Measure around the fullest part of your
-                bust while wearing a non-padded bra.
-              </p>
-            </div>
-          </div>
-        </div>
+        <HowToMeasure />
       </div>
     </div>
   );
