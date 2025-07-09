@@ -75,17 +75,9 @@ const BraSizeCalculatorInteractive: React.FC<
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-lg relative overflow-hidden h-full animate-fadeIn">
-      {/* Stylish discontinuous border */}
-      <div className="absolute top-0 left-0 w-[30%] h-[2px] bg-yellow-400"></div>
-      <div className="absolute top-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
-      <div className="absolute bottom-0 left-0 w-[30%] h-[2px] bg-yellow-400"></div>
-      <div className="absolute bottom-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
-
-      <div className="absolute top-0 left-0 h-[30%] w-[2px] bg-yellow-400"></div>
-      <div className="absolute top-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
-      <div className="absolute bottom-0 left-0 h-[30%] w-[2px] bg-yellow-400"></div>
-      <div className="absolute bottom-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
+    <div className="bg-white p-8 rounded-xl shadow-lg relative overflow-hidden h-full animate-fadeIn gradient-border">
+      {/* Consistent border style with the right side */}
+      <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
 
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-20 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
@@ -110,7 +102,7 @@ const BraSizeCalculatorInteractive: React.FC<
         </div>
       </div>
       <h3 className="text-2xl font-bold text-center mb-2 animate-fadeIn animate-delay-200 font-serif">
-        Enter Your Measurementsoo
+        Enter Your Measurements
       </h3>
       <p className="text-center text-sm text-gray-600 mb-6 animate-fadeIn animate-delay-300">
         Measure around your body for the most accurate results
