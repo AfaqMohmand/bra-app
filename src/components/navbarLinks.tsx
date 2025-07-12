@@ -18,7 +18,7 @@ export default function NavbarLinks({
 }: NavbarLinksProps) {
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect
+  // Handle scroll effect - keeping the yellow background always
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;

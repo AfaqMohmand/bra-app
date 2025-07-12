@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface FAQItem {
   question: string;
@@ -13,6 +13,28 @@ interface FAQAccordionProps {
 
 const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
   const [activeIndex, setActiveIndex] = useState(0); // First item open by default
+  const [heights, setHeights] = useState<{ [key: number]: number }>({});
+  const contentRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+
+  // Measure content heights on initial render and window resize
+  useEffect(() => {
+    const measureHeights = () => {
+      const newHeights: { [key: number]: number } = {};
+      faqs.forEach((_, index) => {
+        if (contentRefs.current[index]) {
+          newHeights[index] = contentRefs.current[index]?.scrollHeight || 0;
+        }
+      });
+      setHeights(newHeights);
+    };
+
+    // Measure after initial render
+    measureHeights();
+
+    // Re-measure on window resize
+    window.addEventListener('resize', measureHeights);
+    return () => window.removeEventListener('resize', measureHeights);
+  }, [faqs]);
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? -1 : index);
@@ -75,9 +97,19 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
                 )}
               </span>
             </button>
-            {activeIndex === index && (
+            <div 
+              ref={(el) => {
+                contentRefs.current[index] = el;
+                return undefined;
+              }}
+              className="overflow-hidden transition-all duration-300 ease-in-out" 
+              style={{
+                maxHeight: activeIndex === index ? `${heights[index] || 0}px` : '0',
+                opacity: activeIndex === index ? 1 : 0,
+              }}
+            >
               <div className="px-6 pb-4 text-gray-600">{faq.answer}</div>
-            )}
+            </div>
           </div>
         ))}
       </div>

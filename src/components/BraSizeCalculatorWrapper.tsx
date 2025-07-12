@@ -111,7 +111,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
 
               <div className="flex items-center justify-center mb-6 animate-fadeIn animate-delay-100 mt-5">
-                <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-full p-4 shadow-lg animate-pulse">
+                <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full p-4 shadow-lg animate-pulse">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-7 w-7 text-white"

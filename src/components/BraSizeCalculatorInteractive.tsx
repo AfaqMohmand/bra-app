@@ -20,6 +20,28 @@ const BraSizeCalculatorInteractive: React.FC<
   const [bustMeasurement, setBustMeasurement] = useState("");
   const [showBandTooltip, setShowBandTooltip] = useState(false);
   const [showBustTooltip, setShowBustTooltip] = useState(false);
+  const [tooltipAnimation, setTooltipAnimation] = useState(false);
+
+  // Handle tooltip animations
+  const openBandTooltip = () => {
+    setShowBandTooltip(true);
+    setTimeout(() => setTooltipAnimation(true), 10);
+  };
+
+  const closeBandTooltip = () => {
+    setTooltipAnimation(false);
+    setTimeout(() => setShowBandTooltip(false), 300); // Match this with CSS transition duration
+  };
+
+  const openBustTooltip = () => {
+    setShowBustTooltip(true);
+    setTimeout(() => setTooltipAnimation(true), 10);
+  };
+
+  const closeBustTooltip = () => {
+    setTooltipAnimation(false);
+    setTimeout(() => setShowBustTooltip(false), 300); // Match this with CSS transition duration
+  };
 
   // Calculate bra size based on measurements
   const calculateBraSize = useCallback((): RecommendedSize => {
@@ -141,7 +163,7 @@ const BraSizeCalculatorInteractive: React.FC<
             Band Measurement
             <div
               className="ml-2 cursor-pointer relative"
-              onMouseEnter={() => setShowBandTooltip(true)}
+              onClick={openBandTooltip}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,14 +199,24 @@ const BraSizeCalculatorInteractive: React.FC<
 
           {/* Band Size Tooltip */}
           {showBandTooltip && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded-xl shadow-2xl border-2 border-yellow-300 max-w-2xl w-full mx-4">
+            <div
+              className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+                tooltipAnimation ? "opacity-100 bg-yellow-50 bg-opacity-90" : "opacity-0"
+              }`}
+              onClick={closeBandTooltip}
+            >
+              <div 
+                className={`bg-white p-6 rounded-xl shadow-2xl border-2 border-yellow-300 max-w-2xl w-full mx-4 transition-all duration-300 ease-in-out ${
+                  tooltipAnimation ? "transform-none opacity-100" : "transform scale-95 opacity-0"
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-bold text-yellow-600">
                     How to Measure Band Size
                   </h3>
                   <button
-                    onClick={() => setShowBandTooltip(false)}
+                    onClick={closeBandTooltip}
                     className="p-1 rounded-full hover:bg-gray-100"
                   >
                     <svg
@@ -250,7 +282,7 @@ const BraSizeCalculatorInteractive: React.FC<
             Bust Measurement
             <div
               className="ml-2 cursor-pointer relative"
-              onMouseEnter={() => setShowBustTooltip(true)}
+              onClick={openBustTooltip}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -286,14 +318,24 @@ const BraSizeCalculatorInteractive: React.FC<
 
           {/* Bust Size Tooltip */}
           {showBustTooltip && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded-xl shadow-2xl border-2 border-yellow-300 max-w-2xl w-full mx-4">
+            <div
+              className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+                tooltipAnimation ? "opacity-100 bg-yellow-50 bg-opacity-90" : "opacity-0"
+              }`}
+              onClick={closeBustTooltip}
+            >
+              <div 
+                className={`bg-white p-6 rounded-xl shadow-2xl border-2 border-yellow-300 max-w-2xl w-full mx-4 transition-all duration-300 ease-in-out ${
+                  tooltipAnimation ? "transform-none opacity-100" : "transform scale-95 opacity-0"
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-bold text-yellow-600">
                     How to Measure Bust Size
                   </h3>
                   <button
-                    onClick={() => setShowBustTooltip(false)}
+                    onClick={closeBustTooltip}
                     className="p-1 rounded-full hover:bg-gray-100"
                   >
                     <svg
