@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the email to your backend
@@ -19,43 +19,29 @@ const Footer = () => {
 
   return (
     <footer className="bg-white py-12 border-t border-gray-200">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-2 max-w-6xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Column 1 - Sign Up */}
           <div className="col-span-1">
-            <h3 className="text-sm font-bold mb-4 uppercase">SIGN UP FOR EMAILS & TEXTS</h3>
-            
             <form onSubmit={handleSubmit} className="mb-6">
               <div className="relative">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder="SIGN UP FOR EMAILS & TEXTS"
                   required
                   className="w-full px-4 py-3 border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition-all duration-200 rounded-md"
                 />
-                <button
-                  type="submit"
-                  className="mt-3 w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center"
-                >
-                  <span>SUBSCRIBE</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
               </div>
               {submitted && (
                 <div className="mt-2 text-green-600 text-sm">
                   Thank you for subscribing!
                 </div>
               )}
-              <p className="text-xs text-gray-500 mt-2">
-                By signing up, you agree to receive marketing emails and text messages.
-              </p>
             </form>
-            
+
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-4">
               <a href="#" aria-label="Facebook">
@@ -118,21 +104,21 @@ const Footer = () => {
 
           {/* Column 2 - Help */}
           <div className="col-span-1">
-            <h3 className="text-sm font-bold mb-4 uppercase">HELP</h3>
+            <h3 className="text-sm font-bold mb-4 uppercase">COMPANY</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Customer Service
+                  Home
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Live Chat
+                  About Us
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Find a Store
+                  Blog
                 </a>
               </li>
               <li>
@@ -145,23 +131,16 @@ const Footer = () => {
 
           {/* Column 2 - Orders & Returns */}
           <div className="col-span-1">
-            <h3 className="text-sm font-bold mb-4 uppercase">
-              ORDERS & RETURNS
-            </h3>
+            <h3 className="text-sm font-bold mb-4 uppercase">SUPPORT</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Order Status
+                  Contact
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Shipping Information
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Return Policy
+                  Incorrect result? Tell us.
                 </a>
               </li>
             </ul>
@@ -169,41 +148,21 @@ const Footer = () => {
 
           {/* Column 3 - Services */}
           <div className="col-span-1">
-            <h3 className="text-sm font-bold mb-4 uppercase">SERVICES</h3>
+            <h3 className="text-sm font-bold mb-4 uppercase">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Store Offer & Events
+                  Privacy
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  VS & PINK Creator Program
+                  Terms
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Discover
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Get the iOS App
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Get the Android App
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Pay My Bill
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Gift Cards
+                  Cookies
                 </a>
               </li>
             </ul>
@@ -213,7 +172,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="text-xs text-gray-500">
           <p className="text-center mb-2">
-            &copy; {currentYear} Victoria&apos;s Secret. All Rights Reserved.
+            &copy; {currentYear} Bra Size Calculator. All Rights Reserved.
           </p>
           <div className="flex flex-wrap justify-center text-center">
             <Link href="/terms" className="text-gray-500 hover:text-gray-700">

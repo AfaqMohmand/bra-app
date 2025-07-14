@@ -32,8 +32,8 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
     measureHeights();
 
     // Re-measure on window resize
-    window.addEventListener('resize', measureHeights);
-    return () => window.removeEventListener('resize', measureHeights);
+    window.addEventListener("resize", measureHeights);
+    return () => window.removeEventListener("resize", measureHeights);
   }, [faqs]);
 
   const toggleAccordion = (index: number) => {
@@ -46,8 +46,8 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-2">
           <span className="text-gray-800">Frequently Asked </span>
-          <span className="text-pink-500">Questions</span>
-          <span className="text-purple-500">.</span>
+          <span className="text-yellow-500">Questions</span>
+          <span className="text-yellow-500">.</span>
         </h2>
       </div>
 
@@ -59,11 +59,11 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
             className="border border-gray-200 rounded-lg overflow-hidden"
           >
             <button
-              className="flex justify-between items-center w-full text-left px-6 py-4"
+              className="flex justify-between items-center w-full text-left px-6 py-4 cursor-pointer"
               onClick={() => toggleAccordion(index)}
             >
               <span className="font-medium text-gray-800">{faq.question}</span>
-              <span>
+              <span className="cursor-pointer">
                 {activeIndex === index ? (
                   <svg
                     className="w-5 h-5"
@@ -97,14 +97,15 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
                 )}
               </span>
             </button>
-            <div 
+            <div
               ref={(el) => {
                 contentRefs.current[index] = el;
                 return undefined;
               }}
-              className="overflow-hidden transition-all duration-300 ease-in-out" 
+              className="overflow-hidden transition-all duration-300 ease-in-out"
               style={{
-                maxHeight: activeIndex === index ? `${heights[index] || 0}px` : '0',
+                maxHeight:
+                  activeIndex === index ? `${heights[index] || 0}px` : "0",
                 opacity: activeIndex === index ? 1 : 0,
               }}
             >

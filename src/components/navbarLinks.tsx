@@ -18,10 +18,11 @@ export default function NavbarLinks({
 }: NavbarLinksProps) {
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect - keeping the yellow background always
+  // Handle scroll effect - making the navbar transparent and blurry when scrolled
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
+      // Check if scrolled past hero section (adjust the value as needed)
+      const isScrolled = window.scrollY > 300;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -38,11 +39,14 @@ export default function NavbarLinks({
       <nav
         className={`w-full py-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
         style={{
-          backgroundImage: `url(${ZigZagTwo.src})`,
-          backgroundRepeat: "repeat",
+          backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
+          backgroundRepeat: scrolled ? "no-repeat" : "repeat",
           backgroundSize: "200px",
-          backgroundColor: "var(--color-yellow)",
-          mixBlendMode: "multiply",
+          backgroundColor: scrolled
+            ? "rgba(255, 255, 255, 0.7)"
+            : "var(--color-yellow)",
+          backdropFilter: scrolled ? "blur(8px)" : "none",
+          boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
