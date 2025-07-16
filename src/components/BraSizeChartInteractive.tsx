@@ -68,7 +68,7 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
           <select
             value={chartRegion}
             onChange={(e) => setChartRegion(e.target.value)}
-            className="appearance-none w-full px-8 py-4 text-sm font-medium bg-white border border-yellow-200 rounded-full shadow-md text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent pr-12"
+            className="appearance-none w-full px-8 py-4 text-sm font-medium bg-white border border-yellow-200 rounded-full shadow-md text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent pr-10"
           >
             <option value="US">US</option>
             <option value="UK">UK</option>
@@ -78,7 +78,7 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
             <option value="Pak/Ind">Pak/Ind</option>
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-            <div className="w-4 h-4 border-t-2 border-r-2 border-yellow-500 transform rotate-45 -translate-y-1"></div>
+            <div className="w-3 h-3 border-t-2 border-r-2 border-yellow-500 transform rotate-45 -translate-y-0.5"></div>
           </div>
         </div>
 

@@ -2,7 +2,7 @@ export default function HowToMeasure() {
   return (
     <div className="px-5 mb-5">
       <div className="mt-8 p-4 bg-yellow-50 border border-t-1 border-t-yellow-200 border-b-0 border-r-0 border-l-0 rounded-lg">
-        <div className="flex items-center mb-2">
+        <div className="flex mb-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 text-yellow-500 mr-2"

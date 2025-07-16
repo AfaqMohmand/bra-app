@@ -16,7 +16,7 @@ export const Dropdown = ({
           <select
             value={chartRegion}
             onChange={(e) => setChartRegion(e.target.value)}
-            className="block w-full pl-4 pr-10 py-2.5 text-base border-2 border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm rounded-lg bg-gradient-to-r from-yellow-50 to-white shadow-sm appearance-none transition-all duration-200 hover:border-yellow-400"
+            className="block w-full pl-4 pr-8 py-2.5 text-base border-2 border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm rounded-lg bg-gradient-to-r from-yellow-50 to-white shadow-sm appearance-none transition-all duration-200 hover:border-yellow-400"
             style={{ fontWeight: "500" }}
           >
             <option value="Pak/Ind">Pakistan/India (Pak/Ind)</option>
@@ -27,9 +27,9 @@ export const Dropdown = ({
             <option value="JP">Japan (JP)</option>
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <div className="h-6 w-6 rounded-full bg-yellow-400 flex items-center justify-center shadow-sm">
+            <div className="h-5 w-5 rounded-full bg-yellow-400 flex items-center justify-center shadow-sm">
               <svg
-                className="h-4 w-4 text-white"
+                className="h-3 w-3 text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"

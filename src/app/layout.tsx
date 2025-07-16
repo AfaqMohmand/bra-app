@@ -4,7 +4,6 @@ import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import bgRaggedUrl from "@/assets/white-bg-ragged.svg";
 
 // Load Poppins font for headings
 const poppins = Poppins({
@@ -34,12 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} ${lato.variable} antialiased`}>
         <ScrollToTop />
-        <div
-          className="min-h-screen flex flex-col"
-          style={{
-            backgroundImage: `url(${bgRaggedUrl.src})`,
-          }}
-        >
+        <div className="min-h-screen flex flex-col">
           <Navbar />
           {children}
           <Footer />

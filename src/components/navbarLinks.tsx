@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import ZigZagTwo from "../assets/zigzag_two.png";
 
 interface NavbarLinksProps {
   logoSrc: string;
@@ -39,13 +38,13 @@ export default function NavbarLinks({
       <nav
         className={`w-full py-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
         style={{
-          backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
+          // backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
           backgroundRepeat: scrolled ? "no-repeat" : "repeat",
           backgroundSize: "200px",
           backgroundColor: scrolled
             ? "rgba(255, 255, 255, 0.7)"
             : "var(--color-yellow)",
-          backdropFilter: scrolled ? "blur(8px)" : "none",
+          backdropFilter: scrolled ? "blur(3px)" : "none",
           boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
@@ -87,19 +86,19 @@ export default function NavbarLinks({
                 href="/"
                 className="px-4 py-2 text-black hover:text-white font-medium transition-colors duration-300 font-poppins"
               >
-                Home
+                Bra Size Chart
               </Link>
               <Link
                 href="/about"
                 className="px-4 py-2 text-black hover:text-white font-medium transition-colors duration-300 font-poppins"
               >
-                About Us
+                About
               </Link>
               <Link
                 href="/contact"
                 className="px-4 py-2 text-black hover:text-white font-medium transition-colors duration-300 font-poppins"
               >
-                Contact Us
+                Blog
               </Link>
             </div>
           )}

@@ -7,6 +7,41 @@ import underbustSvg from "../assets/underbust-cup.svg";
 import overbustSvg from "../assets/overbust-cup.svg";
 import HowToMeasure from "./howToMeasrure";
 
+// Modal component for measurement instructions
+const MeasurementModal = ({ isOpen, onClose, title, children }: { isOpen: boolean; onClose: () => void; title: string; children: React.ReactNode }) => {
+  if (!isOpen) return null;
+  
+  return (
+    <div className="fixed inset-0 z-[9999] bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center">
+      <div className="bg-white p-8 rounded-xl shadow-2xl border-2 border-yellow-300 w-[90%] max-w-[600px] relative">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-yellow-600">{title}</h3>
+          <button
+            onClick={onClose}
+            className="p-1 rounded-full hover:bg-gray-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-gray-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+};
+
 interface BraSizeCalculatorInteractiveProps {
   braSizeData: BraSizeData;
   onSizeCalculated: (size: RecommendedSize) => void;
@@ -20,27 +55,26 @@ const BraSizeCalculatorInteractive: React.FC<
   const [bustMeasurement, setBustMeasurement] = useState("");
   const [showBandTooltip, setShowBandTooltip] = useState(false);
   const [showBustTooltip, setShowBustTooltip] = useState(false);
-  const [tooltipAnimation, setTooltipAnimation] = useState(false);
 
-  // Handle tooltip animations
+  // Handle tooltip display
   const openBandTooltip = () => {
     setShowBandTooltip(true);
-    setTimeout(() => setTooltipAnimation(true), 10);
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
   };
 
   const closeBandTooltip = () => {
-    setTooltipAnimation(false);
-    setTimeout(() => setShowBandTooltip(false), 300); // Match this with CSS transition duration
+    setShowBandTooltip(false);
+    document.body.style.overflow = ''; // Re-enable scrolling
   };
 
   const openBustTooltip = () => {
     setShowBustTooltip(true);
-    setTimeout(() => setTooltipAnimation(true), 10);
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
   };
 
   const closeBustTooltip = () => {
-    setTooltipAnimation(false);
-    setTimeout(() => setShowBustTooltip(false), 300); // Match this with CSS transition duration
+    setShowBustTooltip(false);
+    document.body.style.overflow = ''; // Re-enable scrolling
   };
 
   // Calculate bra size based on measurements
@@ -197,84 +231,50 @@ const BraSizeCalculatorInteractive: React.FC<
             Measure around your ribcage, just under your bust
           </p>
 
-          {/* Band Size Tooltip */}
-          {showBandTooltip && (
-            <div
-              className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
-                tooltipAnimation ? "opacity-100 bg-yellow-50 bg-opacity-90" : "opacity-0"
-              }`}
-              onClick={closeBandTooltip}
-            >
-              <div 
-                className={`bg-white p-6 rounded-xl shadow-2xl border-2 border-yellow-300 max-w-2xl w-full mx-4 transition-all duration-300 ease-in-out ${
-                  tooltipAnimation ? "transform-none opacity-100" : "transform scale-95 opacity-0"
-                }`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-yellow-600">
-                    How to Measure Band Size
-                  </h3>
-                  <button
-                    onClick={closeBandTooltip}
-                    className="p-1 rounded-full hover:bg-gray-100"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-gray-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div className="flex flex-col md:flex-row items-center">
-                  <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                    <Image
-                      src={underbustSvg}
-                      alt="Band Size Measurement"
-                      className="w-full"
-                    />
-                  </div>
-                  <div className="md:w-1/2 md:pl-4">
-                    <h4 className="font-medium text-lg mb-2">
-                      Band Size Instructions:
-                    </h4>
-                    <ol className="list-decimal pl-5 space-y-2">
-                      <li>
-                        Stand straight in front of a mirror wearing a non-padded
-                        bra.
-                      </li>
-                      <li>
-                        Wrap the measuring tape around your ribcage, directly
-                        under your bust.
-                      </li>
-                      <li>
-                        The tape should be snug but not tight - you should be
-                        able to breathe comfortably.
-                      </li>
-                      <li>
-                        Make sure the tape is parallel to the floor all the way
-                        around.
-                      </li>
-                      <li>Round to the nearest whole number.</li>
-                    </ol>
-                    <p className="mt-4 text-sm text-gray-600">
-                      This measurement is crucial for proper support as the band
-                      provides 80% of a bra&apos;s support.
-                    </p>
-                  </div>
-                </div>
+          {/* Band Size Modal */}
+          <MeasurementModal 
+            isOpen={showBandTooltip}
+            onClose={closeBandTooltip}
+            title="How to Measure Band Size"
+          >
+            <div className="flex flex-col md:flex-row items-center justify-center mt-6">
+              <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
+                <Image
+                  src={underbustSvg}
+                  alt="Band Size Measurement"
+                  className="w-full"
+                />
+              </div>
+              <div className="md:w-1/2 md:pl-4">
+                <h4 className="font-medium text-lg mb-2">
+                  Band Size Instructions:
+                </h4>
+                <ol className="list-decimal pl-5 space-y-2">
+                  <li>
+                    Stand straight in front of a mirror wearing a non-padded
+                    bra.
+                  </li>
+                  <li>
+                    Wrap the measuring tape around your ribcage, directly
+                    under your bust.
+                  </li>
+                  <li>
+                    The tape should be snug but not tight - you should be
+                    able to breathe comfortably.
+                  </li>
+                  <li>
+                    Make sure the tape is parallel to the floor all the way
+                    around.
+                  </li>
+                  <li>Round to the nearest whole number.</li>
+                </ol>
+                <p className="mt-4 text-sm text-gray-600">
+                  This measurement is crucial for proper support as the band
+                  provides 80% of a bra&apos;s support.
+                </p>
               </div>
             </div>
-          )}
+          </MeasurementModal>
         </div>
 
         <div className="px-5">
@@ -316,84 +316,50 @@ const BraSizeCalculatorInteractive: React.FC<
             Measure around the fullest part of your bust
           </p>
 
-          {/* Bust Size Tooltip */}
-          {showBustTooltip && (
-            <div
-              className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
-                tooltipAnimation ? "opacity-100 bg-yellow-50 bg-opacity-90" : "opacity-0"
-              }`}
-              onClick={closeBustTooltip}
-            >
-              <div 
-                className={`bg-white p-6 rounded-xl shadow-2xl border-2 border-yellow-300 max-w-2xl w-full mx-4 transition-all duration-300 ease-in-out ${
-                  tooltipAnimation ? "transform-none opacity-100" : "transform scale-95 opacity-0"
-                }`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-yellow-600">
-                    How to Measure Bust Size
-                  </h3>
-                  <button
-                    onClick={closeBustTooltip}
-                    className="p-1 rounded-full hover:bg-gray-100"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-gray-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div className="flex flex-col md:flex-row items-center">
-                  <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                    <Image
-                      src={overbustSvg}
-                      alt="Bust Size Measurement"
-                      className="w-full"
-                    />
-                  </div>
-                  <div className="md:w-1/2 md:pl-4">
-                    <h4 className="font-medium text-lg mb-2">
-                      Bust Size Instructions:
-                    </h4>
-                    <ol className="list-decimal pl-5 space-y-2">
-                      <li>
-                        Stand straight in front of a mirror wearing a non-padded
-                        bra.
-                      </li>
-                      <li>
-                        Wrap the measuring tape around your back and across the
-                        fullest part of your bust.
-                      </li>
-                      <li>
-                        The tape should be snug but not tight - it should not
-                        compress your breast tissue.
-                      </li>
-                      <li>
-                        Make sure the tape is parallel to the floor all the way
-                        around.
-                      </li>
-                      <li>Round to the nearest whole number.</li>
-                    </ol>
-                    <p className="mt-4 text-sm text-gray-600">
-                      This measurement helps determine your cup size when
-                      compared to your band measurement.
-                    </p>
-                  </div>
-                </div>
+          {/* Bust Size Modal */}
+          <MeasurementModal 
+            isOpen={showBustTooltip}
+            onClose={closeBustTooltip}
+            title="How to Measure Bust Size"
+          >
+            <div className="flex flex-col md:flex-row items-center justify-center mt-6">
+              <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
+                <Image
+                  src={overbustSvg}
+                  alt="Bust Size Measurement"
+                  className="w-full"
+                />
+              </div>
+              <div className="md:w-1/2 md:pl-4">
+                <h4 className="font-medium text-lg mb-2">
+                  Bust Size Instructions:
+                </h4>
+                <ol className="list-decimal pl-5 space-y-2">
+                  <li>
+                    Stand straight in front of a mirror wearing a non-padded
+                    bra.
+                  </li>
+                  <li>
+                    Wrap the measuring tape around your back and across the
+                    fullest part of your bust.
+                  </li>
+                  <li>
+                    The tape should be snug but not tight - it should not
+                    compress your breast tissue.
+                  </li>
+                  <li>
+                    Make sure the tape is parallel to the floor all the way
+                    around.
+                  </li>
+                  <li>Round to the nearest whole number.</li>
+                </ol>
+                <p className="mt-4 text-sm text-gray-600">
+                  This measurement helps determine your cup size when
+                  compared to your band measurement.
+                </p>
               </div>
             </div>
-          )}
+          </MeasurementModal>
         </div>
 
         {/* How to Measure Guide */}

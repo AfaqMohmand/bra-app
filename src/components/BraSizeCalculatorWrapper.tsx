@@ -8,7 +8,6 @@ import {
 } from "../types/braSizeTypes";
 import BraSizeCalculatorInteractive from "./BraSizeCalculatorInteractive";
 import BraSizeChartInteractive from "./BraSizeChartInteractive";
-import Heading from "./heading";
 import NoMeasurementData from "./layout/noMeasrumentData";
 import DetailBraSizeChart from "./braSizeChart";
 
@@ -55,8 +54,6 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
   return (
     <div>
-      <Heading />
-
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left column - Calculator input */}
         <div className="w-full lg:w-1/2 animate-slideInLeft">
