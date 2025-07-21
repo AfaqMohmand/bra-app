@@ -53,9 +53,9 @@ export default function NavbarLinks({
             <Image
               src={logoSrc}
               alt="Logo"
-              width={40}
-              height={20}
-              className="h-6 md:h-8 w-auto"
+              width={100}
+              height={60}
+              className="h-8 md:h-8 w-auto"
             />
           </div>
 

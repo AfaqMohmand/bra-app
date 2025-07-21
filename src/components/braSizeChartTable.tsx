@@ -23,7 +23,7 @@ export default function BraSizeChartTable() {
         </div>
       </div>
 
-      <h3 className="text-xl font-serif font-semibold text-center mb-2 animate-fadeIn animate-delay-100">
+      <h3 className="text-xl font-rubik font-semibold text-center mb-2 animate-fadeIn animate-delay-100">
         Bra Size Chart
       </h3>
       <p className="text-center text-sm text-gray-500 mb-6 animate-fadeIn animate-delay-200">

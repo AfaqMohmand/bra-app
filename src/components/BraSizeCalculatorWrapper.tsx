@@ -65,12 +65,14 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
         {/* Right column - Results */}
         <div className="w-full lg:w-1/2 animate-slideInRight">
-          {recommendedSize && recommendedSize.isInvalid ? (
+          {recommendedSize === null ? (
+            <NoMeasurementData />
+          ) : recommendedSize.isInvalid ? (
             <div className="bg-white p-6 rounded-xl shadow-lg h-full gradient-border animate-fadeIn">
               <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
 
               <div className="flex items-center justify-center mb-6 animate-fadeIn animate-delay-100 mt-5">
-                <div className="bg-gradient-to-br from-red-400 to-red-600 rounded-full p-4 shadow-lg animate-pulse">
+                <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full p-4 shadow-lg animate-pulse">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-7 w-7 text-white"
@@ -88,7 +90,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-center mb-3 font-serif animate-fadeIn animate-delay-200">
+              <h3 className="text-2xl font-bold text-center mb-3 font-rubik animate-fadeIn animate-delay-200">
                 Invalid Size
               </h3>
 
@@ -126,7 +128,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-center mb-3 font-serif animate-fadeIn animate-delay-200">
+              <h3 className="text-2xl font-bold text-center mb-3 font-rubik animate-fadeIn animate-delay-200">
                 Your Recommended Size
               </h3>
 
@@ -251,9 +253,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 </div>
               </div>
             </div>
-          ) : (
-            <NoMeasurementData />
-          )}
+          ) : null}
         </div>
       </div>
 

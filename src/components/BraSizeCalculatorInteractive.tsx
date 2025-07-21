@@ -20,11 +20,13 @@ const BraSizeCalculatorInteractive: React.FC<
 
   // Calculate bra size based on measurements
   const calculateBraSize = useCallback((): RecommendedSize => {
+    // Return null if either measurement is missing - this will show the default view
     if (!bandMeasurement || !bustMeasurement) return null;
 
     let band = parseFloat(bandMeasurement);
     let bust = parseFloat(bustMeasurement);
 
+    // Return null if either value is not a valid number - this will show the default view
     if (isNaN(band) || isNaN(bust)) return null;
 
     // Convert cm to inches if needed
@@ -45,6 +47,7 @@ const BraSizeCalculatorInteractive: React.FC<
         difference as keyof typeof braSizeData.cupSizes.inches
       ] || null;
 
+    // Only return isInvalid:true when both measurements are provided but result in an invalid size
     if (!cupSize) return { isInvalid: true, bandSize: 0, cupSize: "" };
 
     return { bandSize, cupSize };
@@ -98,10 +101,10 @@ const BraSizeCalculatorInteractive: React.FC<
           </svg>
         </div>
       </div>
-      <h3 className="text-2xl font-bold text-center mb-2 animate-fadeIn animate-delay-200 font-serif">
+      <h3 className="text-2xl font-bold text-center mb-2 animate-fadeIn animate-delay-200 font-rubik">
         Enter Your Measurements
       </h3>
-      <p className="text-center text-sm text-gray-600 mb-6 animate-fadeIn animate-delay-300">
+      <p className="text-center text-sm text-gray-600 mb-6 animate-fadeIn animate-delay-300 font-lato">
         Measure around your body for the most accurate results
       </p>
 
@@ -134,7 +137,7 @@ const BraSizeCalculatorInteractive: React.FC<
       {/* Measurement inputs */}
       <div className="space-y-8 animate-fadeIn animate-delay-500">
         <div className="px-5">
-          <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
+          <label className="text-sm font-medium text-gray-700 mb-1 flex items-center font-rubik">
             Band Measurement
             <div className="ml-2 cursor-pointer relative">
               <svg
@@ -165,13 +168,13 @@ const BraSizeCalculatorInteractive: React.FC<
               {/* <span className="ml-3 text-gray-600 font-medium">{unit}</span> */}
             </div>
           </div>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-gray-500 font-lato">
             Measure around your ribcage, just under your bust
           </p>
         </div>
 
         <div className="px-5">
-          <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
+          <label className="text-sm font-medium text-gray-700 mb-1 flex items-center font-rubik">
             Bust Measurement
             <div className="ml-2 cursor-pointer relative">
               <svg
@@ -202,7 +205,7 @@ const BraSizeCalculatorInteractive: React.FC<
               {/* <span className="ml-3 text-gray-600 font-medium">{unit}</span> */}
             </div>
           </div>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-gray-500 font-lato">
             Measure around the fullest part of your bust
           </p>
         </div>

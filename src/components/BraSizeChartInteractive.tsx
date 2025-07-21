@@ -44,7 +44,7 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
   };
 
   return (
-    <div className="relative animate-fadeIn">
+    <div className="relative animate-fadeIn bg-[#000]">
       {/* Outer container with shadow and rounded corners - using clip-path to ensure clean edges */}
       <div
         className="relative bg-white rounded-xl shadow-lg overflow-hidden"
