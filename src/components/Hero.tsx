@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <div
       className="hero-section relative overflow-hidden w-full"
-      style={{ height: "70vh" }}
+      style={{ height: "auto", minHeight: "60vh" }}
     >
       {/* Noise texture background with yellow color */}
       <div
@@ -26,11 +26,11 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start lg:items-center h-full">
           {/* Left side - Text content */}
           <div className="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4 lg:pr-8">
-            <h1 className="hero-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">
+            <h1 className="hero-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">
               PROFESSIONAL BRA SIZE CALCULATOR
             </h1>
 
-            <p className="hero-text text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-gray-800 max-w-lg font-lato">
+            <p className="hero-text text-xs sm:text-sm md:text-base lg:text-lg mb-3 sm:mb-4 text-gray-800 max-w-lg font-lato">
               Get your perfect fit with our accurate bra size calculator. Used
               by thousands of women worldwide for precise measurements.
             </p>
@@ -38,13 +38,15 @@ const Hero = () => {
 
           {/* Right side - Image with decorative elements */}
           <div className="w-full md:w-1/2 relative mt-2 md:mt-0">
-            <div className="relative z-10 rounded-lg overflow-hidden shadow-lg mx-auto max-w-xs sm:max-w-sm md:max-w-md transform hover:scale-105 transition-transform duration-500">
+            <div className="relative z-10 rounded-lg overflow-hidden shadow-lg mx-auto max-w-[250px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg transform hover:scale-105 transition-transform duration-500">
               <Image
                 src={HeroImage}
                 alt="Hero Image"
-                className="w-full h-auto object-cover max-h-[300px]"
+                className="w-full h-auto object-cover max-h-[350px]"
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
+                width={500}
+                height={350}
               />
 
               {/* Decorative elements - responsive sizes */}

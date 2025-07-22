@@ -36,7 +36,7 @@ export default function NavbarLinks({
   return (
     <>
       <nav
-        className={`w-full py-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
+        className={`w-full py-2 sm:py-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
         style={{
           // backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
           backgroundRepeat: scrolled ? "no-repeat" : "repeat",
@@ -50,13 +50,15 @@ export default function NavbarLinks({
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Image
-              src={logoSrc}
-              alt="Logo"
-              width={100}
-              height={60}
-              className="h-8 md:h-8 w-auto"
-            />
+            <Link href="/" className="cursor-pointer">
+              <Image
+                src={logoSrc}
+                alt="Logo"
+                width={100}
+                height={60}
+                className="h-6 sm:h-7 md:h-8 w-auto"
+              />
+            </Link>
           </div>
 
           {isMobile ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   BraSizeData,
   BraSizeChartData,
@@ -25,9 +25,11 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
   const [activeRegion, setActiveRegion] = useState<string>("US");
 
   // Handler for when size is calculated in the interactive component
-  const handleSizeCalculated = (size: RecommendedSize) => {
-    setRecommendedSize(size);
-  };
+  const handleSizeCalculated = useCallback((size: RecommendedSize) => {
+    if (JSON.stringify(size) !== JSON.stringify(recommendedSize)) {
+      setRecommendedSize(size);
+    }
+  }, [recommendedSize]);
 
   // Get size for specific region
   const getSizeForRegion = (
@@ -148,7 +150,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 <h4 className="text-center font-medium text-gray-700 mb-4">
                   International Size Chart
                 </h4>
-                <div className="grid grid-cols-3 gap-3 p-5">
+                <div className="grid grid-cols-3 gap-3 pt-5 pt-5 pl-5">
                   <button
                     onClick={() => setActiveRegion("Pak/Ind")}
                     className={`py-3 px-6 rounded-lg transition-all ${
@@ -233,8 +235,8 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               </div>
 
               <div className="flex flex-col items-center animate-fadeIn animate-delay-500 px-5">
-                <div className="grid grid-cols-2 gap-4 w-full">
-                  <div className="border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
+                <div className="grid grid-cols-2 gap-4 w-3/5">
+                  <div className="border border-gray-200 p-3 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
                     <p className="text-sm text-gray-500 mb-1 font-medium">
                       Band Size
                     </p>
@@ -242,7 +244,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                       {recommendedSize.bandSize}
                     </p>
                   </div>
-                  <div className="border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
+                  <div className="border border-gray-200 p-3 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
                     <p className="text-sm text-gray-500 mb-1 font-medium">
                       Cup Size
                     </p>

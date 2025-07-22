@@ -5,20 +5,22 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Bra Size Calculator | Find Your Perfect Fit",
-  description: "Get your accurate bra size with our professional calculator. Find the perfect fit with our easy-to-use measurement tool.",
-  keywords: "bra size calculator, bra fitting, cup size, band size, measurement guide, perfect fit",
+  description:
+    "Get your accurate bra size with our professional calculator. Find the perfect fit with our easy-to-use measurement tool.",
+  keywords:
+    "bra size calculator, bra fitting, cup size, band size, measurement guide, perfect fit",
   openGraph: {
     title: "Bra Size Calculator | Find Your Perfect Fit",
     description: "Get your accurate bra size with our professional calculator",
     url: "https://bra-calculator.com",
     siteName: "Bra Size Calculator",
-    type: "website"
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Bra Size Calculator | Find Your Perfect Fit",
-    description: "Get your accurate bra size with our professional calculator"
-  }
+    description: "Get your accurate bra size with our professional calculator",
+  },
 };
 
 export default function Home() {

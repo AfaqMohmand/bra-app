@@ -47,7 +47,7 @@ const NavbarClient = ({ logoSrc }: NavbarClientProps) => {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black bg-opacity-30 backdrop-blur-[1px] z-50 transition-opacity duration-300 ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={toggleMenu}

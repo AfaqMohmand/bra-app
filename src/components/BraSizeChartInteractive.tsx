@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { BraSizeChartData } from "../types/braSizeTypes";
-import BraSizeChartTable from "./braSizeChartTable";
 import SizeChartNote from "./sizeChartNote";
 
 interface BraSizeChartInteractiveProps {
@@ -44,14 +43,14 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
   };
 
   return (
-    <div className="relative animate-fadeIn bg-[#000]">
+    <div className="relative animate-fadeIn rounded-[18px] bg-[#e6b325]">
       {/* Outer container with shadow and rounded corners - using clip-path to ensure clean edges */}
       <div
         className="relative bg-white rounded-xl shadow-lg overflow-hidden"
         style={{ clipPath: "inset(0 0 0 0 round 0.75rem)" }}
       >
         {/* Inner container for content */}
-        <div className="p-8 relative">
+        <div className="p-4 sm:p-6 md:p-8 relative">
           {/* Stylish discontinuous border */}
           <div className="absolute top-0 left-0 w-[30%] h-[2px] bg-yellow-400"></div>
           <div className="absolute top-0 right-0 w-[30%] h-[2px] bg-yellow-400"></div>
@@ -67,15 +66,14 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
           <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-10 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div>
 
-          <BraSizeChartTable />
-
           {/* Chart controls */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 animate-fadeIn animate-delay-300">
-            <div className="relative w-full sm:w-auto">
+            <div className="relative w-full sm:w-auto" style={{ zIndex: 1000 }}>
               <select
                 value={chartRegion}
                 onChange={(e) => setChartRegion(e.target.value)}
-                className="appearance-none w-full px-8 py-4 text-sm font-medium bg-white border border-yellow-200 rounded-full shadow-md text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent pr-10"
+                className="appearance-none w-full px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent pr-16 sm:pr-24"
+                style={{ zIndex: 50 }}
               >
                 <option value="US">US</option>
                 <option value="UK">UK</option>
@@ -84,26 +82,40 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
                 <option value="IT">IT</option>
                 <option value="Pak/Ind">Pak/Ind</option>
               </select>
-              <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                <div className="w-3 h-3 border-t-2 border-r-2 border-yellow-500 transform rotate-45 -translate-y-0.5"></div>
+
+              {/* Dropdown Icon */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
+                {/* <svg
+                  className="w-4 h-4 text-yellow-500"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg> */}
               </div>
             </div>
 
-            <div className="inline-flex rounded-full overflow-hidden shadow-md">
+            <div className="inline-flex rounded-lg overflow-hidden shadow-sm border border-gray-200 text-xs sm:text-sm">
               <button
-                className={`px-8 py-3 text-sm font-medium transition-all ${
+                className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 font-medium transition-all duration-200 ${
                   chartUnit === "in"
-                    ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
-                    : "bg-white text-gray-700 hover:bg-gray-50"
+                    ? "bg-yellow-50 text-yellow-700 border-r border-gray-200"
+                    : "bg-white text-gray-700 hover:bg-gray-50 border-r border-gray-200"
                 }`}
                 onClick={() => setChartUnit("in")}
               >
                 Inches
               </button>
               <button
-                className={`px-8 py-3 text-sm font-medium transition-all ${
+                className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 font-medium transition-all duration-200 ${
                   chartUnit === "cm"
-                    ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
+                    ? "bg-yellow-50 text-yellow-700"
                     : "bg-white text-gray-700 hover:bg-gray-50"
                 }`}
                 onClick={() => setChartUnit("cm")}
@@ -112,6 +124,8 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
               </button>
             </div>
           </div>
+
+          {/* Table component */}
 
           {/* Size chart table */}
           <div className="overflow-x-auto rounded-lg shadow-md animate-fadeIn animate-delay-400 mx-3">
