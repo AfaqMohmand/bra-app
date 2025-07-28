@@ -72,20 +72,22 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
               <select
                 value={chartRegion}
                 onChange={(e) => setChartRegion(e.target.value)}
-                className="appearance-none w-full px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent pr-16 sm:pr-24"
-                style={{ zIndex: 50 }}
+                className="appearance-none w-full px-4 sm:px-6 py-2.5 text-sm font-medium bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700 cursor-pointer focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-yellow-300 pr-10 transition-all duration-200"
+                style={{ zIndex: 50, padding: "10px 30px" }}
               >
-                <option value="US">US</option>
-                <option value="UK">UK</option>
-                <option value="EU">EU</option>
-                <option value="FR">FR</option>
-                <option value="IT">IT</option>
-                <option value="Pak/Ind">Pak/Ind</option>
+                <span>
+                  <option value="US">US</option>
+                  <option value="UK">UK</option>
+                  <option value="EU">EU</option>
+                  <option value="FR">FR</option>
+                  <option value="IT">IT</option>
+                  <option value="Pak/Ind">Pak/Ind</option>
+                </span>
               </select>
 
               {/* Dropdown Icon */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
-                {/* <svg
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <svg
                   className="w-4 h-4 text-yellow-500"
                   fill="none"
                   stroke="currentColor"
@@ -97,7 +99,7 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
                     strokeLinejoin="round"
                     d="M19 9l-7 7-7-7"
                   />
-                </svg> */}
+                </svg>
               </div>
             </div>
 

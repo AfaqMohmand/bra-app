@@ -4,30 +4,44 @@ import FAQAccordion from "./FAQAccordion";
 const FAQ = () => {
   const faqs = [
     {
-      question: "What is Optimizely?",
+      question: "How do I calculate my bra size?",
       answer:
-        "Optimizely is a comprehensive software platform designed to help businesses optimize operations, enhance productivity, and drive growth. It offers customizable workflows, automation tools, and advanced analytics to support efficient processes, empowering companies to achieve scalable solutions and improve their bottom line.",
+        "To calculate your bra size, measure under your bust to get the band size, then measure around the fullest part of your chest. Subtract the band from the bust to find the cup size. Each inch difference equals one cup size. For example, a 34 band and 37 bust would be a 34C. You can also use our bra size calculator for instant results.",
     },
     {
-      question: "How does Optimizely works?",
+      question: "What is band & bust size?",
       answer:
-        "Optimizely works by providing a suite of tools that help businesses streamline their operations and make data-driven decisions. The platform includes features for A/B testing, personalization, content management, and analytics, allowing companies to optimize their digital experiences and improve customer engagement.",
+        "Band size is the measurement around your ribcage, just under your breasts. Bust size is the measurement around the fullest part of your chest. The difference between these two measurements helps determine your bra cup size.",
     },
     {
-      question: "Is Optimizely Free?",
+      question: "How do I know the band & bust size of my bra?",
       answer:
-        "Optimizely offers various pricing tiers, including both paid plans and limited free options. The free tier provides basic functionality, while paid plans offer more advanced features and capabilities. Contact Optimizely's sales team for detailed pricing information tailored to your business needs.",
+        "To find your band size, measure snugly around your ribcage just under your bust. To find your bust size, measure around the fullest part of your chest. Use these measurements to determine your bra size using our bra size chart or online calculator.",
     },
     {
-      question:
-        "Can I create custom workflows without any technical knowledge?",
+      question: "What does ABCD mean in bra size?",
       answer:
-        "Yes, Optimizely is designed with user-friendly interfaces that allow non-technical users to create and customize workflows. The platform features drag-and-drop tools and intuitive controls that make it easy to build and modify processes without requiring coding or technical expertise.",
+        "ABCD in bra size refers to the cup size, which represents breast volume. A is the smallest cup, followed by B, C, and D as the size increases. The cup letter is determined by the difference between your bust and band measurements.",
     },
     {
-      question: "Can I track the performance of my workflows?",
+      question: "How do I know my breast cup size?",
       answer:
-        "Absolutely. Optimizely provides comprehensive analytics and reporting tools that allow you to monitor the performance of your workflows in real-time. You can track key metrics, identify bottlenecks, and make data-driven decisions to continuously improve your processes and outcomes.",
+        "Measure your band and bust, then subtract the band from the bust. Each inch of difference equals one cup size such as A, B, C, or D. You can also use our calculator for accurate results.",
+    },
+    {
+      question: "Which cup size is bigger, B or C or D?",
+      answer:
+        "Cup size increases with each letter, so D is bigger than C, and C is bigger than B. The larger the letter, the more breast volume the cup holds.",
+    },
+    {
+      question: "What is the average bra size for a 25 year old?",
+      answer:
+        "The average bra size for a 25-year-old woman varies by country, but in the US and UK, it is typically around 34C or 36C. However, individual sizes can differ based on body shape and genetics.",
+    },
+    {
+      question: "What is the smallest bra size?",
+      answer:
+        "The smallest standard bra size is usually 28AA, which has a very small band and minimal cup volume. Some brands also offer AAA cups for even smaller sizes.",
     },
   ];
 

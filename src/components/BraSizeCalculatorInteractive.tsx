@@ -86,8 +86,8 @@ const BraSizeCalculatorInteractive: React.FC<
         <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-20 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-20 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div>
 
-        <div className="flex items-center justify-center mb-6 animate-fadeIn animate-delay-100 mt-5">
-          <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full p-4 shadow-lg animate-pulse">
+        <div className="flex items-center justify-center mb-6 mt-5">
+          <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full p-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7 text-white"
@@ -112,14 +112,25 @@ const BraSizeCalculatorInteractive: React.FC<
         </p>
 
         {/* Unit toggle */}
-        <div className="flex justify-center mb-6 sm:mb-8 animate-fadeIn animate-delay-400">
-          <div className="inline-flex rounded-full overflow-hidden shadow-md text-xs sm:text-sm">
+        <div
+          className="flex justify-center mb-6 sm:mb-8"
+          style={{ animation: "none" }}
+        >
+          <div
+            className="inline-flex rounded-full overflow-hidden shadow-md text-xs sm:text-sm"
+            style={{ transform: "none" }}
+          >
             <button
               className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "inches"
-                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
-                  : "bg-white text-gray-700 hover:text-yellow-400"
+                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
+                  : "bg-white text-gray-700"
               }`}
+              style={{
+                animation: "none",
+                transform: "none",
+                transition: "none",
+              }}
               onClick={() => handleUnitChange("inches")}
             >
               Inches
@@ -127,9 +138,14 @@ const BraSizeCalculatorInteractive: React.FC<
             <button
               className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "centimeters"
-                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
-                  : "bg-white text-gray-700 hover:text-yellow-400"
+                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
+                  : "bg-white text-gray-700"
               }`}
+              style={{
+                animation: "none",
+                transform: "none",
+                transition: "none",
+              }}
               onClick={() => handleUnitChange("centimeters")}
             >
               Centimeters
