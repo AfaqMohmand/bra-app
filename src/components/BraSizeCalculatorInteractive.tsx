@@ -17,7 +17,10 @@ const BraSizeCalculatorInteractive: React.FC<
   const [bandMeasurement, setBandMeasurement] = useState("");
   const [bustMeasurement, setBustMeasurement] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<{ title: string; content: string | React.ReactNode }>({ title: "", content: "" });
+  const [modalContent, setModalContent] = useState<{
+    title: string;
+    content: string | React.ReactNode;
+  }>({ title: "", content: "" });
 
   // Calculate bra size based on measurements
   const calculateBraSize = useCallback((): RecommendedSize => {
@@ -112,20 +115,20 @@ const BraSizeCalculatorInteractive: React.FC<
         <div className="flex justify-center mb-6 sm:mb-8 animate-fadeIn animate-delay-400">
           <div className="inline-flex rounded-full overflow-hidden shadow-md text-xs sm:text-sm">
             <button
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium transition-all ${
+              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "inches"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
+                  : "bg-white text-gray-700 hover:text-yellow-400"
               }`}
               onClick={() => handleUnitChange("inches")}
             >
               Inches
             </button>
             <button
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium transition-all ${
+              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "centimeters"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-inner"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
+                  : "bg-white text-gray-700 hover:text-yellow-400"
               }`}
               onClick={() => handleUnitChange("centimeters")}
             >
@@ -146,25 +149,25 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Band Measurement",
                     content: (
                       <div>
-                        <p className="text-xs font-medium mb-2">
+                        <p className="text-base font-medium mb-4">
                           The band measurement is taken around your ribcage,
                           just under your bust.
                         </p>
-                        <p className="text-xs font-medium mb-1">
+                        <p className="text-base font-medium mb-3">
                           For the most accurate results:
                         </p>
-                        <ul className="list-disc pl-4 space-y-1">
-                          <li className="text-xs">
+                        <ul className="list-disc pl-6 space-y-3">
+                          <li className="text-base">
                             Make sure the measuring tape is snug but not too
                             tight
                           </li>
-                          <li className="text-xs">
+                          <li className="text-base">
                             Keep the tape parallel to the floor
                           </li>
-                          <li className="text-xs">
+                          <li className="text-base">
                             Take a deep breath in and out before measuring
                           </li>
-                          <li className="text-xs">
+                          <li className="text-base">
                             Measure directly against your skin, not over
                             clothing
                           </li>
@@ -218,25 +221,25 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Bust Measurement",
                     content: (
                       <div>
-                        <p className="text-xs font-medium mb-2">
+                        <p className="text-base font-medium mb-4">
                           The bust measurement is taken around the fullest part
                           of your bust.
                         </p>
-                        <p className="text-xs font-medium mb-1">
+                        <p className="text-base font-medium mb-3">
                           For the most accurate results:
                         </p>
-                        <ul className="list-disc pl-4 space-y-1">
-                          <li className="text-xs">
+                        <ul className="list-disc pl-6 space-y-3">
+                          <li className="text-base">
                             Wear a non-padded bra or no bra for the most
                             accurate measurement
                           </li>
-                          <li className="text-xs">
+                          <li className="text-base">
                             Keep the tape parallel to the floor
                           </li>
-                          <li className="text-xs">
+                          <li className="text-base">
                             Make sure the tape is not too tight or too loose
                           </li>
-                          <li className="text-xs">
+                          <li className="text-base">
                             Stand straight with arms at your sides while
                             measuring
                           </li>

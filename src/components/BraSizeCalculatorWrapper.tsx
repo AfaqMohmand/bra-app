@@ -25,11 +25,14 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
   const [activeRegion, setActiveRegion] = useState<string>("US");
 
   // Handler for when size is calculated in the interactive component
-  const handleSizeCalculated = useCallback((size: RecommendedSize) => {
-    if (JSON.stringify(size) !== JSON.stringify(recommendedSize)) {
-      setRecommendedSize(size);
-    }
-  }, [recommendedSize]);
+  const handleSizeCalculated = useCallback(
+    (size: RecommendedSize) => {
+      if (JSON.stringify(size) !== JSON.stringify(recommendedSize)) {
+        setRecommendedSize(size);
+      }
+    },
+    [recommendedSize]
+  );
 
   // Get size for specific region
   const getSizeForRegion = (
@@ -55,7 +58,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
   };
 
   return (
-    <div>
+    <div className="px-3 sm:px-2 md:px-0">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left column - Calculator input */}
         <div className="w-full lg:w-1/2 animate-slideInLeft">
@@ -150,10 +153,10 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 <h4 className="text-center font-medium text-gray-700 mb-4">
                   International Size Chart
                 </h4>
-                <div className="grid grid-cols-3 gap-3 pt-5 pt-5 pl-5">
+                <div className="grid grid-cols-3 gap-2 mx-auto px-2 w-[85%]">
                   <button
                     onClick={() => setActiveRegion("Pak/Ind")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "Pak/Ind"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -163,7 +166,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("US")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "US"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -173,7 +176,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("UK")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "UK"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -183,7 +186,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("EU")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "EU"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -193,7 +196,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("FR")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "FR"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -203,7 +206,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("IT")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "IT"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -213,7 +216,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("AU")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "AU"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -223,7 +226,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("JP")}
-                    className={`py-3 px-6 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all ${
                       activeRegion === "JP"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -234,23 +237,23 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 </div>
               </div>
 
-              <div className="flex flex-col items-center animate-fadeIn animate-delay-500 px-5">
-                <div className="grid grid-cols-2 gap-4 w-3/5">
-                  <div className="border border-gray-200 p-3 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
-                    <p className="text-sm text-gray-500 mb-1 font-medium">
+              <div className="flex flex-col items-center animate-fadeIn animate-delay-500 px-2 mt-4 sm:mt-6 pb-[20px] sm:pb-0">
+                <div className="grid grid-cols-2 gap-3 w-3/5">
+                  <div className="border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
+                    <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Band Size
                     </p>
-                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400">
+                    <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
                       {recommendedSize.bandSize}
-                    </p>
+                    </h6>
                   </div>
-                  <div className="border border-gray-200 p-3 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
-                    <p className="text-sm text-gray-500 mb-1 font-medium">
+                  <div className="border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
+                    <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Cup Size
                     </p>
-                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400">
+                    <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
                       {recommendedSize.cupSize}
-                    </p>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -260,7 +263,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
       </div>
 
       {/* Size chart section */}
-      <div className="mt-16">
+      <div className="mt-8 sm:mt-12 md:mt-16">
         <DetailBraSizeChart />
         <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto mb-8 rounded-full"></div>
         <BraSizeChartInteractive braSizeChartData={braSizeChartData} />

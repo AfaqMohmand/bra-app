@@ -9,12 +9,12 @@ const Footer = () => {
   return (
     <>
       <footer
-        className="bg-white py-12"
+        className="bg-white py-8 sm:py-10 md:py-12"
         style={{ backgroundColor: "rgb(245, 245, 246)" }}
       >
         <div className="container mx-auto px-4">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-6 sm:mb-8 md:mb-10">
             {/* Column 1 - Logo and Text */}
             <div className="col-span-1">
               <div className="mb-6">
@@ -96,22 +96,34 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Careers
                   </a>
                 </li>
@@ -125,12 +137,18 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Contact
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Incorrect result? Tell us.
                   </a>
                 </li>
@@ -144,17 +162,26 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/privacy" className="text-gray-600 hover:text-gray-900">
+                  <Link
+                    href="/privacy"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Privacy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="text-gray-600 hover:text-gray-900">
+                  <Link
+                    href="/terms"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Terms
                   </Link>
                 </li>
                 <li>
-                  <a href="javascript:void(0)" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="javascript:void(0)"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
                     Cookies
                   </a>
                 </li>
@@ -166,7 +193,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-6">
         {/* Bottom Footer */}
         <div className="text-xs text-gray-500">
-          <p className="text-start mb-2">
+          <p className="text-start mb-2 text-sm">
             &copy; {currentYear} Bra Size Calculator. All Rights Reserved.
           </p>
         </div>

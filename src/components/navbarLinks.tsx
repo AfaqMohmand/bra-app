@@ -36,7 +36,7 @@ export default function NavbarLinks({
   return (
     <>
       <nav
-        className={`w-full py-2 sm:py-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
+        className={`w-full py-3 sm:py-4 md:py-5 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
         style={{
           // backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
           backgroundRepeat: scrolled ? "no-repeat" : "repeat",
@@ -86,19 +86,19 @@ export default function NavbarLinks({
             <div className="flex items-center">
               <Link
                 href="/"
-                className="px-4 py-2 text-black hover:text-white font-medium transition-colors duration-300 font-poppins"
+                className="px-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"
               >
                 Bra Size Chart
               </Link>
               <Link
                 href="/about"
-                className="px-4 py-2 text-black hover:text-white font-medium transition-colors duration-300 font-poppins"
+                className="px-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"
               >
                 About
               </Link>
               <Link
                 href="/contact"
-                className="px-4 py-2 text-black hover:text-white font-medium transition-colors duration-300 font-poppins"
+                className="px-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"
               >
                 Blog
               </Link>
@@ -107,7 +107,7 @@ export default function NavbarLinks({
         </div>
       </nav>
       {/* Add a spacer to prevent content from hiding under the fixed navbar */}
-      <div className="h-16"></div>
+      <div className="h-12 sm:h-14 md:h-16"></div>
     </>
   );
 }

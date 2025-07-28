@@ -47,18 +47,18 @@ const NavbarClient = ({ logoSrc }: NavbarClientProps) => {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-30 backdrop-blur-[1px] z-50 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-gray-100 bg-opacity-70 backdrop-blur-[3px] z-50 transition-opacity duration-300 ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={toggleMenu}
       >
         <div
-          className={`fixed right-0 top-0 h-full w-64 bg-white shadow-lg z-50 transition-transform duration-300 ease-in-out ${
+          className={`fixed right-0 top-0 h-full w-64 bg-white shadow-lg z-50 transition-transform duration-300 ease-in-out rounded-l-xl ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col p-5">
+          <div className="flex flex-col p-5 h-full">
             <div className="flex justify-end">
               <button
                 className="text-black focus:outline-none"
@@ -81,14 +81,30 @@ const NavbarClient = ({ logoSrc }: NavbarClientProps) => {
                 </svg>
               </button>
             </div>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col space-y-2">
               <Link
                 href="/"
-                className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-200"
+                className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
                 style={{ color: "var(--color-black)" }}
                 onClick={toggleMenu}
               >
                 Home
+              </Link>
+              <Link
+                href="/"
+                className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
+                style={{ color: "var(--color-black)" }}
+                onClick={toggleMenu}
+              >
+                Calculator
+              </Link>
+              <Link
+                href="/"
+                className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
+                style={{ color: "var(--color-black)" }}
+                onClick={toggleMenu}
+              >
+                FAQ
               </Link>
             </div>
           </div>

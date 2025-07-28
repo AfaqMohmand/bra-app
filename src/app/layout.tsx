@@ -21,20 +21,22 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: "Bra Size Calculator",
-  description: "Professional bra size calculator with accurate measurements and sizing",
-  keywords: "bra size calculator, bra fitting, cup size, band size, measurement guide",
+  description:
+    "Professional bra size calculator with accurate measurements and sizing",
+  keywords:
+    "bra size calculator, bra fitting, cup size, band size, measurement guide",
   openGraph: {
     title: "Bra Size Calculator",
     description: "Find your perfect bra size with our professional calculator",
     url: "https://bra-calculator.com",
     siteName: "Bra Size Calculator",
-    type: "website"
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Bra Size Calculator",
-    description: "Find your perfect bra size with our professional calculator"
-  }
+    description: "Find your perfect bra size with our professional calculator",
+  },
 };
 
 export default function RootLayout({

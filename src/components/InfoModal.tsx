@@ -43,8 +43,8 @@ const InfoModal: React.FC<InfoModalProps> = ({
       right: "auto",
       bottom: "auto",
       transform: "translate(-50%, -50%)",
-      width: "90%",
-      maxWidth: "28rem",
+      width: "95%",
+      maxWidth: "32rem",
       padding: 0,
       border: "none",
       borderRadius: "0.75rem",
@@ -60,18 +60,20 @@ const InfoModal: React.FC<InfoModalProps> = ({
       onRequestClose={onClose}
       style={customStyles}
       contentLabel={title}
-      closeTimeoutMS={300}
+      closeTimeoutMS={0}
     >
       {/* Modal header */}
-      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-4 flex justify-between items-center">
-        <h3 className="text-lg font-medium text-white">{title}</h3>
+      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3 flex justify-center items-center relative">
+        <h3 className="text-2xl font-semibold text-white text-center">
+          {title}
+        </h3>
         <button
           onClick={onClose}
-          className="text-white hover:text-gray-200 focus:outline-none ml-2"
+          className="text-white hover:text-gray-200 focus:outline-none absolute right-4 top-1/2 transform -translate-y-1/2 bg-yellow-600 rounded-full p-1"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-5 w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -86,38 +88,26 @@ const InfoModal: React.FC<InfoModalProps> = ({
         </button>
       </div>
 
-      {/* Modal content with two columns */}
-      <div className="p-3 sm:p-4">
-        <div className="flex flex-col md:flex-row gap-3 sm:gap-4">
-          {/* Left column with image */}
-          <div className="w-full md:w-1/2 flex justify-center items-center">
-            <div className="relative w-full h-28 sm:h-32 flex justify-center">
-              <Image
-                src={showBandMeasurement ? UnderBustCupSvg : OverBustCupSvg}
-                alt={
-                  showBandMeasurement ? "Band Measurement" : "Bust Measurement"
-                }
-                width={100}
-                height={100}
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-          </div>
-
-          {/* Right column with content */}
-          <div className="w-full md:w-1/2">
-            <div className="text-gray-700 text-sm">{content}</div>
+      {/* Modal content with image first, then text */}
+      <div className="p-5 sm:p-6">
+        {/* Image section */}
+        <div className="w-full flex justify-center items-center mb-5">
+          <div className="relative w-full h-40 sm:h-44 flex justify-center">
+            <Image
+              src={showBandMeasurement ? UnderBustCupSvg : OverBustCupSvg}
+              alt={
+                showBandMeasurement ? "Band Measurement" : "Bust Measurement"
+              }
+              width={160}
+              height={160}
+              style={{ objectFit: "contain" }}
+            />
           </div>
         </div>
 
-        {/* Modal footer */}
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white rounded-lg hover:from-yellow-500 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 transition-all duration-300"
-          >
-            Close
-          </button>
+        {/* Text content section */}
+        <div className="w-full">
+          <div className="text-gray-700 text-lg">{content}</div>
         </div>
       </div>
     </Modal>

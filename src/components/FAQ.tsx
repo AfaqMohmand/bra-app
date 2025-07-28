@@ -32,7 +32,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-4 sm:py-6 md:py-8">
       <FAQAccordion faqs={faqs} />
     </section>
   );
