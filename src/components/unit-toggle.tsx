@@ -8,6 +8,7 @@ export default function UnitToggle({
   setChartUnit,
 }: UnitToggleProps) {
   console.log("this change is done by rayyan");
+  console.log("chnages done by samad");
   return (
     <>
       <div className="bg-yellow-100 rounded-full p-1 inline-flex shadow-md">
