@@ -7,6 +7,7 @@ export default function UnitToggle({
   chartUnit,
   setChartUnit,
 }: UnitToggleProps) {
+  console.log("chnages done by samad");
   return (
     <>
       <div className="bg-yellow-100 rounded-full p-1 inline-flex shadow-md">
