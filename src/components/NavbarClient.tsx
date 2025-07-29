@@ -91,20 +91,36 @@ const NavbarClient = ({ logoSrc }: NavbarClientProps) => {
                 Home
               </Link>
               <Link
-                href="/"
+                href="/about"
                 className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
                 style={{ color: "var(--color-black)" }}
                 onClick={toggleMenu}
               >
-                Calculator
+                About
               </Link>
               <Link
-                href="/"
+                href="/contact"
                 className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
                 style={{ color: "var(--color-black)" }}
                 onClick={toggleMenu}
               >
-                FAQ
+                Contact
+              </Link>
+              <Link
+                href="/terms"
+                className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
+                style={{ color: "var(--color-black)" }}
+                onClick={toggleMenu}
+              >
+                Terms
+              </Link>
+              <Link
+                href="/privacy"
+                className="block py-3 text-black hover:text-yellow-500 font-medium transition-colors duration-300 border-b border-gray-100"
+                style={{ color: "var(--color-black)" }}
+                onClick={toggleMenu}
+              >
+                Privacy
               </Link>
             </div>
           </div>

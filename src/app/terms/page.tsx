@@ -17,194 +17,105 @@ const Terms = () => {
   return (
     <div className="relative min-h-screen">
       <div className="relative z-10 container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold font-rubik mb-8">
+        <h1 className="text-4xl font-bold mb-8 p-4 rounded-md">
           Terms and Conditions
         </h1>
 
         <div className="bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-medium font-rubik mb-4">
-            Agreement to Terms
-          </h2>
-          <p className="mb-4 font-lato">
-            These Terms and Conditions constitute a legally binding agreement
-            made between you, whether personally or on behalf of an entity
-            (&quot;you&quot;) and our company (&quot;we,&quot; &quot;us&quot; or
-            &quot;our&quot;), concerning your access to and use of our website
-            as well as any other media form, media channel, mobile website or
-            mobile application related, linked, or otherwise connected thereto
-            (collectively, the &quot;Site&quot;).
-          </p>
-          <p className="mb-4 font-lato">
-            You agree that by accessing the Site, you have read, understood, and
-            agree to be bound by all of these Terms and Conditions. If you do
-            not agree with all of these Terms and Conditions, then you are
-            expressly prohibited from using the Site and you must discontinue
-            use immediately.
+          <h2 className="text-2xl font-medium mb-4">Acceptance of Terms</h2>
+          <p className="mb-4">
+            By accessing and using the Bra Size Calculator website (the
+            &quot;Service&quot;), you agree to be legally bound by these Terms
+            and Conditions (&quot;Terms&quot;). If you do not accept any part of
+            these Terms, please stop using the Service immediately. These Terms
+            govern your use of the tool and any related features, content, or
+            updates we may offer.
           </p>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Intellectual Property Rights
+          <h2 className="text-2xl font-medium mb-4 mt-8">
+            Description of Service
           </h2>
-          <p className="mb-4 font-lato">
-            Unless otherwise indicated, the Site is our proprietary property and
-            all source code, databases, functionality, software, website
-            designs, audio, video, text, photographs, and graphics on the Site
-            (collectively, the &quot;Content&quot;) and the trademarks, service
-            marks, and logos contained therein (the &quot;Marks&quot;) are owned
-            or controlled by us or licensed to us, and are protected by
-            copyright and trademark laws and various other intellectual property
-            rights and unfair competition laws of the United States,
-            international copyright laws, and international conventions.
-          </p>
-          <p className="mb-4 font-lato">
-            The Content and the Marks are provided on the Site &quot;AS IS&quot;
-            for your information and personal use only. Except as expressly
-            provided in these Terms and Conditions, no part of the Site and no
-            Content or Marks may be copied, reproduced, aggregated, republished,
-            uploaded, posted, publicly displayed, encoded, translated,
-            transmitted, distributed, sold, licensed, or otherwise exploited for
-            any commercial purpose whatsoever, without our express prior written
-            permission.
+          <p className="mb-4">
+            The Bra Size Calculator is an online tool created to help women
+            estimate their bra size based on basic measurements. It is designed
+            to be quick, simple, and educational. The tool is provided for
+            informational purposes only and does not replace professional
+            fittings or medical advice.
           </p>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            User Representations
-          </h2>
-          <p className="mb-4 font-lato">
-            By using the Site, you represent and warrant that:
-          </p>
-          <ol className="list-decimal pl-5 mb-4">
-            <li className="mb-2 font-lato">
-              All registration information you submit will be true, accurate,
-              current, and complete;
-            </li>
-            <li className="mb-2 font-lato">
-              You will maintain the accuracy of such information and promptly
-              update such registration information as necessary;
-            </li>
-            <li className="mb-2 font-lato">
-              You have the legal capacity and you agree to comply with these
-              Terms and Conditions;
-            </li>
-            <li className="mb-2 font-lato">
-              You are not a minor in the jurisdiction in which you reside;
-            </li>
-            <li className="mb-2 font-lato">
-              You will not access the Site through automated or non-human means,
-              whether through a bot, script, or otherwise;
-            </li>
-            <li className="mb-2 font-lato">
-              You will not use the Site for any illegal or unauthorized purpose;
-            </li>
-            <li className="mb-2 font-lato">
-              Your use of the Site will not violate any applicable law or
-              regulation.
-            </li>
-          </ol>
-
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Products
-          </h2>
-          <p className="mb-4 font-lato">
-            We make every effort to display as accurately as possible the
-            colors, features, specifications, and details of the products
-            available on the Site. However, we do not guarantee that the colors,
-            features, specifications, and details of the products will be
-            accurate, complete, reliable, current, or free of other errors, and
-            your electronic display may not accurately reflect the actual colors
-            and details of the products.
-          </p>
-          <p className="mb-4 font-lato">
-            All products are subject to availability, and we cannot guarantee
-            that items will be in stock. We reserve the right to discontinue any
-            products at any time for any reason. Prices for all products are
-            subject to change.
+          <h2 className="text-2xl font-medium mb-4 mt-8">Use of Service</h2>
+          <p className="mb-4">
+            You agree to use the tool responsibly and only for your own
+            personal, non-commercial purposes. You must not reproduce, modify,
+            sell, or distribute any part of the Service or its content without
+            our prior written permission. Any misuse or unauthorized use of the
+            website or tool may result in legal action.
           </p>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Purchases and Payment
-          </h2>
-          <p className="mb-4 font-lato">
-            We accept the following forms of payment:
-          </p>
-          <ul className="list-disc pl-5 mb-4">
-            <li>Visa</li>
-            <li>Mastercard</li>
-            <li>American Express</li>
-            <li>PayPal</li>
-          </ul>
-          <p className="mb-4 font-lato">
-            You agree to provide current, complete, and accurate purchase and
-            account information for all purchases made via the Site. You further
-            agree to promptly update account and payment information, including
-            email address, payment method, and payment card expiration date, so
-            that we can complete your transactions and contact you as needed.
+          <h2 className="text-2xl font-medium mb-4 mt-8">No Data Collection</h2>
+          <p className="mb-4">
+            We prioritize your privacy. Our tool does not collect, store, or
+            transmit any information you input. All data stays within your
+            browser session and is never saved on our servers. You can use the
+            calculator confidently without worrying about your privacy being
+            compromised.
           </p>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Returns Policy
+          <h2 className="text-2xl font-medium mb-4 mt-8">
+            Accuracy and Limitations
           </h2>
-          <p className="mb-4 font-lato">
-            Please review our Returns Policy posted on the Site prior to making
-            any purchases.
+          <p className="mb-4">
+            While the calculator is designed to provide helpful estimates, it is
+            not guaranteed to be 100% accurate. Every body is unique, and bra
+            sizing can vary across brands and styles. The tool should be used as
+            a general guide — for precise fitting, we recommend consulting a
+            professional or trying on different sizes.
           </p>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Prohibited Activities
+          <h2 className="text-2xl font-medium mb-4 mt-8">
+            Intellectual Property
           </h2>
-          <p className="mb-4 font-lato">
-            You may not access or use the Site for any purpose other than that
-            for which we make the Site available. The Site may not be used in
-            connection with any commercial endeavors except those that are
-            specifically endorsed or approved by us.
+          <p className="mb-4">
+            All text, graphics, code, and design on this site are the
+            intellectual property of our team and protected by copyright and
+            other applicable laws. Unauthorized use or reproduction is strictly
+            prohibited.
           </p>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Site Management
-          </h2>
-          <p className="mb-4 font-lato">
-            We reserve the right, but not the obligation, to:
+          <h2 className="text-2xl font-medium mb-4 mt-8">Changes to Terms</h2>
+          <p className="mb-4">
+            We may revise these Terms from time to time to reflect changes in
+            our services, the law, or for other operational reasons. When we do,
+            we will update the &quot;Last Updated&quot; date at the bottom of
+            this page. By continuing to use the Service, you accept any changes
+            made.
           </p>
-          <ol className="list-decimal pl-5 mb-4">
-            <li className="mb-2 font-lato">
-              Monitor the Site for violations of these Terms and Conditions;
-            </li>
-            <li className="mb-2 font-lato">
-              Take appropriate legal action against anyone who, in our sole
-              discretion, violates the law or these Terms and Conditions;
-            </li>
-            <li className="mb-2 font-lato">
-              In our sole discretion and without limitation, refuse, restrict
-              access to, limit the availability of, or disable (to the extent
-              technologically feasible) any of your Contributions or any portion
-              thereof;
-            </li>
-            <li className="mb-2 font-lato">
-              In our sole discretion and without limitation, notice, or
-              liability, to remove from the Site or otherwise disable all files
-              and content that are excessive in size or are in any way
-              burdensome to our systems;
-            </li>
-            <li className="mb-2 font-lato">
-              Otherwise manage the Site in a manner designed to protect our
-              rights and property and to facilitate the proper functioning of
-              the Site.
-            </li>
-          </ol>
 
-          <h2 className="text-2xl font-medium font-rubik mb-4 mt-8">
-            Contact Us
+          <h2 className="text-2xl font-medium mb-4 mt-8">
+            Limitation of Liability
           </h2>
-          <p className="mb-4 font-lato">
-            In order to resolve a complaint regarding the Site or to receive
-            further information regarding use of the Site, please contact us at:
+          <p className="mb-4">
+            We are not liable for any direct, indirect, incidental, or
+            consequential issues that arise from using our tool. The calculator
+            is provided &quot;as is,&quot; and we do not guarantee specific
+            results. Use of the tool is at your own discretion and risk.
           </p>
-          <p className="mb-4 font-lato">
-            Email: terms@example.com
-            <br />
-            Phone: 1-800-123-4567
-            <br />
-            Address: 123 Terms Street, Suite 100, City, State 12345
+
+          <h2 className="text-2xl font-medium mb-4 mt-8">Governing Law</h2>
+          <p className="mb-4">
+            These Terms are governed by and interpreted in accordance with the
+            laws applicable in your local jurisdiction. Any disputes will be
+            resolved under those laws.
+          </p>
+
+          <h2 className="text-2xl font-medium mb-4 mt-8">Contact</h2>
+          <p className="mb-4">
+            If you have any questions, feedback, or concerns about these Terms,
+            please reach out via our Contact page. We&apos;re here to help.
+          </p>
+
+          <p className="text-sm text-gray-500 mt-8">
+            Last Updated: July 29, 2025
           </p>
         </div>
       </div>

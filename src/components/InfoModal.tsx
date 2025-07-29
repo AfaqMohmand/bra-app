@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react";
 import Modal from "react-modal";
-import UnderBustCupSvg from "../assets/underbust-cup.svg";
-import OverBustCupSvg from "../assets/overbust-cup.svg";
+import UnderBustCupJpg from "../assets/underbustcup.jpg";
+import OverBustCupJpg from "../assets/overbust-cup.jpg";
 import Image from "next/image";
 
 interface InfoModalProps {
@@ -54,6 +54,27 @@ const InfoModal: React.FC<InfoModalProps> = ({
     },
   };
 
+  // Add custom CSS to ensure modal title has no margin
+  useEffect(() => {
+    // Create a style element
+    const styleElement = document.createElement("style");
+    // Add CSS rule to remove margin from modal title
+    styleElement.innerHTML = `
+      .modal-title-no-margin {
+        margin: 0 !important;
+        padding: 0;
+        line-height: 1.2;
+      }
+    `;
+    // Append the style element to the document head
+    document.head.appendChild(styleElement);
+
+    // Clean up function to remove the style element when component unmounts
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -63,13 +84,13 @@ const InfoModal: React.FC<InfoModalProps> = ({
       closeTimeoutMS={0}
     >
       {/* Modal header */}
-      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3 flex justify-center items-center relative">
-        <h3 className="text-2xl font-semibold text-white text-center">
+      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3 flex justify-between items-center relative">
+        <h3 className="text-2xl font-semibold text-white text-start flex-grow modal-title-no-margin">
           {title}
         </h3>
         <button
           onClick={onClose}
-          className="text-white hover:text-gray-200 focus:outline-none absolute right-4 top-1/2 transform -translate-y-1/2 bg-yellow-600 rounded-full p-1"
+          className="text-white hover:text-gray-200 focus:outline-none bg-yellow-600 rounded-full p-1 flex items-center justify-center cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +115,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
         <div className="w-full flex justify-center items-center mb-5">
           <div className="relative w-full h-40 sm:h-44 flex justify-center">
             <Image
-              src={showBandMeasurement ? UnderBustCupSvg : OverBustCupSvg}
+              src={showBandMeasurement ? UnderBustCupJpg : OverBustCupJpg}
               alt={
                 showBandMeasurement ? "Band Measurement" : "Bust Measurement"
               }

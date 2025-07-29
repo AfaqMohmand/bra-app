@@ -47,7 +47,6 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
         <h2 className="text-4xl font-bold mb-2">
           <span className="text-gray-800">Frequently Asked </span>
           <span className="text-yellow-500">Questions</span>
-          <span className="text-yellow-500">.</span>
         </h2>
       </div>
 

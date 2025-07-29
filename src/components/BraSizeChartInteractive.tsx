@@ -63,8 +63,8 @@ const BraSizeChartInteractive: React.FC<BraSizeChartInteractiveProps> = ({
           <div className="absolute bottom-0 right-0 h-[30%] w-[2px] bg-yellow-400"></div>
 
           {/* Background decorative elements */}
-          <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-10 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div>
+          {/* <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-300 opacity-10 transform rotate-45 translate-x-8 -translate-y-8 rounded-full blur-xl"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-200 opacity-10 transform rotate-12 -translate-x-10 translate-y-10 rounded-full blur-xl"></div> */}
 
           {/* Chart controls */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 animate-fadeIn animate-delay-300">

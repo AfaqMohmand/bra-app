@@ -41,9 +41,7 @@ export default function NavbarLinks({
           // backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
           backgroundRepeat: scrolled ? "no-repeat" : "repeat",
           backgroundSize: "200px",
-          backgroundColor: scrolled
-            ? "rgba(255, 255, 255, 0.7)"
-            : "var(--color-yellow)",
+
           backdropFilter: scrolled ? "blur(3px)" : "none",
           boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none",
         }}
@@ -88,7 +86,7 @@ export default function NavbarLinks({
                 href="/"
                 className="px-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"
               >
-                Bra Size Chart
+                Home
               </Link>
               <Link
                 href="/about"
@@ -100,7 +98,7 @@ export default function NavbarLinks({
                 href="/contact"
                 className="px-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"
               >
-                Blog
+                Contact
               </Link>
             </div>
           )}
