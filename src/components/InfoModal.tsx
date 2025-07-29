@@ -26,6 +26,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
       Modal.setAppElement(appElement);
     }
   }, []);
+  console.log("this is the first commit");
 
   // Determine which image to show based on title
   const showBandMeasurement = title.toLowerCase().includes("band");
