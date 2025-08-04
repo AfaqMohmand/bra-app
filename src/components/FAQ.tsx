@@ -71,7 +71,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-4 sm:py-6 md:py-8">
+    <section className="pb-4 sm:py-6 md:py-8">
       <FAQAccordion faqs={faqs} />
     </section>
   );

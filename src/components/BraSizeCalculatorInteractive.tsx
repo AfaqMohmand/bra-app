@@ -37,23 +37,99 @@ const BraSizeCalculatorInteractive: React.FC<
         : parseFloat(bustMeasurement) / 2.54;
 
     // Return null if either value is not a valid number
-    if (isNaN(bandInches) || isNaN(bustInches)) return null;
+    if (isNaN(bandInches) || isNaN(bustInches)) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        errorMessage:
+          "Please enter valid numeric values for both measurements.",
+      };
+    }
 
-    // Calculate band size (round to nearest even number)
-    let bandSize = Math.round(bandInches / 2) * 2;
-    if (bandInches < 33) bandSize += 4;
+    // Validation: Ensure bust is always greater than band
+    if (bustInches <= bandInches) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        errorMessage: "Please check your measurements.",
+      };
+    }
 
-    // Calculate cup size (difference between bust and band)
+    // Validation: Band size restrictions
+    if (bandInches <= 25) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        errorMessage: "Band too small to have a valid bra size.",
+      };
+    }
+
+    if (bandInches > 47) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        errorMessage: "Band too large to have a valid bra size.",
+      };
+    }
+
+    // Calculate bust-band difference for cup size
     const difference = Math.round(bustInches - bandInches);
-    const cupSize =
-      braSizeData.cupSizes.inches[
-        difference as keyof typeof braSizeData.cupSizes.inches
-      ] || null;
 
-    // Only return isInvalid:true when both measurements are provided but result in an invalid size
-    if (!cupSize) return { isInvalid: true, bandSize: 0, cupSize: "" };
+    // Validation: Cup size restrictions
+    if (difference > 16) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        errorMessage: "Bust too large for available cup size range.",
+      };
+    }
 
-    return { bandSize, cupSize };
+    // Round band measurement to the nearest even number as per the table
+    // 27 → 28, 29 → 30, 31 → 32, etc.
+    const bandSize = Math.round(bandInches / 2) * 2;
+
+    // Additional validation for cm measurements
+    if (unit === "centimeters") {
+      if (parseFloat(bandMeasurement) <= 58) {
+        return {
+          isInvalid: true,
+          bandSize: 0,
+          cupSize: "",
+          errorMessage: "Band too small to calculate size.",
+        };
+      }
+
+      if (parseFloat(bandMeasurement) > 130) {
+        return {
+          isInvalid: true,
+          bandSize: 0,
+          cupSize: "",
+          errorMessage: "Band too large to calculate size.",
+        };
+      }
+    }
+
+    // Get cup size based on the difference using the table data
+    // Using US cup sizes as default
+    const differenceKey = difference.toString();
+    const cupSize = braSizeData.cupSizes.us[differenceKey] || null;
+
+    // Return invalid if no cup size is found
+    if (!cupSize)
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        errorMessage: "Unable to determine cup size for your measurements.",
+        unit,
+      };
+
+    return { bandSize, cupSize, unit };
   }, [bandMeasurement, bustMeasurement, unit, braSizeData]);
 
   // Memoize the effect callback to avoid infinite loops
@@ -71,9 +147,23 @@ const BraSizeCalculatorInteractive: React.FC<
 
   // Handle unit change
   const handleUnitChange = (newUnit: string) => {
+    if (bandMeasurement && bustMeasurement) {
+      // Convert existing measurements when switching units
+      if (newUnit === "inches" && unit === "centimeters") {
+        // Convert from cm to inches (divide by 2.54)
+        const bandInches = (parseFloat(bandMeasurement) / 2.54).toFixed(1);
+        const bustInches = (parseFloat(bustMeasurement) / 2.54).toFixed(1);
+        setBandMeasurement(bandInches);
+        setBustMeasurement(bustInches);
+      } else if (newUnit === "centimeters" && unit === "inches") {
+        // Convert from inches to cm (multiply by 2.54)
+        const bandCm = (parseFloat(bandMeasurement) * 2.54).toFixed(1);
+        const bustCm = (parseFloat(bustMeasurement) * 2.54).toFixed(1);
+        setBandMeasurement(bandCm);
+        setBustMeasurement(bustCm);
+      }
+    }
     setUnit(newUnit);
-    setBandMeasurement("");
-    setBustMeasurement("");
   };
 
   return (
@@ -122,16 +212,13 @@ const BraSizeCalculatorInteractive: React.FC<
               className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "inches"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
-                  : "bg-white text-gray-700"
+                  : "bg-white text-gray-700 "
               }`}
-              style={{
-                animation: "none",
-                transform: "none",
-                transition: "none",
-              }}
               onClick={() => handleUnitChange("inches")}
             >
-              Inches
+              <span className="transition-transform duration-300 hover:-translate-y-1">
+                Inches
+              </span>
             </button>
             <button
               className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
@@ -139,11 +226,6 @@ const BraSizeCalculatorInteractive: React.FC<
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
                   : "bg-white text-gray-700"
               }`}
-              style={{
-                animation: "none",
-                transform: "none",
-                transition: "none",
-              }}
               onClick={() => handleUnitChange("centimeters")}
             >
               Centimeters

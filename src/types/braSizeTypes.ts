@@ -33,14 +33,20 @@ export type RegionConversions = {
 };
 
 export type BandSizes = {
-  [unit: string]: {
-    [size: number]: { cm: string };
+  inches: {
+    [size: string]: {
+      usUk: string;
+      eu: string;
+      fr: string;
+      pakInd: string;
+      aus: string;
+    };
   };
 };
 
 export type CupSizes = {
   [unit: string]: {
-    [difference: number]: string;
+    [difference: string]: string;
   };
 };
 
@@ -54,4 +60,6 @@ export type RecommendedSize = {
   bandSize: number;
   cupSize: string;
   isInvalid?: boolean;
+  errorMessage?: string;
+  unit?: string;
 } | null;

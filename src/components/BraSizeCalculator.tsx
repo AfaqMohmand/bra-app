@@ -10,7 +10,7 @@ const BraSizeCalculator = () => {
   const braSizeChartData: BraSizeChartData = braSizeDataJson.braSizeChartData;
 
   return (
-    <div className="bra-size-calculator sm:px-6 py-12 animate-fadeIn">
+    <div className="bra-size-calculator sm:px-6 pt-12 animate-fadeIn">
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-10">
           <div

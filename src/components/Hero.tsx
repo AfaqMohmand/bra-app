@@ -23,7 +23,7 @@ const Hero = () => {
       {/* Simple straight edge instead of wave */}
 
       <div className="container mx-auto px-4 py-0 relative z-10 h-full">
-        <div className="flex flex-col md:flex-row items-center h-full">
+        <div className="flex flex-row items-center h-full">
           {/* Left side - Text content */}
           <div className="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4 lg:pr-8">
             <h1 className="hero-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">

@@ -100,14 +100,22 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               </h3>
 
               <div className="text-center my-6 animate-fadeIn animate-delay-300">
-                <p className="text-lg text-gray-700 mb-4">
-                  The measurements you entered don&apos;t correspond to a
-                  standard bra size.
-                </p>
-                <p className="text-md text-gray-600">
-                  Please double-check your measurements and try again, or
-                  consider getting professionally fitted.
-                </p>
+                {recommendedSize?.errorMessage ? (
+                  <p className="text-lg text-gray-700 mb-4">
+                    {recommendedSize.errorMessage}
+                  </p>
+                ) : (
+                  <>
+                    <p className="text-lg text-gray-700 mb-4">
+                      The measurements you entered don&apos;t correspond to a
+                      standard bra size.
+                    </p>
+                    <p className="text-md text-gray-600">
+                      Please double-check your measurements and try again, or
+                      consider getting professionally fitted.
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           ) : recommendedSize ? (
@@ -148,6 +156,15 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               <p className="text-center text-sm font-medium text-gray-600 mb-6 animate-fadeIn animate-delay-400">
                 {activeRegion} Size
               </p>
+
+              {/* Only display band size in centimeters */}
+              {recommendedSize.unit === "centimeters" && (
+                <div className="text-center text-sm text-gray-500 -mt-4 mb-4">
+                  <span>
+                    Band: {(recommendedSize.bandSize * 2.54).toFixed(1)} cm
+                  </span>
+                </div>
+              )}
 
               <div className="mb-8 animate-fadeIn animate-delay-500">
                 <h4 className="text-center font-medium text-gray-700 mb-4">
@@ -265,7 +282,6 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
       {/* Size chart section */}
       <div className="mt-8 sm:mt-12 md:mt-16">
         <DetailBraSizeChart />
-        <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto mb-8 rounded-full"></div>
         <BraSizeChartInteractive braSizeChartData={braSizeChartData} />
       </div>
     </div>

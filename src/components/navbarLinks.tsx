@@ -20,8 +20,8 @@ export default function NavbarLinks({
   // Handle scroll effect - making the navbar transparent and blurry when scrolled
   useEffect(() => {
     const handleScroll = () => {
-      // Check if scrolled past hero section (adjust the value as needed)
-      const isScrolled = window.scrollY > 300;
+      // Check if scrolled at all - even 1px
+      const isScrolled = window.scrollY > 0;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -36,13 +36,14 @@ export default function NavbarLinks({
   return (
     <>
       <nav
-        className={`w-full py-3 sm:py-4 md:py-5 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
+        className={`w-full pt-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
         style={{
-          // backgroundImage: scrolled ? "none" : `url(${ZigZagTwo.src})`,
+          backgroundColor: scrolled
+            ? "rgba(255, 255, 255, 0.8)"
+            : "transparent",
           backgroundRepeat: scrolled ? "no-repeat" : "repeat",
           backgroundSize: "200px",
-
-          backdropFilter: scrolled ? "blur(3px)" : "none",
+          backdropFilter: scrolled ? "blur(5px)" : "none",
           boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
@@ -54,7 +55,7 @@ export default function NavbarLinks({
                 alt="Logo"
                 width={100}
                 height={60}
-                className="h-6 sm:h-7 md:h-8 w-auto"
+                className="h-8 sm:h-9 md:h-10 w-auto"
               />
             </Link>
           </div>

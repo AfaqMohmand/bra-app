@@ -73,14 +73,19 @@ export default function ContactPage() {
   };
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between max-w-6xl mx-auto">
+      <div className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between">
           {/* Left side - Contact heading and text */}
           <div className="md:w-1/3 mb-8 md:mb-0 pr-0 md:pr-8">
-            <h1 className="text-4xl font-bold mb-6 text-gray-800">Contact</h1>
+            <h1 className="text-4xl font-bold mb-2 text-gray-800">Contact</h1>
+            <h4 className="text-2xl font-bold mb-6 text-gray-800">
+              Get in Touch
+            </h4>
             <p className="text-gray-700 mb-4">
-              Contact us to report a problem, clarify any doubts about our bra
-              size calculator, or just find out more.
+              Have questions, feedback, or need help using our bra size
+              calculator? We’d love to hear from you. Simply fill out the form
+              below or email us directly. We’re here to help. Form
             </p>
           </div>
 
@@ -245,6 +250,7 @@ export default function ContactPage() {
                 </div>
               </form>
             </div>
+          </div>
           </div>
         </div>
       </div>

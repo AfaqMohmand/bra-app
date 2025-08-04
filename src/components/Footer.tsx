@@ -22,11 +22,11 @@ const Footer = () => {
               <div className="mb-6">
                 {/* Logo */}
                 <div className="mb-4">
-                  <Image 
-                    src={BlackLogo} 
-                    alt="Bra Size Calculator Logo" 
-                    width={120} 
-                    height={40} 
+                  <Image
+                    src={BlackLogo}
+                    alt="Bra Size Calculator Logo"
+                    width={120}
+                    height={40}
                     className="h-auto"
                   />
                 </div>
@@ -166,7 +166,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-6">
         {/* Bottom Footer */}
         <div className="text-xs text-gray-500">
-          <p className="text-start mb-2 text-sm">
+          <p className="text-start text-sm" style={{ marginBottom: "0px" }}>
             &copy; {currentYear} Bra Size Calculator. All Rights Reserved.
           </p>
         </div>

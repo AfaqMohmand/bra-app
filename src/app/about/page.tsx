@@ -7,7 +7,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           {/* Centered heading */}
           <h1 className="text-4xl font-bold mb-12 text-center text-gray-800">
-            Our Story
+            About
           </h1>
 
           {/* Content section with the same text but styled like the image */}

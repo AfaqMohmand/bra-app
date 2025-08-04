@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <Hero />
       <main>
-        <section className="pt-10 pb-6 sm:py-12 md:py-16 container mx-auto">
+        <section className="pt-10 sm:py-12 md:py-16 container mx-auto">
           <BraSizeCalculator />
         </section>
         <FAQ />
