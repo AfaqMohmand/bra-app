@@ -208,7 +208,7 @@ const BraSizeCalculatorInteractive: React.FC<
             className="inline-flex rounded-full overflow-hidden shadow-md text-xs sm:text-sm"
             style={{ transform: "none" }}
           >
-            <button
+            <div
               className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "inches"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
@@ -216,11 +216,11 @@ const BraSizeCalculatorInteractive: React.FC<
               }`}
               onClick={() => handleUnitChange("inches")}
             >
-              <span className="transition-transform duration-300 hover:-translate-y-1">
+              <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
                 Inches
               </span>
-            </button>
-            <button
+            </div>
+            <div
               className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
                 unit === "centimeters"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
@@ -228,8 +228,10 @@ const BraSizeCalculatorInteractive: React.FC<
               }`}
               onClick={() => handleUnitChange("centimeters")}
             >
-              Centimeters
-            </button>
+              <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                Centimeters
+              </span>
+            </div>
           </div>
         </div>
 

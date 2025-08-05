@@ -183,7 +183,7 @@ export default function DetailBraSizeChart() {
 
   return (
     <div className="pt-8 px-4 md:px-8">
-      <h2 className="text-4xl font-bold text-center mb-6 text-gray-800 font-rubik">
+      <h2 className="text-4xl font-bold text-left sm:text-center mb-6 text-gray-800 font-rubik">
         <span className="inline-block">DETAILED BRA SIZE</span>{" "}
         <span className="text-yellow-500 ">CHART</span>
       </h2>
@@ -216,7 +216,7 @@ export default function DetailBraSizeChart() {
 
       {/* Band Size Conversion Table */}
       <div className="mb-12 overflow-x-auto">
-        <h3 className="text-xl font-bold mb-4 text-center text-[#000] py-2 rounded-lg">
+        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-[#000] py-2 rounded-lg">
           {unit === "inches" ? "(Inches)" : "(Centimeters)"} Bra Size Conversion
           Tables
         </h3>
@@ -269,7 +269,7 @@ export default function DetailBraSizeChart() {
 
       {/* Cup Size Conversion Table */}
       <div className="mb-12 overflow-x-auto">
-        <h3 className="text-xl font-bold mb-4 text-center text-black py-2 rounded-lg">
+        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-black py-2 rounded-lg">
           Cup Size Conversion Table
         </h3>
         <table className="w-full border-collapse shadow-lg">

@@ -236,7 +236,7 @@
 
 /* Hero section styling */
 .hero-section {
-  min-height: 50vh;
+  /* min-height: 50vh; */
   position: relative;
 }
 
