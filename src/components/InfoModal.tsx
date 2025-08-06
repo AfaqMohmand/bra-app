@@ -113,7 +113,11 @@ const InfoModal: React.FC<InfoModalProps> = ({
       <div className="p-5 sm:p-6">
         {/* Image section */}
         <div className="w-full flex justify-center items-center mb-5">
-          <div className="relative w-full h-40 sm:h-44 flex justify-center">
+          <div className="relative w-full h-40 sm:h-44 flex justify-center items-center">
+            {/* Loading spinner */}
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="w-8 h-8 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+            </div>
             <Image
               src={showBandMeasurement ? UnderBustCupJpg : OverBustCupJpg}
               alt={
@@ -122,6 +126,12 @@ const InfoModal: React.FC<InfoModalProps> = ({
               width={160}
               height={160}
               style={{ objectFit: "contain" }}
+              onLoadingComplete={(img) => {
+                // Find the parent of the image and hide the loader
+                const loaderEl =
+                  img.parentElement?.querySelector("div.absolute");
+                if (loaderEl) loaderEl.classList.add("hidden");
+              }}
             />
           </div>
         </div>
