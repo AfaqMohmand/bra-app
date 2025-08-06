@@ -7,7 +7,8 @@ import BraSizeCalculatorWrapper from "./BraSizeCalculatorWrapper";
 const BraSizeCalculator = () => {
   // Extract data from imported JSON - this is fine on server
   const braSizeData: BraSizeData = braSizeDataJson.braSizeData;
-  const braSizeChartData: BraSizeChartData = braSizeDataJson.braSizeChartData;
+  // Create an empty chart data object since it's not in the JSON anymore
+  const braSizeChartData: BraSizeChartData = {}; // Empty chart data as per the tables
 
   return (
     <div className="bra-size-calculator sm:px-6 pt-12 animate-fadeIn">
