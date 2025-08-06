@@ -93,9 +93,10 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
-    // Round band measurement to the nearest even number as per the table
-    // 27 → 28, 29 → 30, 31 → 32, etc.
-    const bandSize = Math.round(bandInches / 2) * 2;
+    // Round band measurement to the next even number if odd
+    // 27 → 28, 29 → 30, 31 → 32, 33 → 34, 35 → 36, etc.
+    // For odd numbers, we round up to the next even number
+    const bandSize = bandInches % 2 === 0 ? bandInches : Math.ceil(bandInches / 2) * 2;
 
     // Additional validation for cm measurements
     if (unit === "centimeters") {
