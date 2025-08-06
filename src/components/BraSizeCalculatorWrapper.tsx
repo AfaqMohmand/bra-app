@@ -155,6 +155,9 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               </div>
               <p className="text-center text-sm font-medium text-gray-600 mb-6 animate-fadeIn animate-delay-400">
                 {activeRegion} Size
+                {activeRegion === "AU" && (
+                  <span className="block text-xs mt-1">(Dress Size: {braSizeData.bandSizes.inches[recommendedSize.bandSize.toString()]?.aus || ""})</span>
+                )}
               </p>
 
               {/* Only display band size in centimeters */}
@@ -221,16 +224,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   >
                     FR
                   </button>
-                  <button
-                    onClick={() => setActiveRegion("IT")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
-                      activeRegion === "IT"
-                        ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
-                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
-                    }`}
-                  >
-                    IT
-                  </button>
+
                   <button
                     onClick={() => setActiveRegion("AU")}
                     className={`py-2 px-4 rounded-lg transition-all ${
@@ -239,17 +233,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    AU
-                  </button>
-                  <button
-                    onClick={() => setActiveRegion("JP")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
-                      activeRegion === "JP"
-                        ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
-                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
-                    }`}
-                  >
-                    JP
+                    AUS
                   </button>
                 </div>
               </div>
