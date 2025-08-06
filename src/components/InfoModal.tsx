@@ -88,7 +88,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
         <h3 className="text-2xl font-semibold text-white text-start flex-grow modal-title-no-margin">
           {title}
         </h3>
-        <button
+        <div
           onClick={onClose}
           className="text-white hover:text-gray-200 focus:outline-none bg-yellow-600 rounded-full p-1 flex items-center justify-center cursor-pointer"
         >
@@ -106,7 +106,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
-        </button>
+        </div>
       </div>
 
       {/* Modal content with image first, then text */}

@@ -36,7 +36,7 @@ export default function NavbarLinks({
   return (
     <>
       <nav
-        className={`w-full pt-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
+        className={`w-full py-3 flex justify-center items-center fixed top-0 left-0 right-0 transition-all duration-300 z-50`}
         style={{
           backgroundColor: scrolled
             ? "rgba(255, 255, 255, 0.8)"

@@ -267,27 +267,24 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Bust Measurement",
                     content: (
                       <div>
-                        <p className="text-base font-medium mb-4">
-                          The bust measurement is taken around the fullest part
-                          of your bust.
+                        <p className="text-sm mb-3">
+                          The bust measurement is taken around the fullest part of your bust.
                         </p>
-                        <p className="text-base font-medium mb-3">
+                        <p className="text-sm mb-2">
                           For the most accurate results:
                         </p>
-                        <ul className="list-disc pl-6 space-y-3">
-                          <li className="text-base">
-                            Wear a non-padded bra or no bra for the most
-                            accurate measurement
+                        <ul className="list-disc pl-5 space-y-1">
+                          <li className="text-sm">
+                            Wear a non-padded bra or no bra for the most accurate measurement
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Keep the tape parallel to the floor
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Make sure the tape is not too tight or too loose
                           </li>
-                          <li className="text-base">
-                            Stand straight with arms at your sides while
-                            measuring
+                          <li className="text-sm">
+                            Stand straight with arms at your sides while measuring
                           </li>
                         </ul>
                       </div>
@@ -338,27 +335,24 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Band Measurement",
                     content: (
                       <div>
-                        <p className="text-base font-medium mb-4">
-                          The band measurement is taken around your ribcage,
-                          just under your bust.
+                        <p className="text-sm mb-3">
+                          The band measurement is taken around your ribcage, just under your bust.
                         </p>
-                        <p className="text-base font-medium mb-3">
+                        <p className="text-sm mb-2">
                           For the most accurate results:
                         </p>
-                        <ul className="list-disc pl-6 space-y-3">
-                          <li className="text-base">
-                            Make sure the measuring tape is snug but not too
-                            tight
+                        <ul className="list-disc pl-5 space-y-1">
+                          <li className="text-sm">
+                            Make sure the measuring tape is snug but not too tight
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Keep the tape parallel to the floor
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Take a deep breath in and out before measuring
                           </li>
-                          <li className="text-base">
-                            Measure directly against your skin, not over
-                            clothing
+                          <li className="text-sm">
+                            Measure directly against your skin, not over clothing
                           </li>
                         </ul>
                       </div>

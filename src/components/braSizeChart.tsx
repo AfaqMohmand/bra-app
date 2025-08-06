@@ -184,33 +184,37 @@ export default function DetailBraSizeChart() {
   return (
     <div className="pt-8 px-4 md:px-8">
       <h2 className="text-4xl font-bold text-left sm:text-center mb-6 text-gray-800 font-rubik">
-        <span className="inline-block">DETAILED BRA SIZE</span>{" "}
+        <span className="inline-block">BRA SIZE</span>{" "}
         <span className="text-yellow-500 ">CHART</span>
       </h2>
 
       {/* Unit toggle */}
       <div className="flex justify-center mb-8">
         <div className="bg-yellow-100 rounded-full p-1 inline-flex shadow-md">
-          <button
+          <div
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               unit === "inches"
-                ? "bg-yellow-500 text-white shadow-sm hover:-translate-y-0.5"
-                : "text-gray-600 hover:bg-yellow-200 hover:-translate-y-0.5"
+                ? "bg-yellow-500 text-white shadow-sm"
+                : "text-gray-600 "
             }`}
             onClick={() => setUnit("inches")}
           >
-            Inches
-          </button>
-          <button
+            <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+              Inches
+            </span>
+          </div>
+          <div
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               unit === "cm"
-                ? "bg-yellow-500 text-white shadow-sm hover:-translate-y-0.5"
-                : "text-gray-600 hover:bg-yellow-200 hover:-translate-y-0.5"
+                ? "bg-yellow-500 text-white shadow-sm "
+                : "text-gray-600 "
             }`}
             onClick={() => setUnit("cm")}
           >
-            Centimeters
-          </button>
+            <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+              Centimeters
+            </span>
+          </div>
         </div>
       </div>
 

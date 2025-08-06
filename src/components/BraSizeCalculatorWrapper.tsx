@@ -221,7 +221,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               </div>
               <p className="text-center text-sm font-medium text-gray-600 mb-6 animate-fadeIn animate-delay-400">
                 {activeRegion === "AU"
-                  ? "AUS Dress Size"
+                  ? "AU Dress Size"
                   : `${activeRegion} Size`}
                 {activeRegion === "AU" && (
                   <span className="block text-xs mt-1">
@@ -273,7 +273,9 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    UK
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      UK
+                    </span>
                   </button>
                   <button
                     onClick={() => setActiveRegion("EU")}
@@ -283,7 +285,9 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    EU
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      EU
+                    </span>
                   </button>
                   <button
                     onClick={() => setActiveRegion("FR")}
@@ -293,7 +297,9 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    FR
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      FR
+                    </span>
                   </button>
 
                   <button
@@ -304,7 +310,9 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    AUS
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      AU
+                    </span>
                   </button>
                 </div>
               </div>
