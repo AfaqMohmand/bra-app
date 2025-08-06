@@ -73,10 +73,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
         adjustedCup = braSizeData.cupSizes.uk?.[differenceKey] || "";
       } else if (region === "Pak/Ind") {
         // For Pak/Ind, get cup size from its table
-        adjustedCup = braSizeData.cupSizes.pakind?.[differenceKey] || "";
-      } else if (region === "AU") {
-        // For AU, get cup size from its table
-        adjustedCup = braSizeData.cupSizes.aus?.[differenceKey] || "";
+        adjustedCup = braSizeData.cupSizes.pakInd?.[differenceKey] || "";
       } else {
         // Default to US cup size
         adjustedCup = braSizeData.cupSizes.us[differenceKey] || "";
@@ -212,7 +209,13 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                         braSizeData.bandSizes.inches[
                           recommendedSize.bandSize.toString()
                         ]?.aus || ""
-                      }${recommendedSize.cupSize}`
+                      }${
+                        recommendedSize.bustBandDifference !== undefined
+                          ? braSizeData.cupSizes.aus?.[
+                              recommendedSize.bustBandDifference.toString()
+                            ] || recommendedSize.cupSize
+                          : recommendedSize.cupSize
+                      }`
                     : activeRegion === "US"
                     ? `${recommendedSize.bandSize}${recommendedSize.cupSize}`
                     : getSizeForRegion(activeRegion, recommendedSize)}
@@ -332,7 +335,15 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                       Cup Size
                     </p>
                     <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
-                      {recommendedSize.cupSize}
+                      {activeRegion === "Pak/Ind" || activeRegion === "AU"
+                        ? recommendedSize.bustBandDifference !== undefined
+                          ? braSizeData.cupSizes[
+                              activeRegion === "Pak/Ind" ? "pakInd" : "aus"
+                            ]?.[
+                              recommendedSize.bustBandDifference.toString()
+                            ] || recommendedSize.cupSize
+                          : recommendedSize.cupSize
+                        : recommendedSize.cupSize}
                     </h6>
                   </div>
                 </div>

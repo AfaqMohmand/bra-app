@@ -219,122 +219,140 @@ export default function DetailBraSizeChart() {
       </div>
 
       {/* Band Size Conversion Table */}
-      <div className="mb-12 overflow-x-auto">
-        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-[#000] py-2 rounded-lg">
+      <div className="mb-12">
+        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-[#000] py-2 rounded-lg bg-white">
           {unit === "inches" ? "(Inches)" : "(Centimeters)"} Bra Size Conversion
           Tables
         </h3>
-        <table className="w-full border-collapse shadow-lg">
-          <thead>
-            <tr className="bg-yellow-500 text-white">
-              <th className="border border-yellow-300 px-4 py-3">US/UK Band</th>
-              <th className="border border-yellow-300 px-4 py-3">EU Band</th>
-              <th className="border border-yellow-300 px-4 py-3">FR Band</th>
-              <th className="border border-yellow-300 px-4 py-3">
-                Pak/Ind Band
-              </th>
-              <th className="border border-yellow-300 px-4 py-3">
-                AUS Band (Dress Size)
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {bandSizeData.map((row, index) => (
-              <tr
-                key={index}
-                className={index % 2 === 0 ? "bg-yellow-50" : "bg-white"}
-              >
-                <td className="border border-yellow-300 px-4 py-2 text-center">
-                  {unit === "inches" ? row.usUkBand : inchesToCm(row.usUkBand)}
-                </td>
-                <td className="border border-yellow-300 px-4 py-2 text-center">
-                  {unit === "inches"
-                    ? row.euBand
-                    : inchesToCm((row.euBand / 2.54) * 2.54)}
-                </td>
-                <td className="border border-yellow-300 px-4 py-2 text-center">
-                  {unit === "inches"
-                    ? row.frBand
-                    : inchesToCm((row.frBand / 2.54) * 2.54)}
-                </td>
-                <td className="border border-yellow-300 px-4 py-2 text-center">
-                  {unit === "inches"
-                    ? row.pakIndBand
-                    : inchesToCm(row.pakIndBand)}
-                </td>
-                <td className="border border-yellow-300 px-4 py-2 text-center">
-                  {row.ausBand}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="relative">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse shadow-lg">
+              <thead>
+                <tr className="bg-yellow-500 text-white">
+                  <th className="border border-yellow-300 px-4 py-3">
+                    US/UK Band
+                  </th>
+                  <th className="border border-yellow-300 px-4 py-3">
+                    EU Band
+                  </th>
+                  <th className="border border-yellow-300 px-4 py-3">
+                    FR Band
+                  </th>
+                  <th className="border border-yellow-300 px-4 py-3">
+                    Pak/Ind Band
+                  </th>
+                  <th className="border border-yellow-300 px-4 py-3">
+                    AUS Band (Dress Size)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {bandSizeData.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={index % 2 === 0 ? "bg-yellow-50" : "bg-white"}
+                  >
+                    <td className="border border-yellow-300 px-4 py-2 text-center">
+                      {unit === "inches"
+                        ? row.usUkBand
+                        : inchesToCm(row.usUkBand)}
+                    </td>
+                    <td className="border border-yellow-300 px-4 py-2 text-center">
+                      {unit === "inches"
+                        ? row.euBand
+                        : inchesToCm((row.euBand / 2.54) * 2.54)}
+                    </td>
+                    <td className="border border-yellow-300 px-4 py-2 text-center">
+                      {unit === "inches"
+                        ? row.frBand
+                        : inchesToCm((row.frBand / 2.54) * 2.54)}
+                    </td>
+                    <td className="border border-yellow-300 px-4 py-2 text-center">
+                      {unit === "inches"
+                        ? row.pakIndBand
+                        : inchesToCm(row.pakIndBand)}
+                    </td>
+                    <td className="border border-yellow-300 px-4 py-2 text-center">
+                      {row.ausBand}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {/* Cup Size Conversion Table */}
-      <div className="mb-12 overflow-x-auto">
-        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-black py-2 rounded-lg">
+      <div className="mb-12">
+        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-black py-2 rounded-lg bg-white">
           Cup Size Conversion Table
         </h3>
-        <table className="w-full border-collapse shadow-lg">
-          <thead>
-            <tr className="bg-yellow-500 text-white">
-              <th className="border border-yellow-300 px-4 py-3">
-                Bust-Band Diff {unit === "inches" ? "(inches)" : "(cm)"}
-              </th>
-              <th className="border border-yellow-300 px-4 py-3">UK Cup</th>
-              <th className="border border-yellow-300 px-4 py-3">US Cup</th>
-              <th className="border border-yellow-300 px-4 py-3">EU Cup</th>
-              <th className="border border-yellow-300 px-4 py-3">FR Cup</th>
-              <th className="border border-yellow-300 px-4 py-3">
-                Pak/Ind Cup
-              </th>
-              <th className="border border-yellow-300 px-4 py-3">
-                AUS Cup (Dress)
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {cupSizeData.map((row, index) => {
-              // Convert the difference if it's a number
-              let diffValue = row.bustBandDiff;
-              if (unit === "cm" && diffValue !== "<1") {
-                diffValue = String(Math.round(parseFloat(diffValue) * 2.54));
-              } else if (unit === "cm" && diffValue === "<1") {
-                diffValue = "<2.5";
-              }
-
-              return (
-                <tr
-                  key={index}
-                  className={index % 2 === 0 ? "bg-yellow-50" : "bg-white"}
-                >
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {diffValue}
-                  </td>
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {row.ukCup}
-                  </td>
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {row.usCup}
-                  </td>
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {row.euCup}
-                  </td>
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {row.frCup}
-                  </td>
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {row.pakIndCup}
-                  </td>
-                  <td className="border border-yellow-300 px-4 py-2 text-center">
-                    {row.ausCup}
-                  </td>
+        <div className="relative">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse shadow-lg">
+              <thead>
+                <tr className="bg-yellow-500 text-white">
+                  <th className="border border-yellow-300 px-4 py-3">
+                    Bust-Band Diff {unit === "inches" ? "(inches)" : "(cm)"}
+                  </th>
+                  <th className="border border-yellow-300 px-4 py-3">UK Cup</th>
+                  <th className="border border-yellow-300 px-4 py-3">US Cup</th>
+                  <th className="border border-yellow-300 px-4 py-3">EU Cup</th>
+                  <th className="border border-yellow-300 px-4 py-3">FR Cup</th>
+                  <th className="border border-yellow-300 px-4 py-3">
+                    Pak/Ind Cup
+                  </th>
+                  <th className="border border-yellow-300 px-4 py-3">
+                    AUS Cup (Dress)
+                  </th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {cupSizeData.map((row, index) => {
+                  // Convert the difference if it's a number
+                  let diffValue = row.bustBandDiff;
+                  if (unit === "cm" && diffValue !== "<1") {
+                    diffValue = String(
+                      Math.round(parseFloat(diffValue) * 2.54)
+                    );
+                  } else if (unit === "cm" && diffValue === "<1") {
+                    diffValue = "<2.5";
+                  }
+
+                  return (
+                    <tr
+                      key={index}
+                      className={index % 2 === 0 ? "bg-yellow-50" : "bg-white"}
+                    >
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {diffValue}
+                      </td>
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {row.ukCup}
+                      </td>
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {row.usCup}
+                      </td>
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {row.euCup}
+                      </td>
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {row.frCup}
+                      </td>
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {row.pakIndCup}
+                      </td>
+                      <td className="border border-yellow-300 px-4 py-2 text-center">
+                        {row.ausCup}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {/* Size Chart Note */}
