@@ -37,7 +37,11 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
   // Get size for specific region
   const getSizeForRegion = (
     region: string,
-    baseSize: { bandSize: number; cupSize: string; bustBandDifference?: number } | null
+    baseSize: {
+      bandSize: number;
+      cupSize: string;
+      bustBandDifference?: number;
+    } | null
   ): string | null => {
     if (!baseSize) return null;
 
@@ -51,47 +55,63 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
     // Calculate the adjusted band size for the region
     const adjustedBand = bandSize + regionData.bandAdjustment;
-    
+
     // Get the correct cup size for this region based on the bust-band difference
     let adjustedCup = "";
-    
+
     // If we have the bust-band difference, use it to get the cup size directly from the table
     if (bustBandDifference !== undefined) {
       const differenceKey = bustBandDifference.toString();
-      
+
       // Look up the cup size for this region based on the difference
       if (region === "EU" || region === "FR") {
         // For EU and FR, get cup size from their respective tables
-        adjustedCup = braSizeData.cupSizes[region.toLowerCase()][differenceKey] || "";
-      } else if (region === "UK" || region === "Pak/Ind" || region === "AU") {
-        // For UK, Pak/Ind, and AU, get cup size from their respective tables
-        const regionKey = region === "Pak/Ind" ? "pakind" : region.toLowerCase();
-        adjustedCup = braSizeData.cupSizes[regionKey][differenceKey] || "";
+        adjustedCup =
+          braSizeData.cupSizes[region.toLowerCase()]?.[differenceKey] || "";
+      } else if (region === "UK") {
+        // For UK, get cup size from its table
+        adjustedCup = braSizeData.cupSizes.uk?.[differenceKey] || "";
+      } else if (region === "Pak/Ind") {
+        // For Pak/Ind, get cup size from its table
+        adjustedCup = braSizeData.cupSizes.pakind?.[differenceKey] || "";
+      } else if (region === "AU") {
+        // For AU, get cup size from its table
+        adjustedCup = braSizeData.cupSizes.aus?.[differenceKey] || "";
       } else {
         // Default to US cup size
         adjustedCup = braSizeData.cupSizes.us[differenceKey] || "";
       }
     }
-    
+
     // If we couldn't get the cup size from the difference, fall back to the mapping
     if (!adjustedCup && baseSize.cupSize) {
-      adjustedCup = regionData.cupMapping[baseSize.cupSize as keyof typeof regionData.cupMapping] || baseSize.cupSize;
+      adjustedCup =
+        regionData.cupMapping[
+          baseSize.cupSize as keyof typeof regionData.cupMapping
+        ] || baseSize.cupSize;
     }
 
-    // For EU band sizes, convert from inches to EU sizing
-    if (region === "EU") {
-      // EU band size is typically inches * 2 + 4
-      const euBandSize = bandSize * 2 + 4;
-      return `${String(euBandSize)}${adjustedCup}`;
-    }
-    
-    // For FR band sizes, they use a different conversion formula
-    if (region === "FR") {
-      // FR band size is typically (inches * 2) + 15
-      // Since adjustedBand already has +15 from regionData.bandAdjustment, we need to subtract it first
-      const originalBand = bandSize; // Original band size without adjustment
-      const frBandSize = (originalBand * 2) + 15; // Apply the FR formula
-      return `${String(frBandSize)}${adjustedCup}`;
+    // Use the band size conversion table from the JSON file
+    const bandSizeStr = String(bandSize);
+    const bandSizeData = braSizeData.bandSizes.inches[bandSizeStr];
+
+    if (bandSizeData) {
+      if (region === "EU") {
+        return `${bandSizeData.eu}${adjustedCup}`;
+      }
+
+      if (region === "FR") {
+        return `${bandSizeData.fr}${adjustedCup}`;
+      }
+
+      if (region === "Pak/Ind") {
+        return `${bandSizeData.pakInd}${adjustedCup}`;
+      }
+
+      if (region === "AU") {
+        // For AU, we'll use the usUk value since that's what's in the table
+        return `${bandSizeData.usUk}${adjustedCup}`;
+      }
     }
 
     return `${String(adjustedBand)}${adjustedCup}`;
@@ -187,16 +207,27 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
               <div className="text-5xl font-bold text-center my-6 animate-fadeIn animate-delay-300 relative">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400">
-                  {activeRegion === "US"
+                  {activeRegion === "AU"
+                    ? `${
+                        braSizeData.bandSizes.inches[
+                          recommendedSize.bandSize.toString()
+                        ]?.aus || ""
+                      }${recommendedSize.cupSize}`
+                    : activeRegion === "US"
                     ? `${recommendedSize.bandSize}${recommendedSize.cupSize}`
                     : getSizeForRegion(activeRegion, recommendedSize)}
                 </span>
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-full"></div>
               </div>
               <p className="text-center text-sm font-medium text-gray-600 mb-6 animate-fadeIn animate-delay-400">
-                {activeRegion} Size
+                {activeRegion === "AU"
+                  ? "AUS Dress Size"
+                  : `${activeRegion} Size`}
                 {activeRegion === "AU" && (
-                  <span className="block text-xs mt-1">(Dress Size: {braSizeData.bandSizes.inches[recommendedSize.bandSize.toString()]?.aus || ""})</span>
+                  <span className="block text-xs mt-1">
+                    (bra size: {getSizeForRegion(activeRegion, recommendedSize)}
+                    )
+                  </span>
                 )}
               </p>
 

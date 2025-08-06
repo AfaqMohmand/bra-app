@@ -43,7 +43,8 @@ const BraSizeCalculatorInteractive: React.FC<
         bandSize: 0,
         cupSize: "",
         bustBandDifference: 0,
-        errorMessage: "Please enter valid numeric values for both measurements.",
+        errorMessage:
+          "Please enter valid numeric values for both measurements.",
       };
     }
 
@@ -112,6 +113,19 @@ const BraSizeCalculatorInteractive: React.FC<
           errorMessage: "Band too large to calculate size.",
         };
       }
+    }
+
+    // Check if the band size exists in our data tables
+    const bandSizeStr = bandSize.toString();
+    if (!braSizeData.bandSizes.inches[bandSizeStr]) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        bustBandDifference: 0,
+        errorMessage: `Band size ${bandSizeStr} is not available in our size charts. Please try a different measurement.`,
+        unit,
+      };
     }
 
     // Get cup size based on the difference using the table data
