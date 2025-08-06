@@ -183,7 +183,7 @@ export default function DetailBraSizeChart() {
 
   return (
     <div className="pt-8 px-4 md:px-8">
-      <h2 className="text-4xl font-bold text-left sm:text-center mb-6 text-gray-800 font-rubik">
+      <h2 className="text-[23px] sm:text-4xl font-bold text-center mb-6 text-gray-800 font-rubik">
         <span className="inline-block">BRA SIZE</span>{" "}
         <span className="text-yellow-500 ">CHART</span>
       </h2>
@@ -192,7 +192,7 @@ export default function DetailBraSizeChart() {
       <div className="flex justify-center mb-8">
         <div className="bg-yellow-100 rounded-full p-1 inline-flex shadow-md">
           <div
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
               unit === "inches"
                 ? "bg-yellow-500 text-white shadow-sm"
                 : "text-gray-600 "
@@ -204,7 +204,7 @@ export default function DetailBraSizeChart() {
             </span>
           </div>
           <div
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
               unit === "cm"
                 ? "bg-yellow-500 text-white shadow-sm "
                 : "text-gray-600 "
@@ -220,7 +220,7 @@ export default function DetailBraSizeChart() {
 
       {/* Band Size Conversion Table */}
       <div className="mb-12">
-        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-[#000] py-2 rounded-lg bg-white">
+        <h3 className="text-xl font-bold mb-4 text-center text-[#000] py-2 rounded-lg bg-white">
           {unit === "inches" ? "(Inches)" : "(Centimeters)"} Bra Size Conversion
           Tables
         </h3>
@@ -242,7 +242,7 @@ export default function DetailBraSizeChart() {
                     Pak/Ind Band
                   </th>
                   <th className="border border-yellow-300 px-4 py-3">
-                    AUS Band (Dress Size)
+                    AU Band (Dress Size)
                   </th>
                 </tr>
               </thead>
@@ -285,7 +285,7 @@ export default function DetailBraSizeChart() {
 
       {/* Cup Size Conversion Table */}
       <div className="mb-12">
-        <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-black py-2 rounded-lg bg-white">
+        <h3 className="text-xl font-bold mb-4 text-center text-black py-2 rounded-lg bg-white">
           Cup Size Conversion Table
         </h3>
         <div className="relative">
@@ -304,7 +304,7 @@ export default function DetailBraSizeChart() {
                     Pak/Ind Cup
                   </th>
                   <th className="border border-yellow-300 px-4 py-3">
-                    AUS Cup (Dress)
+                    AU Cup (Dress)
                   </th>
                 </tr>
               </thead>

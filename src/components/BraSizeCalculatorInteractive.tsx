@@ -96,7 +96,8 @@ const BraSizeCalculatorInteractive: React.FC<
     // Round band measurement to the next even number if odd
     // 27 → 28, 29 → 30, 31 → 32, 33 → 34, 35 → 36, etc.
     // For odd numbers, we round up to the next even number
-    const bandSize = bandInches % 2 === 0 ? bandInches : Math.ceil(bandInches / 2) * 2;
+    const bandSize =
+      bandInches % 2 === 0 ? bandInches : Math.ceil(bandInches / 2) * 2;
 
     // Additional validation for cm measurements
     if (unit === "centimeters") {
@@ -233,7 +234,7 @@ const BraSizeCalculatorInteractive: React.FC<
             style={{ transform: "none" }}
           >
             <div
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
+              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium cursor-pointer ${
                 unit === "inches"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
                   : "bg-white text-gray-700 "
@@ -245,7 +246,7 @@ const BraSizeCalculatorInteractive: React.FC<
               </span>
             </div>
             <div
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
+              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium cursor-pointer ${
                 unit === "centimeters"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
                   : "bg-white text-gray-700"
@@ -271,7 +272,7 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Bust Measurement",
                     content: (
                       <div>
-                        <p className="text-sm mb-3">
+                        <p className="text-[20px] mb-3">
                           The bust measurement is taken around the fullest part
                           of your bust.
                         </p>

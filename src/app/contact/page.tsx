@@ -76,181 +76,179 @@ export default function ContactPage() {
       <div className="py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between">
-          {/* Left side - Contact heading and text */}
-          <div className="md:w-1/3 mb-8 md:mb-0 pr-0 md:pr-8">
-            <h1 className="text-4xl font-bold mb-2 text-gray-800">Contact</h1>
-            <h4 className="text-2xl font-bold mb-6 text-gray-800">
-              Get in Touch
-            </h4>
-            <p className="text-gray-700 mb-4">
-              Have questions, feedback, or need help using our bra size
-              calculator? We’d love to hear from you. Simply fill out the form
-              below or email us directly. We’re here to help. Form
-            </p>
-          </div>
+            {/* Left side - Contact heading and text */}
+            <div className="md:w-1/3 mb-8 md:mb-0 pr-0 md:pr-8">
+              <h1 className="text-4xl font-bold mb-2 text-gray-800">Contact</h1>
 
-          {/* Right side - Contact form */}
-          <div className="md:w-2/3">
-            <div className="bg-white p-8 rounded-lg shadow-sm">
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      Your Name*
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                      placeholder="Your Name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      Your Email*
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                      placeholder="Your Email"
-                      required
-                    />
-                  </div>
-                </div>
+              <p className="text-gray-700 mb-4">
+                Have questions, feedback, or need help using our bra size
+                calculator? We’d love to hear from you. Simply fill out the form
+                below or email us directly. We’re here to help
+              </p>
+            </div>
 
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Subject*
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md appearance-none"
-                      required
-                      defaultValue=""
-                    >
-                      <option value="" disabled>
-                        Choose a subject...
-                      </option>
-                      <option value="question">Question</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="support">Support</option>
-                      <option value="other">Other</option>
-                    </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                      <svg
-                        className="fill-current h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
+            {/* Right side - Contact form */}
+            <div className="md:w-2/3">
+              <div className="bg-white p-8 rounded-lg shadow-sm">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700 mb-1"
                       >
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                      </svg>
+                        Your Name*
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                        placeholder="Your Name"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Your Email*
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                        placeholder="Your Email"
+                        required
+                      />
                     </div>
                   </div>
-                </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Message*
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                    placeholder="Write a message"
-                    required
-                  ></textarea>
-                </div>
-
-                <div className="flex justify-start items-center">
                   <div>
-                    <input
-                      type="checkbox"
-                      id="terms"
-                      name="terms"
-                      checked={formData.terms}
-                      onChange={handleChange}
-                      className="h-4 w-4 text-yellow-500 border-gray-300 rounded mt-2"
-                      required
-                    />
-                  </div>
-                  <div className="text-right">
                     <label
-                      htmlFor="terms"
-                      className="block text-sm text-gray-700 ml-2"
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-gray-700 mb-1"
                     >
-                      I accept:{" "}
-                      <a
-                        href="/terms"
-                        className="text-yellow-500 hover:underline"
-                      >
-                        Terms & Conditions
-                      </a>{" "}
-                      and{" "}
-                      <a
-                        href="/privacy"
-                        className="text-yellow-500 hover:underline"
-                      >
-                        Legal & Privacy
-                      </a>
+                      Subject*
                     </label>
+                    <div className="relative">
+                      <select
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md appearance-none"
+                        required
+                        defaultValue=""
+                      >
+                        <option value="" disabled>
+                          Choose a subject...
+                        </option>
+                        <option value="question">Question</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="support">Support</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg
+                          className="fill-current h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                {submitStatus.message && (
-                  <div
-                    className={`p-3 rounded ${
-                      submitStatus.success
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {submitStatus.message}
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Message*
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                      placeholder="Write a message"
+                      required
+                    ></textarea>
                   </div>
-                )}
 
-                <div className="text-right">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`px-6 py-2 bg-yellow-500 text-white font-medium rounded-md transition-colors duration-300 ${
-                      isSubmitting
-                        ? "opacity-70 cursor-not-allowed"
-                        : "hover:bg-red-600"
-                    }`}
-                  >
-                    {isSubmitting ? "Sending..." : "Send message"}
-                  </button>
-                </div>
-              </form>
+                  <div className="flex justify-start items-center">
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        checked={formData.terms}
+                        onChange={handleChange}
+                        className="h-4 w-4 text-yellow-500 border-gray-300 rounded mt-2"
+                        required
+                      />
+                    </div>
+                    <div className="text-right">
+                      <label
+                        htmlFor="terms"
+                        className="block text-sm text-gray-700 ml-2"
+                      >
+                        I accept:{" "}
+                        <a
+                          href="/terms"
+                          className="text-yellow-500 hover:underline"
+                        >
+                          Terms & Conditions
+                        </a>{" "}
+                        and{" "}
+                        <a
+                          href="/privacy"
+                          className="text-yellow-500 hover:underline"
+                        >
+                          Legal & Privacy
+                        </a>
+                      </label>
+                    </div>
+                  </div>
+
+                  {submitStatus.message && (
+                    <div
+                      className={`p-3 rounded ${
+                        submitStatus.success
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
+
+                  <div className="text-right">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`px-6 py-2 bg-yellow-500 text-white font-medium rounded-md transition-colors duration-300 ${
+                        isSubmitting
+                          ? "opacity-70 cursor-not-allowed"
+                          : "hover:bg-red-600"
+                      }`}
+                    >
+                      {isSubmitting ? "Sending..." : "Send message"}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

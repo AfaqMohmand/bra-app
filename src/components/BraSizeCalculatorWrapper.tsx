@@ -250,7 +250,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 <div className="grid grid-cols-3 gap-2 mx-auto px-2 w-[85%]">
                   <button
                     onClick={() => setActiveRegion("Pak/Ind")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "Pak/Ind"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -260,7 +260,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("US")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "US"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -270,7 +270,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("UK")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "UK"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -282,7 +282,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("EU")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "EU"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -294,7 +294,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("FR")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "FR"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -307,7 +307,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
                   <button
                     onClick={() => setActiveRegion("AU")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "AU"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"

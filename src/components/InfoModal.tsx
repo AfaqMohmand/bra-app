@@ -85,7 +85,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
     >
       {/* Modal header */}
       <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3 flex justify-between items-center relative">
-        <h3 className="text-2xl font-semibold text-white text-start flex-grow modal-title-no-margin">
+        <h3 className="text-[20px] font-medium text-white text-start flex-grow modal-title-no-margin">
           {title}
         </h3>
         <div

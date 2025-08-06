@@ -19,7 +19,7 @@ export default function NoMeasurementData() {
             />
           </svg>
         </div>
-        <p className="text-xl font-medium mb-2">Enter your measurements</p>
+        <h3 className="text-xl font-medium mb-2">Enter your measurements</h3>
         <p className="text-sm text-gray-400">
           Your recommended size will appear here
         </p>
