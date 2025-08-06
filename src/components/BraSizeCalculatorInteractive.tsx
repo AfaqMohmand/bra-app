@@ -48,8 +48,8 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
-    // Validation: Ensure bust is always greater than band
-    if (bustInches <= bandInches) {
+    // Handle cases where bust is equal to or less than band
+    if (bustInches < bandInches) {
       return {
         isInvalid: true,
         bandSize: 0,
@@ -58,8 +58,10 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
+    // When bust equals band, difference is 0, use AA cup size
+
     // Validation: Band size restrictions
-    if (bandInches <= 25) {
+    if (bandInches <= 26) {
       return {
         isInvalid: true,
         bandSize: 0,
@@ -68,7 +70,7 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
-    if (bandInches > 47) {
+    if (bandInches > 46) {
       return {
         isInvalid: true,
         bandSize: 0,
@@ -78,7 +80,8 @@ const BraSizeCalculatorInteractive: React.FC<
     }
 
     // Calculate bust-band difference for cup size
-    const difference = Math.round(bustInches - bandInches);
+    // When bust equals band, difference is 0, which corresponds to AA cup size
+    const difference = Math.max(0, Math.round(bustInches - bandInches));
 
     // Validation: Cup size restrictions
     if (difference > 16) {
@@ -268,14 +271,16 @@ const BraSizeCalculatorInteractive: React.FC<
                     content: (
                       <div>
                         <p className="text-sm mb-3">
-                          The bust measurement is taken around the fullest part of your bust.
+                          The bust measurement is taken around the fullest part
+                          of your bust.
                         </p>
                         <p className="text-sm mb-2">
                           For the most accurate results:
                         </p>
                         <ul className="list-disc pl-5 space-y-1">
                           <li className="text-sm">
-                            Wear a non-padded bra or no bra for the most accurate measurement
+                            Wear a non-padded bra or no bra for the most
+                            accurate measurement
                           </li>
                           <li className="text-sm">
                             Keep the tape parallel to the floor
@@ -284,7 +289,8 @@ const BraSizeCalculatorInteractive: React.FC<
                             Make sure the tape is not too tight or too loose
                           </li>
                           <li className="text-sm">
-                            Stand straight with arms at your sides while measuring
+                            Stand straight with arms at your sides while
+                            measuring
                           </li>
                         </ul>
                       </div>
@@ -336,14 +342,16 @@ const BraSizeCalculatorInteractive: React.FC<
                     content: (
                       <div>
                         <p className="text-sm mb-3">
-                          The band measurement is taken around your ribcage, just under your bust.
+                          The band measurement is taken around your ribcage,
+                          just under your bust.
                         </p>
                         <p className="text-sm mb-2">
                           For the most accurate results:
                         </p>
                         <ul className="list-disc pl-5 space-y-1">
                           <li className="text-sm">
-                            Make sure the measuring tape is snug but not too tight
+                            Make sure the measuring tape is snug but not too
+                            tight
                           </li>
                           <li className="text-sm">
                             Keep the tape parallel to the floor
@@ -352,7 +360,8 @@ const BraSizeCalculatorInteractive: React.FC<
                             Take a deep breath in and out before measuring
                           </li>
                           <li className="text-sm">
-                            Measure directly against your skin, not over clothing
+                            Measure directly against your skin, not over
+                            clothing
                           </li>
                         </ul>
                       </div>
