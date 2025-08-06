@@ -42,8 +42,8 @@ const BraSizeCalculatorInteractive: React.FC<
         isInvalid: true,
         bandSize: 0,
         cupSize: "",
-        errorMessage:
-          "Please enter valid numeric values for both measurements.",
+        bustBandDifference: 0,
+        errorMessage: "Please enter valid numeric values for both measurements.",
       };
     }
 
@@ -117,7 +117,7 @@ const BraSizeCalculatorInteractive: React.FC<
     // Get cup size based on the difference using the table data
     // Using US cup sizes as default
     const differenceKey = difference.toString();
-    const cupSize = braSizeData.cupSizes.us[differenceKey] || null;
+    const cupSize = braSizeData.cupSizes.us[differenceKey] || "";
 
     // Return invalid if no cup size is found
     if (!cupSize)
@@ -125,11 +125,17 @@ const BraSizeCalculatorInteractive: React.FC<
         isInvalid: true,
         bandSize: 0,
         cupSize: "",
+        bustBandDifference: 0,
         errorMessage: "Unable to determine cup size for your measurements.",
         unit,
       };
 
-    return { bandSize, cupSize, unit };
+    return {
+      bandSize,
+      cupSize,
+      bustBandDifference: difference,
+      unit,
+    };
   }, [bandMeasurement, bustMeasurement, unit, braSizeData]);
 
   // Memoize the effect callback to avoid infinite loops
