@@ -6,6 +6,7 @@ const Hero = () => {
   return (
     <div
       className="hero-section relative overflow-hidden w-full"
+      style={{ marginTop: "8px" }}
       // style={{ height: "auto", minHeight: "50vh" }}
     >
       {/* Noise texture background with yellow color */}
@@ -30,7 +31,10 @@ const Hero = () => {
               BRA SIZE CALCULATOR
             </h1>
 
-            <p className="hero-text leading-[18px] text-xs sm:text-sm md:text-base lg:text-lg text-gray-800 max-w-lg font-lato">
+            <p
+              className="hero-text  text-xs sm:text-sm md:text-base lg:text-lg text-gray-800 max-w-lg font-lato"
+              style={{ lineHeight: "1.2" }}
+            >
               Get your perfect fit with our accurate bra size calculator. Used
               by thousands of women worldwide for precise measurements.
             </p>
