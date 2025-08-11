@@ -25,13 +25,16 @@ const Footer = () => {
               <div className="mb-6">
                 {/* Logo */}
                 <div className="mb-4">
-                  <Image
+               <Link href="/" className="flex items-center">
+                   <Image
                     src={BlackLogo}
                     alt="Bra Size Calculator Logo"
                     width={120}
                     height={40}
                     className="h-auto"
                   />
+                </Link>
+                    
                 </div>
                 {/* Dummy Text */}
                 <p className="text-gray-600 text-sm">
@@ -102,9 +105,9 @@ const Footer = () => {
 
             {/* Column 2 - Help */}
             <div className="col-span-1 md:col-span-3">
-              <h3 className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase">
+              <p className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase">
                 COMPANY
-              </h3>
+              </p>
               <ul className="space-y-0.5 sm:space-y-2 text-xs sm:text-sm">
                 <li>
                   <Link href="/" className="text-gray-600 hover:text-gray-900">
@@ -124,9 +127,9 @@ const Footer = () => {
 
             {/* Column 2 - Orders & Returns */}
             <div className="col-span-1 md:col-span-3">
-              <h3 className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase mt-3 sm:mt-0">
+              <p className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase mt-3 sm:mt-0">
                 SUPPORT
-              </h3>
+              </p>
               <ul className="space-y-0.5 sm:space-y-2 text-xs sm:text-sm">
                 <li>
                   <Link
@@ -141,9 +144,9 @@ const Footer = () => {
 
             {/* Column 3 - Services */}
             <div className="col-span-1 md:col-span-3">
-              <h3 className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase mt-3 sm:mt-0">
+              <p className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase mt-3 sm:mt-0">
                 LEGAL
-              </h3>
+              </p>
               <ul className="space-y-0.5 sm:space-y-2 text-xs sm:text-sm">
                 <li>
                   <Link

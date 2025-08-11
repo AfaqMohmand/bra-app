@@ -323,17 +323,17 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
               <div className="flex flex-col items-center animate-fadeIn animate-delay-500 px-2 mt-4 sm:mt-6 pb-[20px] sm:pb-0">
                 <div className="grid grid-cols-2 gap-3 w-3/5">
                   <div className="border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
-                    <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
+                    <h6 className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Band Size
-                    </p>
-                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
+                    </h6>
+                    <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
                       {recommendedSize.bandSize}
-                    </p>
+                    </h6>
                   </div>
                   <div className="border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
-                    <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
+                    <h6 className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Cup Size
-                    </p>
+                    </h6>
                     <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
                       {activeRegion === "Pak/Ind" || activeRegion === "AU"
                         ? recommendedSize.bustBandDifference !== undefined
