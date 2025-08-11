@@ -85,10 +85,10 @@ const InfoModal: React.FC<InfoModalProps> = ({
     >
       {/* Modal header */}
       <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3 flex justify-between items-center relative">
-        <h3 className="text-2xl font-semibold text-white text-start flex-grow modal-title-no-margin">
+        <h3 className="text-[20px] font-medium text-white text-start flex-grow modal-title-no-margin">
           {title}
         </h3>
-        <button
+        <div
           onClick={onClose}
           className="text-white hover:text-gray-200 focus:outline-none bg-yellow-600 rounded-full p-1 flex items-center justify-center cursor-pointer"
         >
@@ -106,14 +106,18 @@ const InfoModal: React.FC<InfoModalProps> = ({
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
-        </button>
+        </div>
       </div>
 
       {/* Modal content with image first, then text */}
       <div className="p-5 sm:p-6">
         {/* Image section */}
         <div className="w-full flex justify-center items-center mb-5">
-          <div className="relative w-full h-40 sm:h-44 flex justify-center">
+          <div className="relative w-full h-40 sm:h-44 flex justify-center items-center">
+            {/* Loading spinner */}
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="w-8 h-8 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+            </div>
             <Image
               src={showBandMeasurement ? UnderBustCupJpg : OverBustCupJpg}
               alt={
@@ -122,6 +126,12 @@ const InfoModal: React.FC<InfoModalProps> = ({
               width={160}
               height={160}
               style={{ objectFit: "contain" }}
+              onLoadingComplete={(img) => {
+                // Find the parent of the image and hide the loader
+                const loaderEl =
+                  img.parentElement?.querySelector("div.absolute");
+                if (loaderEl) loaderEl.classList.add("hidden");
+              }}
             />
           </div>
         </div>

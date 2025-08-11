@@ -44,9 +44,11 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
     <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
       {/* FAQ Header */}
       <div className="text-left sm:text-center mb-6 sm:mb-8">
-        <h2 className="text-4xl font-bold mb-2 text-left sm:text-center">
-          <span className="text-gray-800">Frequently Asked </span>
-          <span className="text-yellow-500">Questions</span>
+        <h2 className="text-[23px] sm:text-4xl font-bold mb-2 text-left sm:text-center text-gray-800 inline">
+          Frequently Asked{" "}
+          <h2 className="text-[23px] sm:text-4xl font-bold mb-2 text-left sm:text-center text-yellow-500 inline">
+            Questions
+          </h2>
         </h2>
       </div>
 

@@ -37,11 +37,15 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
   // Get size for specific region
   const getSizeForRegion = (
     region: string,
-    baseSize: { bandSize: number; cupSize: string } | null
+    baseSize: {
+      bandSize: number;
+      cupSize: string;
+      bustBandDifference?: number;
+    } | null
   ): string | null => {
     if (!baseSize) return null;
 
-    const { bandSize, cupSize } = baseSize;
+    const { bandSize, bustBandDifference } = baseSize;
     const regionData =
       braSizeData.regionConversions[
         region as keyof typeof braSizeData.regionConversions
@@ -49,10 +53,63 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
     if (!regionData) return null;
 
+    // Calculate the adjusted band size for the region
     const adjustedBand = bandSize + regionData.bandAdjustment;
-    const adjustedCup =
-      regionData.cupMapping[cupSize as keyof typeof regionData.cupMapping] ||
-      cupSize;
+
+    // Get the correct cup size for this region based on the bust-band difference
+    let adjustedCup = "";
+
+    // If we have the bust-band difference, use it to get the cup size directly from the table
+    if (bustBandDifference !== undefined) {
+      const differenceKey = bustBandDifference.toString();
+
+      // Look up the cup size for this region based on the difference
+      if (region === "EU" || region === "FR") {
+        // For EU and FR, get cup size from their respective tables
+        adjustedCup =
+          braSizeData.cupSizes[region.toLowerCase()]?.[differenceKey] || "";
+      } else if (region === "UK") {
+        // For UK, get cup size from its table
+        adjustedCup = braSizeData.cupSizes.uk?.[differenceKey] || "";
+      } else if (region === "Pak/Ind") {
+        // For Pak/Ind, get cup size from its table
+        adjustedCup = braSizeData.cupSizes.pakInd?.[differenceKey] || "";
+      } else {
+        // Default to US cup size
+        adjustedCup = braSizeData.cupSizes.us[differenceKey] || "";
+      }
+    }
+
+    // If we couldn't get the cup size from the difference, fall back to the mapping
+    if (!adjustedCup && baseSize.cupSize) {
+      adjustedCup =
+        regionData.cupMapping[
+          baseSize.cupSize as keyof typeof regionData.cupMapping
+        ] || baseSize.cupSize;
+    }
+
+    // Use the band size conversion table from the JSON file
+    const bandSizeStr = String(bandSize);
+    const bandSizeData = braSizeData.bandSizes.inches[bandSizeStr];
+
+    if (bandSizeData) {
+      if (region === "EU") {
+        return `${bandSizeData.eu}${adjustedCup}`;
+      }
+
+      if (region === "FR") {
+        return `${bandSizeData.fr}${adjustedCup}`;
+      }
+
+      if (region === "Pak/Ind") {
+        return `${bandSizeData.pakInd}${adjustedCup}`;
+      }
+
+      if (region === "AU") {
+        // For AU, we'll use the usUk value since that's what's in the table
+        return `${bandSizeData.usUk}${adjustedCup}`;
+      }
+    }
 
     return `${String(adjustedBand)}${adjustedCup}`;
   };
@@ -147,14 +204,34 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
 
               <div className="text-5xl font-bold text-center my-6 animate-fadeIn animate-delay-300 relative">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400">
-                  {activeRegion === "US"
+                  {activeRegion === "AU"
+                    ? `${
+                        braSizeData.bandSizes.inches[
+                          recommendedSize.bandSize.toString()
+                        ]?.aus || ""
+                      }${
+                        recommendedSize.bustBandDifference !== undefined
+                          ? braSizeData.cupSizes.aus?.[
+                              recommendedSize.bustBandDifference.toString()
+                            ] || recommendedSize.cupSize
+                          : recommendedSize.cupSize
+                      }`
+                    : activeRegion === "US"
                     ? `${recommendedSize.bandSize}${recommendedSize.cupSize}`
                     : getSizeForRegion(activeRegion, recommendedSize)}
                 </span>
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-full"></div>
               </div>
               <p className="text-center text-sm font-medium text-gray-600 mb-6 animate-fadeIn animate-delay-400">
-                {activeRegion} Size
+                {activeRegion === "AU"
+                  ? "AU Dress Size"
+                  : `${activeRegion} Size`}
+                {activeRegion === "AU" && (
+                  <span className="block text-xs mt-1">
+                    (bra size: {getSizeForRegion(activeRegion, recommendedSize)}
+                    )
+                  </span>
+                )}
               </p>
 
               {/* Only display band size in centimeters */}
@@ -173,7 +250,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                 <div className="grid grid-cols-3 gap-2 mx-auto px-2 w-[85%]">
                   <button
                     onClick={() => setActiveRegion("Pak/Ind")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "Pak/Ind"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -183,7 +260,7 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("US")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "US"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
@@ -193,63 +270,52 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                   </button>
                   <button
                     onClick={() => setActiveRegion("UK")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "UK"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    UK
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      UK
+                    </span>
                   </button>
                   <button
                     onClick={() => setActiveRegion("EU")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "EU"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    EU
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      EU
+                    </span>
                   </button>
                   <button
                     onClick={() => setActiveRegion("FR")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "FR"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    FR
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      FR
+                    </span>
                   </button>
-                  <button
-                    onClick={() => setActiveRegion("IT")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
-                      activeRegion === "IT"
-                        ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
-                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
-                    }`}
-                  >
-                    IT
-                  </button>
+
                   <button
                     onClick={() => setActiveRegion("AU")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
+                    className={`py-2 px-4 rounded-lg transition-all cursor-pointer ${
                       activeRegion === "AU"
                         ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
                         : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
                     }`}
                   >
-                    AU
-                  </button>
-                  <button
-                    onClick={() => setActiveRegion("JP")}
-                    className={`py-2 px-4 rounded-lg transition-all ${
-                      activeRegion === "JP"
-                        ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-md"
-                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-yellow-200 hover:shadow-sm"
-                    }`}
-                  >
-                    JP
+                    <span className="inline-block transition-transform duration-300 hover:-translate-y-1">
+                      AU
+                    </span>
                   </button>
                 </div>
               </div>
@@ -268,9 +334,17 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                     <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Cup Size
                     </p>
-                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
-                      {recommendedSize.cupSize}
-                    </p>
+                    <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
+                      {activeRegion === "Pak/Ind" || activeRegion === "AU"
+                        ? recommendedSize.bustBandDifference !== undefined
+                          ? braSizeData.cupSizes[
+                              activeRegion === "Pak/Ind" ? "pakInd" : "aus"
+                            ]?.[
+                              recommendedSize.bustBandDifference.toString()
+                            ] || recommendedSize.cupSize
+                          : recommendedSize.cupSize
+                        : recommendedSize.cupSize}
+                    </h6>
                   </div>
                 </div>
               </div>

@@ -16,9 +16,12 @@ const Footer = () => {
       >
         <div className="container mx-auto px-4">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-6 sm:mb-8 md:mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-x-4 gap-y-4 sm:gap-8 md:gap-8 mb-6 sm:mb-8 md:mb-10">
             {/* Column 1 - Logo and Text */}
-            <div className="col-span-1">
+            <div
+              className="col-span-1 md:col-span-3"
+              style={{ maxWidth: "280px" }}
+            >
               <div className="mb-6">
                 {/* Logo */}
                 <div className="mb-4">
@@ -98,11 +101,11 @@ const Footer = () => {
             </div>
 
             {/* Column 2 - Help */}
-            <div className="col-span-1">
-              <p className="text-[10.668px] font-bold mb-4 uppercase">
+            <div className="col-span-1 md:col-span-3">
+              <h3 className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase">
                 COMPANY
-              </p>
-              <ul className="space-y-2 text-sm">
+              </h3>
+              <ul className="space-y-0.5 sm:space-y-2 text-xs sm:text-sm">
                 <li>
                   <Link href="/" className="text-gray-600 hover:text-gray-900">
                     Home
@@ -120,11 +123,11 @@ const Footer = () => {
             </div>
 
             {/* Column 2 - Orders & Returns */}
-            <div className="col-span-1">
-              <p className="text-[10.668px] font-bold mb-4 uppercase">
+            <div className="col-span-1 md:col-span-3">
+              <h3 className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase mt-3 sm:mt-0">
                 SUPPORT
-              </p>
-              <ul className="space-y-2 text-sm">
+              </h3>
+              <ul className="space-y-0.5 sm:space-y-2 text-xs sm:text-sm">
                 <li>
                   <Link
                     href="/contact"
@@ -137,11 +140,11 @@ const Footer = () => {
             </div>
 
             {/* Column 3 - Services */}
-            <div className="col-span-1">
-              <p className="text-[10.668px] font-bold mb-4 uppercase">
-                Legal
-              </p>
-              <ul className="space-y-2 text-sm">
+            <div className="col-span-1 md:col-span-3">
+              <h3 className="text-xs sm:text-[10.668px] font-bold mb-1 sm:mb-4 uppercase mt-3 sm:mt-0">
+                LEGAL
+              </h3>
+              <ul className="space-y-0.5 sm:space-y-2 text-xs sm:text-sm">
                 <li>
                   <Link
                     href="/privacy"

@@ -42,13 +42,14 @@ const BraSizeCalculatorInteractive: React.FC<
         isInvalid: true,
         bandSize: 0,
         cupSize: "",
+        bustBandDifference: 0,
         errorMessage:
           "Please enter valid numeric values for both measurements.",
       };
     }
 
-    // Validation: Ensure bust is always greater than band
-    if (bustInches <= bandInches) {
+    // Handle cases where bust is equal to or less than band
+    if (bustInches < bandInches) {
       return {
         isInvalid: true,
         bandSize: 0,
@@ -57,8 +58,10 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
+    // When bust equals band, difference is 0, use AA cup size
+
     // Validation: Band size restrictions
-    if (bandInches <= 25) {
+    if (bandInches <= 26) {
       return {
         isInvalid: true,
         bandSize: 0,
@@ -67,7 +70,7 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
-    if (bandInches > 47) {
+    if (bandInches > 46) {
       return {
         isInvalid: true,
         bandSize: 0,
@@ -77,7 +80,8 @@ const BraSizeCalculatorInteractive: React.FC<
     }
 
     // Calculate bust-band difference for cup size
-    const difference = Math.round(bustInches - bandInches);
+    // When bust equals band, difference is 0, which corresponds to AA cup size
+    const difference = Math.max(0, Math.round(bustInches - bandInches));
 
     // Validation: Cup size restrictions
     if (difference > 16) {
@@ -89,9 +93,11 @@ const BraSizeCalculatorInteractive: React.FC<
       };
     }
 
-    // Round band measurement to the nearest even number as per the table
-    // 27 → 28, 29 → 30, 31 → 32, etc.
-    const bandSize = Math.round(bandInches / 2) * 2;
+    // Round band measurement to the next even number if odd
+    // 27 → 28, 29 → 30, 31 → 32, 33 → 34, 35 → 36, etc.
+    // For odd numbers, we round up to the next even number
+    const bandSize =
+      bandInches % 2 === 0 ? bandInches : Math.ceil(bandInches / 2) * 2;
 
     // Additional validation for cm measurements
     if (unit === "centimeters") {
@@ -114,10 +120,23 @@ const BraSizeCalculatorInteractive: React.FC<
       }
     }
 
+    // Check if the band size exists in our data tables
+    const bandSizeStr = bandSize.toString();
+    if (!braSizeData.bandSizes.inches[bandSizeStr]) {
+      return {
+        isInvalid: true,
+        bandSize: 0,
+        cupSize: "",
+        bustBandDifference: 0,
+        errorMessage: `Band size ${bandSizeStr} is not available in our size charts. Please try a different measurement.`,
+        unit,
+      };
+    }
+
     // Get cup size based on the difference using the table data
     // Using US cup sizes as default
     const differenceKey = difference.toString();
-    const cupSize = braSizeData.cupSizes.us[differenceKey] || null;
+    const cupSize = braSizeData.cupSizes.us[differenceKey] || "";
 
     // Return invalid if no cup size is found
     if (!cupSize)
@@ -125,11 +144,17 @@ const BraSizeCalculatorInteractive: React.FC<
         isInvalid: true,
         bandSize: 0,
         cupSize: "",
+        bustBandDifference: 0,
         errorMessage: "Unable to determine cup size for your measurements.",
         unit,
       };
 
-    return { bandSize, cupSize, unit };
+    return {
+      bandSize,
+      cupSize,
+      bustBandDifference: difference,
+      unit,
+    };
   }, [bandMeasurement, bustMeasurement, unit, braSizeData]);
 
   // Memoize the effect callback to avoid infinite loops
@@ -209,7 +234,7 @@ const BraSizeCalculatorInteractive: React.FC<
             style={{ transform: "none" }}
           >
             <div
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
+              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium cursor-pointer ${
                 unit === "inches"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
                   : "bg-white text-gray-700 "
@@ -221,7 +246,7 @@ const BraSizeCalculatorInteractive: React.FC<
               </span>
             </div>
             <div
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium ${
+              className={`px-4 sm:px-6 py-2 sm:py-2.5 font-medium cursor-pointer ${
                 unit === "centimeters"
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-white"
                   : "bg-white text-gray-700"
@@ -247,25 +272,25 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Bust Measurement",
                     content: (
                       <div>
-                        <p className="text-base font-medium mb-4">
+                        <p className="text-[20px] mb-3">
                           The bust measurement is taken around the fullest part
                           of your bust.
                         </p>
-                        <p className="text-base font-medium mb-3">
+                        <p className="text-sm mb-2">
                           For the most accurate results:
                         </p>
-                        <ul className="list-disc pl-6 space-y-3">
-                          <li className="text-base">
+                        <ul className="list-disc pl-5 space-y-1">
+                          <li className="text-sm">
                             Wear a non-padded bra or no bra for the most
                             accurate measurement
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Keep the tape parallel to the floor
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Make sure the tape is not too tight or too loose
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Stand straight with arms at your sides while
                             measuring
                           </li>
@@ -318,25 +343,25 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Band Measurement",
                     content: (
                       <div>
-                        <p className="text-base font-medium mb-4">
+                        <p className="text-sm mb-3">
                           The band measurement is taken around your ribcage,
                           just under your bust.
                         </p>
-                        <p className="text-base font-medium mb-3">
+                        <p className="text-sm mb-2">
                           For the most accurate results:
                         </p>
-                        <ul className="list-disc pl-6 space-y-3">
-                          <li className="text-base">
+                        <ul className="list-disc pl-5 space-y-1">
+                          <li className="text-sm">
                             Make sure the measuring tape is snug but not too
                             tight
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Keep the tape parallel to the floor
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Take a deep breath in and out before measuring
                           </li>
-                          <li className="text-base">
+                          <li className="text-sm">
                             Measure directly against your skin, not over
                             clothing
                           </li>

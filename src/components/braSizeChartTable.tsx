@@ -23,9 +23,9 @@ export default function BraSizeChartTable() {
         </div>
       </div>
 
-      <h3 className="text-xl font-rubik font-semibold text-center mb-2 animate-fadeIn animate-delay-100">
+      <h2 className="text-xl font-rubik font-semibold text-center mb-2 animate-fadeIn animate-delay-100">
         Bra Size Chart
-      </h3>
+      </h2>
       <p className="text-center text-sm text-gray-500 mb-6 animate-fadeIn animate-delay-200">
         Find your perfect fit with our comprehensive size chart
       </p>
