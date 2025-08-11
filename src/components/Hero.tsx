@@ -18,7 +18,7 @@ const Hero = () => {
           backgroundSize: "200px",
           backgroundColor: "var(--color-yellow)",
           mixBlendMode: "multiply",
-          marginTop: "5px",
+          
         }}
       ></div>
 
@@ -47,7 +47,7 @@ const Hero = () => {
               <Image
                 src={HeroImage}
                 alt="Hero Image"
-                className="w-full h-auto object-cover mt-[5px]"
+                className="w-full h-auto object-cover"
 
                 priority
                 // sizes="(max-width: 768px) 100vw, 50vw"
