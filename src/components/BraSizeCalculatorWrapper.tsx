@@ -260,17 +260,17 @@ const BraSizeCalculatorWrapper: React.FC<BraSizeCalculatorWrapperProps> = ({
                     <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Band Size
                     </p>
-                    <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
+                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
                       {recommendedSize.bandSize}
-                    </h6>
+                    </p>
                   </div>
                   <div className="border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all bg-white text-center">
                     <p className="text-sm text-gray-500 mt-2 mb-1 font-medium">
                       Cup Size
                     </p>
-                    <h6 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
+                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-yellow-400 mb-2">
                       {recommendedSize.cupSize}
-                    </h6>
+                    </p>
                   </div>
                 </div>
               </div>

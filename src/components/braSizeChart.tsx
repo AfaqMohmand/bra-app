@@ -217,8 +217,7 @@ export default function DetailBraSizeChart() {
       {/* Band Size Conversion Table */}
       <div className="mb-12 overflow-x-auto">
         <h3 className="text-xl font-bold mb-4 text-left sm:text-center text-[#000] py-2 rounded-lg">
-          {unit === "inches" ? "(Inches)" : "(Centimeters)"} Bra Size Conversion
-          Tables
+         Bra Band size chart in {unit === "inches" ? "Inches" : "Centimeters"} 
         </h3>
         <table className="w-full border-collapse shadow-lg">
           <thead>

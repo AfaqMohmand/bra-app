@@ -17,6 +17,7 @@ const Hero = () => {
           backgroundSize: "200px",
           backgroundColor: "var(--color-yellow)",
           mixBlendMode: "multiply",
+          marginTop: "5px",
         }}
       ></div>
 
@@ -26,7 +27,7 @@ const Hero = () => {
         <div className="flex flex-row items-center h-full">
           {/* Left side - Text content */}
           <div className="w-full md:w-1/2 pt-3 md:mb-0 md:pr-4 lg:pr-8">
-            <h1 className="hero-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">
+            <h1 className="hero-heading text-[16.5px] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">
               BRA SIZE CALCULATOR
             </h1>
 
@@ -42,7 +43,8 @@ const Hero = () => {
               <Image
                 src={HeroImage}
                 alt="Hero Image"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover mt-[5px]"
+
                 priority
                 // sizes="(max-width: 768px) 100vw, 50vw"
                 // width={500}
