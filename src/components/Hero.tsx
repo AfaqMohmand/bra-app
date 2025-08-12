@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <div
       className="hero-section relative overflow-hidden w-full"
-      style={{ marginTop: "8px" }}
+      
       // style={{ height: "auto", minHeight: "50vh" }}
     >
       {/* Noise texture background with yellow color */}

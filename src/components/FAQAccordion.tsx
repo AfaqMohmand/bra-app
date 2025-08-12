@@ -63,7 +63,7 @@ const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
               className="flex justify-between items-center w-full text-left px-6 py-4 cursor-pointer"
               onClick={() => toggleAccordion(index)}
             >
-              <h3 className="font-medium text-base text-gray-800">{faq.question}</h3>
+              <h3 className="font-medium text-base text-gray-800" style={{marginBottom:'unset !important'}}>{faq.question}</h3>
               <span className="cursor-pointer">
                 {activeIndex === index ? (
                   <svg
