@@ -95,6 +95,12 @@ export default function NavbarLinks({
               >
                 About
               </Link>
+                            <Link
+                href="/blog"
+                className="px-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"
+              >
+                Blog
+              </Link>
               <Link
                 href="/contact"
                 className="pl-4 py-2 text-black hover:text-yellow-400 font-medium transition-colors duration-300 font-poppins"

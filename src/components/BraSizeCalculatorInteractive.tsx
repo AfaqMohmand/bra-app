@@ -272,7 +272,7 @@ const BraSizeCalculatorInteractive: React.FC<
                     title: "Bust Measurement",
                     content: (
                       <div>
-                        <p className="text-[20px] mb-3">
+                        <p className="text-sm mb-3">
                           The bust measurement is taken around the fullest part
                           of your bust.
                         </p>

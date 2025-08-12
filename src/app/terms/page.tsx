@@ -17,7 +17,7 @@ const Terms = () => {
   return (
     <div className="relative min-h-screen">
       <div className="relative z-10 container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 p-4 rounded-md">
+        <h1 className="text-4xl font-bold mb-8 py-4 rounded-md">
           Terms and Conditions
         </h1>
 

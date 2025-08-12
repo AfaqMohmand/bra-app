@@ -11,7 +11,7 @@ const Hero = () => {
     >
       {/* Noise texture background with yellow color */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 mt-[8px] md:mt-0"
         style={{
           // backgroundImage: `url(${ZigZagTwo.src})`,
           backgroundRepeat: "repeat",
@@ -27,8 +27,8 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-0 relative z-10 h-full">
         <div className="flex flex-row items-center h-full">
           {/* Left side - Text content */}
-          <div className="w-full md:w-1/2  md:mb-0 md:pr-4 lg:pr-8">
-            <h1 className="hero-heading text-[15px] md:text-4xl pb-1 lg:text-5xl xl:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">
+          <div className="w-full md:w-1/2  md:mb-0 md:pr-4 lg:pr-8 py-[33px]">
+            <h1 className="hero-heading text-[20px] md:text-4xl pb-1 lg:text-5xl xl:text-6xl mb-0 sm:mb-1 text-black tracking-tight font-poppins">
               BRA SIZE CALCULATOR
             </h1>
 
