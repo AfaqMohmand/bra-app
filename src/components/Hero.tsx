@@ -1,10 +1,11 @@
 import React from "react";
+import Image from "next/image";
 import HeroImage from "../assets/HeroImage.png";
 
 const Hero = () => {
   return (
     <div
-      className="hero-section relative overflow-hidden w-full mt-2 md:mt-0"
+      className="hero-section relative overflow-hidden w-full mt-2 md:mt-0 h-[161px] md:h-[450px] lg:h-[550px]"
       
       // style={{ height: "auto", minHeight: "50vh" }}
     >
@@ -41,7 +42,17 @@ const Hero = () => {
           </div>
 
           {/* Right side - Image */}
-          <div className="w-full md:w-1/2 h-[250px] md:h-[450px] lg:h-[550px]" style={{backgroundImage: `url(${HeroImage.src})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
+          <div className="w-full md:w-1/2 relative">
+            <div className="relative z-10 mx-auto">
+              <Image
+                src={HeroImage}
+                priority
+                alt="Hero Image"
+                className="w-full h-auto object-cover"
+                // sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
           
         </div>
       </div>
