@@ -1,11 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import HeroImage from "../assets/HeroImage.png";
 
 const Hero = () => {
   return (
     <div
-      className="hero-section relative overflow-hidden w-full"
+      className="hero-section relative overflow-hidden w-full mt-2 md:mt-0"
       
       // style={{ height: "auto", minHeight: "50vh" }}
     >
@@ -24,7 +23,7 @@ const Hero = () => {
 
       {/* Simple straight edge instead of wave */}
 
-      <div className="container mx-auto px-4 py-0 relative z-10 h-full">
+      <div className="container mx-auto px-4 py-0 relative z-10 h-full bg-[#f2c94c]">
         <div className="flex flex-row items-center h-full">
           {/* Left side - Text content */}
           <div className="w-full md:w-1/2  md:mb-0 md:pr-4 lg:pr-8 py-[33px]">
@@ -42,20 +41,8 @@ const Hero = () => {
           </div>
 
           {/* Right side - Image */}
-          <div className="w-full md:w-1/2 relative">
-            <div className="relative z-10 mx-auto">
-              <Image
-                src={HeroImage}
-                alt="Hero Image"
-                className="w-full h-auto object-cover"
-
-                priority
-                // sizes="(max-width: 768px) 100vw, 50vw"
-                // width={500}
-                // height={350}
-              />
-            </div>
-          </div>
+          <div className="w-full md:w-1/2 h-[250px] md:h-[450px] lg:h-[550px]" style={{backgroundImage: `url(${HeroImage.src})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
+          
         </div>
       </div>
     </div>
