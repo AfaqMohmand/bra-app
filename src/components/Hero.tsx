@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <div
       className="hero-section relative overflow-hidden w-full mt-2 md:mt-0 h-[161px] md:h-[450px] lg:h-[550px]"
-      
+
       // style={{ height: "auto", minHeight: "50vh" }}
     >
       {/* Noise texture background with yellow color */}
@@ -18,7 +18,6 @@ const Hero = () => {
           backgroundSize: "200px",
           backgroundColor: "var(--color-yellow)",
           mixBlendMode: "multiply",
-          
         }}
       ></div>
 
@@ -42,18 +41,17 @@ const Hero = () => {
           </div>
 
           {/* Right side - Image */}
-          <div className="w-full md:w-1/2 relative">
-            <div className="relative z-10 mx-auto">
+          <div className="w-full h-full md:w-1/2 relative">
+            <div className="relative z-10 mx-auto h-full">
               <Image
                 src={HeroImage}
                 priority
                 alt="Hero Image"
-                className="w-full h-auto object-cover"
+                className="w-full  object-cover h-full"
                 // sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
-          
         </div>
       </div>
     </div>
