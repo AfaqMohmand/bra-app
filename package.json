@@ -2,14 +2,11 @@
   "name": "calcualtor",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "node server.js",
-    "start:next": "next start",
-    "lint": "next lint",
-    "deploy:static": "npm run build"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/react-modal": "^3.16.3",
