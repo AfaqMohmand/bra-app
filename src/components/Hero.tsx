@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import HeroImage from "../assets/HeroImage.png";
+import HeroImage from "../assets/brasizecalculator.png";
 
 const Hero = () => {
   return (
@@ -46,7 +46,7 @@ const Hero = () => {
               <Image
                 src={HeroImage}
                 priority
-                alt="Hero Image"
+                alt="Bra size calculator tool for accurate band and cup measurements"
                 className="w-full  object-cover h-full"
                 // sizes="(max-width: 768px) 100vw, 50vw"
               />

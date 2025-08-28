@@ -2,14 +2,31 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Bra Size Calculator",
-  description: "Terms and conditions for using the Bra Size Calculator website",
-  keywords:
-    "terms and conditions, legal agreement, user terms, bra size calculator",
+  title: "Terms & Conditions – Bra Size Calculator",
+  description: "Review the terms and conditions of bracalculator.net to understand your rights and responsibilities when using our services.",
+  alternates: {
+    canonical: "https://bracalculator.net/terms",
+  },
   openGraph: {
-    title: "Terms and Conditions | Bra Size Calculator",
-    description:
-      "Terms and conditions for using the Bra Size Calculator website",
+    title: "Terms & Conditions – Bra Size Calculator",
+    description: "Review the terms and conditions of bracalculator.net to understand your rights and responsibilities when using our services.",
+    url: "https://bracalculator.net/terms",
+    siteName: "Bra Size Calculator",
+    type: "website",
+    images: [
+      {
+        url: "/assets/terms.png",
+        width: 1200,
+        height: 630,
+        alt: "Terms & Conditions – Bra Size Calculator",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms & Conditions – Bra Size Calculator",
+    description: "Review the terms and conditions of bracalculator.net to understand your rights and responsibilities when using our services.",
+    images: ["/assets/terms.png"],
   },
 };
 

@@ -2,13 +2,31 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Bra Size Calculator",
-  description: "Privacy policy for the Bra Size Calculator website",
-  keywords:
-    "privacy policy, data protection, personal information, bra size calculator",
+  title: "Privacy Policy – Bra Size Calculator",
+  description: "Read the privacy policy of bracalculator.net to understand how we handle your data with care and transparency.",
+  alternates: {
+    canonical: "https://bracalculator.net/privacy",
+  },
   openGraph: {
-    title: "Privacy Policy | Bra Size Calculator",
-    description: "Privacy policy for the Bra Size Calculator website",
+    title: "Privacy Policy – Bra Size Calculator",
+    description: "Read the privacy policy of bracalculator.net to understand how we handle your data with care and transparency.",
+    url: "https://bracalculator.net/privacy",
+    siteName: "Bra Size Calculator",
+    type: "website",
+    images: [
+      {
+        url: "/assets/privacy.png",
+        width: 1200,
+        height: 630,
+        alt: "Privacy Policy – Bra Size Calculator",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy – Bra Size Calculator",
+    description: "Read the privacy policy of bracalculator.net to understand how we handle your data with care and transparency.",
+    images: ["/assets/privacy.png"],
   },
 };
 

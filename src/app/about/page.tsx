@@ -1,5 +1,36 @@
 import React from "react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us – Bra Size Calculator",
+  description: "At bracalculator.net, our mission is to help women find confidence and comfort with accurate bra size calculations and fit guidance.",
+  alternates: {
+    canonical: "https://bracalculator.net/about",
+  },
+  openGraph: {
+    title: "About Us – Bra Size Calculator",
+    description: "At bracalculator.net, our mission is to help women find confidence and comfort with accurate bra size calculations and fit guidance.",
+    url: "https://bracalculator.net/about",
+    siteName: "Bra Size Calculator",
+    type: "website",
+    images: [
+      {
+        url: "/assets/about.png",
+        width: 1200,
+        height: 630,
+        alt: "About Us – Bra Size Calculator",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us – Bra Size Calculator",
+    description: "At bracalculator.net, our mission is to help women find confidence and comfort with accurate bra size calculations and fit guidance.",
+    images: ["/assets/about.png"],
+  },
+};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
